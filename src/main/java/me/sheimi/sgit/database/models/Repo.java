@@ -345,9 +345,6 @@ public class Repo implements Comparable<Repo>, Serializable {
                     .setListMode(ListBranchCommand.ListMode.REMOTE).call();
             for (Ref ref : remoteRefs) {
                 String name = ref.getName();
-                String localName = convertRemoteName(name);
-                if (branchSet.contains(localName))
-                    continue;
                 branchList.add(name);
             }
             return branchList.toArray(new String[0]);
