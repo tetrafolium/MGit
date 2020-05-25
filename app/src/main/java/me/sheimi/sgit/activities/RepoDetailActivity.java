@@ -237,10 +237,8 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
                 int position = mViewPager.getCurrentItem();
                 OnBackClickListener onBackClickListener = mTabItemPagerAdapter
                         .getItem(position).getOnBackClickListener();
-                if (onBackClickListener != null) {
-                    if (onBackClickListener.onClick())
-                        return true;
-                }
+                if ((onBackClickListener != null) && (onBackClickListener.onClick()))
+                    return true;
                 finish();
                 return true;
             case KeyEvent.KEYCODE_F:
