@@ -13,8 +13,8 @@ public class DeleteFileFromRepoTask extends RepoOpTask {
     public AsyncTaskPostCallback mCallback;
     private DeleteOperationType mOperationType;
 
-    public DeleteFileFromRepoTask(Repo repo, String filepattern,
-            DeleteOperationType deleteOperationType,AsyncTaskPostCallback callback) {
+    public DeleteFileFromRepoTask(final Repo repo, final String filepattern,
+            final DeleteOperationType deleteOperationType, final AsyncTaskPostCallback callback) {
         super(repo);
         mFilePattern = filepattern;
         mCallback = callback;
@@ -23,11 +23,11 @@ public class DeleteFileFromRepoTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return removeFile();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);
@@ -61,6 +61,6 @@ public class DeleteFileFromRepoTask extends RepoOpTask {
      * Created by lee on 2015-01-30.
      */
     public static enum DeleteOperationType {
-        DELETE,REMOVE_CACHED,REMOVE_FORCE
+        DELETE, REMOVE_CACHED, REMOVE_FORCE
     }
 }

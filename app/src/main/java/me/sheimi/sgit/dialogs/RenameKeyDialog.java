@@ -29,7 +29,7 @@ public class RenameKeyDialog extends SheimiDialogFragment implements
     public static final String FROM_PATH = "from path";
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         mActivity = (PrivateKeyManageActivity) getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
@@ -57,7 +57,7 @@ public class RenameKeyDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(FROM_PATH, mFromPath);
     }
@@ -74,7 +74,7 @@ public class RenameKeyDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         String newFilename = mNewFilename.getText().toString().trim();
         if (newFilename.equals("")) {
             showToastMessage(R.string.alert_new_filename_required);
@@ -96,18 +96,18 @@ public class RenameKeyDialog extends SheimiDialogFragment implements
             return;
         }
         mFromFile.renameTo(file);
-	try {
-	    PrivateKeyUtils.getPublicKey(mFromFile).renameTo(PrivateKeyUtils.getPublicKey(file));
-	} catch (Exception e) {
-	    //TODO 
-	    e.printStackTrace();
-	}
+        try {
+            PrivateKeyUtils.getPublicKey(mFromFile).renameTo(PrivateKeyUtils.getPublicKey(file));
+        } catch (Exception e) {
+            //TODO 
+            e.printStackTrace();
+        }
         mActivity.refreshList();
         dismiss();
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
+    public void onClick(final DialogInterface dialogInterface, final int i) {
     }
 
 }

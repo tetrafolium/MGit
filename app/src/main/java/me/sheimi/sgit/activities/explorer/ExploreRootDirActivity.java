@@ -27,7 +27,7 @@ public class ExploreRootDirActivity extends FileExplorerActivity {
     protected FileFilter getExplorerFileFilter() {
         return new FileFilter() {
             @Override
-            public boolean accept(File file) {
+            public boolean accept(final File file) {
                 String filename = file.getName();
                 return !filename.startsWith(".") && file.isDirectory();
             }
@@ -38,8 +38,8 @@ public class ExploreRootDirActivity extends FileExplorerActivity {
     protected AdapterView.OnItemClickListener getOnListItemClickListener() {
         return new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view,
-                    int position, long id) {
+            public void onItemClick(final AdapterView<?> adapterView, final View view,
+                    final int position, final long id) {
                 File file = mFilesListAdapter.getItem(position);
                 if (file.isDirectory()) {
                     setCurrentDir(file);
@@ -55,14 +55,14 @@ public class ExploreRootDirActivity extends FileExplorerActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.select_root, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_select_root:
                 Repo.setLocalRepoRoot(this, getCurrentDir());

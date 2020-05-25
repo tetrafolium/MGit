@@ -39,7 +39,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
     private int mCurrentTab;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_file);
         mRepo = (Repo) getIntent().getSerializableExtra(Repo.TAG);
@@ -50,7 +50,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         Bundle b = new Bundle();
         Bundle extras = getIntent().getExtras();
         String fileName = extras.getString(TAG_FILE_NAME);
-	    mActivityMode = extras.getShort(TAG_MODE, TAG_MODE_NORMAL);
+            mActivityMode = extras.getShort(TAG_MODE, TAG_MODE_NORMAL);
         b.putString(TAG_FILE_NAME, fileName);
         if (mRepo != null) {
             b.putSerializable(Repo.TAG, mRepo);
@@ -71,14 +71,14 @@ public class ViewFileActivity extends SheimiFragmentActivity {
 
     class TabItemPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
-        private final int[] PAGE_TITLE = { R.string.tab_file_label, R.string.tab_commits_label };
+        private final int[] PAGE_TITLE = {R.string.tab_file_label, R.string.tab_commits_label };
 
-        public TabItemPagerAdapter(FragmentManager fm) {
+        public TabItemPagerAdapter(final FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public BaseFragment getItem(int position) {
+        public BaseFragment getItem(final int position) {
             switch (position) {
                 case FILE_FRAGMENT_INDEX:
                     return mFileFragment;
@@ -89,7 +89,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(final int position) {
             return getString(PAGE_TITLE[position]);
         }
 
@@ -102,23 +102,23 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
 
         }
 
         @Override
-        public void onPageSelected(int position) {
+        public void onPageSelected(final int position) {
             mCurrentTab = position;
             invalidateOptionsMenu();
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
+        public void onPageScrollStateChanged(final int state) {
 
         }
 
         @Override
-        public boolean onQueryTextSubmit(String query) {
+        public boolean onQueryTextSubmit(final String query) {
             switch (mViewPager.getCurrentItem()) {
                 case COMMITS_FRAGMENT_INDEX:
                     mCommitsFragment.setFilter(query);
@@ -128,7 +128,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public boolean onQueryTextChange(String query) {
+        public boolean onQueryTextChange(final String query) {
             switch (mViewPager.getCurrentItem()) {
                 case COMMITS_FRAGMENT_INDEX:
                     mCommitsFragment.setFilter(query);
@@ -138,12 +138,12 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public boolean onMenuItemActionExpand(MenuItem menuItem) {
+        public boolean onMenuItemActionExpand(final MenuItem menuItem) {
             return true;
         }
 
         @Override
-        public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        public boolean onMenuItemActionCollapse(final MenuItem menuItem) {
             switch (mViewPager.getCurrentItem()) {
                 case COMMITS_FRAGMENT_INDEX:
                     mCommitsFragment.setFilter(null);
@@ -154,7 +154,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
 
     }
 
-    private void setSaveStatus(MenuItem mi) {
+    private void setSaveStatus(final MenuItem mi) {
         if (mFileFragment.getEditMode()) {
             mi.setIcon(R.drawable.ic_action_save);
             mi.setTitle(R.string.action_edit_save);
@@ -165,7 +165,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.view_file, menu);
         if (mActivityMode == TAG_MODE_SSH_KEY) {
@@ -201,7 +201,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -233,7 +233,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setLanguage(String lang) {
+    public void setLanguage(final String lang) {
         mFileFragment.setLanguage(lang);
     }
 }

@@ -53,7 +53,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     private List<DiffEntry> mDiffEntries;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_diff);
         setupActionBar();
@@ -81,13 +81,13 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
         WebSettings webSettings = mDiffContent.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mDiffContent.setWebChromeClient(new WebChromeClient() {
-            public void onConsoleMessage(String message, int lineNumber,
-                                         String sourceID) {
+            public void onConsoleMessage(final String message, final int lineNumber,
+                                         final String sourceID) {
                 Log.d("MyApplication", message + " -- From line " + lineNumber
                         + " of " + sourceID);
             }
 
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
                 return false;
             }
         });
@@ -99,7 +99,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.diff_commits, menu);
         MenuItem item = menu.findItem(R.id.action_share_diff);
@@ -111,8 +111,8 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
         shareIntent.setData(futurePathName);
         shareIntent.setType("text/x-patch");
 
-        shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener () {
-            public boolean onShareTargetSelected(ShareActionProvider source, Intent intent) {
+        shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
+            public boolean onShareTargetSelected(final ShareActionProvider source, final Intent intent) {
                 try {
                     File diff = sharedDiffPathName();
                     saveDiff(new FileOutputStream(diff));
@@ -138,8 +138,8 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
                 + "CommitDate: " + committer.getWhen() + "\n";
     }
 
-    private void saveDiff(OutputStream fos) throws IOException {
-	    /* FIXME: LOCK!!! */
+    private void saveDiff(final OutputStream fos) throws IOException {
+            /* FIXME: LOCK!!! */
         if (mCommit != null) {
             String message;
             fos.write(formatCommitInfo().getBytes());
@@ -164,7 +164,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == REQUEST_SAVE_DIFF && resultCode == RESULT_OK) {
             Uri diffUri = data.getData();
             try {
@@ -176,7 +176,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -194,7 +194,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
 
     private class CodeLoader {
         @JavascriptInterface
-        public String getDiff(int index) {
+        public String getDiff(final int index) {
             return mDiffStrs.get(index);
         }
 
@@ -221,21 +221,21 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
         }
 
         @JavascriptInterface
-        public String getChangeType(int index) {
+        public String getChangeType(final int index) {
             DiffEntry diff = mDiffEntries.get(index);
             DiffEntry.ChangeType ct = diff.getChangeType();
             return ct.toString();
         }
 
         @JavascriptInterface
-        public String getOldPath(int index) {
+        public String getOldPath(final int index) {
             DiffEntry diff = mDiffEntries.get(index);
             String op = diff.getOldPath();
             return op;
         }
 
         @JavascriptInterface
-        public String getNewPath(int index) {
+        public String getNewPath(final int index) {
             DiffEntry diff = mDiffEntries.get(index);
             String np = diff.getNewPath();
             return np;
@@ -247,8 +247,8 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
             CommitDiffTask diffTask = new CommitDiffTask(mRepo, oldCommit,
                     mNewCommit, new CommitDiffResult() {
                 @Override
-                public void pushResult(List<DiffEntry> diffEntries,
-                                       List<String> diffStrs, RevCommit commit) {
+                public void pushResult(final List<DiffEntry> diffEntries,
+                                       final List<String> diffStrs, final RevCommit commit) {
                     mDiffEntries = diffEntries;
                     mDiffStrs = diffStrs;
                     mCommit = commit;

@@ -6,7 +6,7 @@ import me.sheimi.sgit.repo.tasks.repo.AddToStageTask;
 
 public class AddAllAction extends RepoAction {
 
-    public AddAllAction(Repo repo, RepoDetailActivity activity) {
+    public AddAllAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 

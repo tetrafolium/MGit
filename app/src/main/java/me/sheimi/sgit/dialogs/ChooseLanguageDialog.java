@@ -19,7 +19,7 @@ public class ChooseLanguageDialog extends SheimiDialogFragment {
     private ViewFileActivity mActivity;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
 
         mActivity = (ViewFileActivity) getActivity();
@@ -31,8 +31,8 @@ public class ChooseLanguageDialog extends SheimiDialogFragment {
         builder.setItems(langs.toArray(new String[0]),
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface,
-                            int position) {
+                    public void onClick(final DialogInterface dialogInterface,
+                            final int position) {
                         String lang = langs.get(position);
                         String tag = CodeGuesser.getLanguageTag(lang);
                         mActivity.setLanguage(tag);

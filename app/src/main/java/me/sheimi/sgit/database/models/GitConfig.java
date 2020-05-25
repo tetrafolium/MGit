@@ -26,7 +26,7 @@ public class GitConfig {
      *
      * @param repo
      */
-    public GitConfig(Repo repo) throws StopTaskException {
+    public GitConfig(final Repo repo) throws StopTaskException {
         mConfig = repo.getStoredConfig();
     }
 
@@ -34,7 +34,7 @@ public class GitConfig {
         return getSubsection(NAME_SUBSECTION);
     }
 
-    public void setUserName(String name) {
+    public void setUserName(final String name) {
         setSubsection(NAME_SUBSECTION, name);
     }
 
@@ -42,11 +42,11 @@ public class GitConfig {
         return getSubsection(EMAIL_SUBSECTION);
     }
 
-    public void setUserEmail(String email) {
+    public void setUserEmail(final String email) {
         setSubsection(EMAIL_SUBSECTION, email);
     }
 
-    private void setSubsection(String subsection, String value) {
+    private void setSubsection(final String subsection, final String value) {
         if (value == null || value.equals("")) {
             mConfig.unset(USER_SECTION, null, subsection);
         } else {
@@ -59,7 +59,7 @@ public class GitConfig {
         }
     }
 
-    private String getSubsection(String subsection) {
+    private String getSubsection(final String subsection) {
         return mConfig.getString(USER_SECTION, null, subsection);
     }
 }

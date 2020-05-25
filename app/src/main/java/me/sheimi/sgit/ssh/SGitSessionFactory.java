@@ -22,7 +22,7 @@ import timber.log.Timber;
 public class SGitSessionFactory extends JschConfigSessionFactory {
 
     @Override
-    protected void configure(Host host, Session session) {
+    protected void configure(final Host host, final Session session) {
         session.setConfig("StrictHostKeyChecking", "no");
         session.setConfig("PreferredAuthentications", "publickey,password");
 
@@ -34,7 +34,7 @@ public class SGitSessionFactory extends JschConfigSessionFactory {
 
 
     @Override
-    protected JSch createDefaultJSch(FS fs) throws JSchException {
+    protected JSch createDefaultJSch(final FS fs) throws JSchException {
         JSch jsch = new JSch();
         PrivateKeyUtils.migratePrivateKeys();
         File sshDir = PrivateKeyUtils.getPrivateKeyFolder();

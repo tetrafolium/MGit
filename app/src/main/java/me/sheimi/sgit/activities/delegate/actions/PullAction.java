@@ -21,13 +21,13 @@ import me.sheimi.sgit.repo.tasks.repo.PullTask;
 
 public class PullAction extends RepoAction {
 
-    public PullAction(Repo repo, RepoDetailActivity activity) {
+    public PullAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
     @Override
     public void execute() {
-	Set<String> remotes = mRepo.getRemotes();
+        Set<String> remotes = mRepo.getRemotes();
         if (remotes == null || remotes.isEmpty()) {
             mActivity.showToastMessage(R.string.alert_please_add_a_remote);
             return;
@@ -38,8 +38,8 @@ public class PullAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    private static void pull(Repo repo, RepoDetailActivity activity,
-			     String remote, boolean forcePull) {
+    private static void pull(final Repo repo, final RepoDetailActivity activity,
+                             final String remote, final boolean forcePull) {
         PullTask pullTask = new PullTask(repo, remote, forcePull, activity.new ProgressCallback(
                 R.string.pull_msg_init));
         pullTask.executeTask();
@@ -55,7 +55,7 @@ public class PullAction extends RepoAction {
         private ArrayAdapter<String> mAdapter;
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             super.onCreateDialog(savedInstanceState);
             Bundle args = getArguments();
             if (args != null && args.containsKey(Repo.TAG)) {
@@ -79,8 +79,8 @@ public class PullAction extends RepoAction {
             mRemoteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                        int position, long id) {
+                public void onItemClick(final AdapterView<?> parent, final View view,
+                        final int position, final long id) {
                     String remote = mAdapter.getItem(position);
                     boolean isForcePull = mForcePull.isChecked();
                     pull(mRepo, mActivity, remote, isForcePull);

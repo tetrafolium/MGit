@@ -19,7 +19,7 @@ public abstract class BaseFragment extends Fragment {
     public abstract void reset();
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(final Context context) {
         super.onAttach(context);
         mActivity = (SheimiFragmentActivity) context;
     }
@@ -28,23 +28,23 @@ public abstract class BaseFragment extends Fragment {
         return mActivity;
     }
 
-    public void showMessageDialog(int title, int msg, int positiveBtn,
-            DialogInterface.OnClickListener positiveListener) {
+    public void showMessageDialog(final int title, final int msg, final int positiveBtn,
+            final DialogInterface.OnClickListener positiveListener) {
         getRawActivity().showMessageDialog(title, msg, positiveBtn,
                 positiveListener);
     }
 
-    public void showMessageDialog(int title, String msg, int positiveBtn,
-            DialogInterface.OnClickListener positiveListener) {
+    public void showMessageDialog(final int title, final String msg, final int positiveBtn,
+            final DialogInterface.OnClickListener positiveListener) {
         getRawActivity().showMessageDialog(title, msg, positiveBtn,
                 positiveListener);
     }
 
-    public void showToastMessage(int resId) {
+    public void showToastMessage(final int resId) {
         getRawActivity().showToastMessage(getString(resId));
     }
 
-    public void showToastMessage(String msg) {
+    public void showToastMessage(final String msg) {
         getRawActivity().showToastMessage(msg);
     }
 

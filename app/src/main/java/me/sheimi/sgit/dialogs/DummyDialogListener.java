@@ -7,6 +7,6 @@ import android.content.DialogInterface;
  */
 public class DummyDialogListener implements DialogInterface.OnClickListener {
     @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
+    public void onClick(final DialogInterface dialogInterface, final int i) {
     }
 }

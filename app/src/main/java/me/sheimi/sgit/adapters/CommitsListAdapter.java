@@ -55,7 +55,7 @@ public class CommitsListAdapter extends BaseAdapter {
 
     private class BackgroundUpdate extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(final Void... params) {
             int i;
             for (i = mProgressCursor; i < mAll.size(); i++) {
                 if (mFiltered.size() != mPosted && System.nanoTime() > mPostAtTime) {
@@ -79,7 +79,7 @@ public class CommitsListAdapter extends BaseAdapter {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(final Void aVoid) {
             super.onPostExecute(aVoid);
             if (isCancelled()) {
                 return;
@@ -96,8 +96,8 @@ public class CommitsListAdapter extends BaseAdapter {
         }
     }
 
-    public CommitsListAdapter(Context context, Set<Integer> chosenItems,
-                              Repo repo, String file) {
+    public CommitsListAdapter(final Context context, final Set<Integer> chosenItems,
+                              final Repo repo, final String file) {
         super();
         mFile = file;
         mContext = context;
@@ -108,7 +108,7 @@ public class CommitsListAdapter extends BaseAdapter {
         mFilter = null;
     }
 
-    private boolean isAccepted(RevCommit in) {
+    private boolean isAccepted(final RevCommit in) {
         if (mFilter == null) {
             return true;
         }
@@ -153,7 +153,7 @@ public class CommitsListAdapter extends BaseAdapter {
         }
     }
 
-    public void setFilter(String query) {
+    public void setFilter(final String query) {
         synchronized (mProgressLock) {
             stopFiltering();
             if (query == null || query.equals("")) {
@@ -175,7 +175,7 @@ public class CommitsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
         if (mIsIncomplete && position >= mPosted) {
             return -1;
         }
@@ -190,7 +190,7 @@ public class CommitsListAdapter extends BaseAdapter {
         }
     }
 
-    public RevCommit getItem(int position) {
+    public RevCommit getItem(final int position) {
         if (mIsIncomplete && position >= mPosted) {
             return null;
         }
@@ -201,7 +201,7 @@ public class CommitsListAdapter extends BaseAdapter {
         }
     }
 
-    public boolean isProgressBar(int position) {
+    public boolean isProgressBar(final int position) {
         if (mFilter == null)
             return position >= mAll.size();
         if (mIsIncomplete)
@@ -210,7 +210,7 @@ public class CommitsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         if (isProgressBar(position)) {
@@ -281,7 +281,7 @@ public class CommitsListAdapter extends BaseAdapter {
                 new GetCommitCallback() {
 
                     @Override
-                    public void postCommits(List<RevCommit> commits) {
+                    public void postCommits(final List<RevCommit> commits) {
                         if (commits != null) {
                             // TODO why == null
                             synchronized (mProgressLock) {

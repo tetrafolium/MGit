@@ -39,7 +39,7 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
     protected abstract AdapterView.OnItemLongClickListener getOnListItemLongClickListener();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,7 +56,7 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
         mUpDir = (TextView) findViewById(R.id.upDir);
         mUpDir.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 File parent = mCurrentDir.getParentFile();
                 if (parent != null) {
                     setCurrentDir(parent);
@@ -74,14 +74,14 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.empty_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -91,7 +91,7 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
     }
     
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
+    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             final File parent = mCurrentDir.getParentFile();
             if (!mRootFolder.equals(mCurrentDir) && (parent != null)) {
@@ -104,7 +104,7 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
         return false;
     }
 
-    protected void setCurrentDir(File dir) {
+    protected void setCurrentDir(final File dir) {
         mCurrentDir = dir;
         mFilesListAdapter.setDir(mCurrentDir);
         mCurrentPathView.setText(mCurrentDir.getPath());

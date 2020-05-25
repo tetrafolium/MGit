@@ -17,17 +17,17 @@ public class StatusTask extends RepoOpTask {
     private GetStatusCallback mCallback;
     private StringBuffer mResult = new StringBuffer();
 
-    public StatusTask(Repo repo, GetStatusCallback callback) {
+    public StatusTask(final Repo repo, final GetStatusCallback callback) {
         super(repo);
         mCallback = callback;
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return status();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null && isSuccess) {
             mCallback.postStatus(mResult.toString());
@@ -57,7 +57,7 @@ public class StatusTask extends RepoOpTask {
         return true;
     }
 
-    private void convertStatus(org.eclipse.jgit.api.Status status) {
+    private void convertStatus(final org.eclipse.jgit.api.Status status) {
         if (!status.hasUncommittedChanges() && status.isClean()) {
             mResult.append("Nothing to commit, working directory clean");
             return;
@@ -73,7 +73,7 @@ public class StatusTask extends RepoOpTask {
 
     }
 
-    private void convertStatusSet(String type, Set<String> status) {
+    private void convertStatusSet(final String type, final Set<String> status) {
         if (status.isEmpty())
             return;
         mResult.append(type);

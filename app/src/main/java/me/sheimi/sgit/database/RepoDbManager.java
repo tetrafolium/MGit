@@ -25,7 +25,7 @@ public class RepoDbManager {
 
     private static Map<String, Set<RepoDbObserver>> mObservers = new HashMap<String, Set<RepoDbObserver>>();
 
-    private RepoDbManager(Context context) {
+    private RepoDbManager(final Context context) {
         mDbHelper = new RepoDbHelper(context);
         mWritableDatabase = mDbHelper.getWritableDatabase();
         mReadableDatabase = mDbHelper.getReadableDatabase();
@@ -38,7 +38,7 @@ public class RepoDbManager {
         return mInstance;
     }
 
-    public static void registerDbObserver(String table, RepoDbObserver observer) {
+    public static void registerDbObserver(final String table, final RepoDbObserver observer) {
         Set<RepoDbObserver> set = mObservers.get(table);
         if (set == null) {
             set = new HashSet<RepoDbObserver>();
@@ -47,15 +47,15 @@ public class RepoDbManager {
         set.add(observer);
     }
 
-    public static void unregisterDbObserver(String table,
-            RepoDbObserver observer) {
+    public static void unregisterDbObserver(final String table,
+            final RepoDbObserver observer) {
         Set<RepoDbObserver> set = mObservers.get(table);
         if (set == null)
             return;
         set.remove(observer);
     }
 
-    public static void notifyObservers(String table) {
+    public static void notifyObservers(final String table) {
         Set<RepoDbObserver> set = mObservers.get(table);
         if (set == null)
             return;
@@ -64,7 +64,7 @@ public class RepoDbManager {
         }
     }
 
-    public static void persistCredentials(long repoId,String username, String password) {
+    public static void persistCredentials(final long repoId, final String username, final String password) {
         ContentValues values = new ContentValues();
         if (username != null && password != null) {
             values.put(RepoContract.RepoEntry.COLUMN_NAME_USERNAME, username);
@@ -80,11 +80,11 @@ public class RepoDbManager {
         public void nofityChanged();
     }
 
-    public static Cursor searchRepo(String query) {
+    public static Cursor searchRepo(final String query) {
         return getInstance()._searchRepo(query);
     }
 
-    private Cursor _searchRepo(String query) {
+    private Cursor _searchRepo(final String query) {
         String selection = RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH
                 + " LIKE ? OR " + RepoContract.RepoEntry.COLUMN_NAME_REMOTE_URL
                 + " LIKE ? OR "
@@ -93,7 +93,7 @@ public class RepoDbManager {
                 + RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMIT_MSG
                 + " LIKE ?";
         query = "%" + query + "%";
-        String[] selectionArgs = { query, query, query, query };
+        String[] selectionArgs = {query, query, query, query };
         Cursor cursor = mReadableDatabase.query(true,
                 RepoContract.RepoEntry.TABLE_NAME,
                 RepoContract.RepoEntry.ALL_COLUMNS, selection, selectionArgs,
@@ -113,15 +113,15 @@ public class RepoDbManager {
         return cursor;
     }
 
-    public static Cursor getRepoById(long id) {
+    public static Cursor getRepoById(final long id) {
         return getInstance()._getRepoById(id);
     }
 
-    private Cursor _getRepoById(long id) {
+    private Cursor _getRepoById(final long id) {
         Cursor cursor = mReadableDatabase.query(true,
                 RepoContract.RepoEntry.TABLE_NAME,
                 RepoContract.RepoEntry.ALL_COLUMNS, RepoContract.RepoEntry._ID
-                        + "= ?", new String[] { String.valueOf(id) }, null,
+                        + "= ?", new String[] {String.valueOf(id) }, null,
                 null, null, null);
         if (cursor.getCount() < 1) {
             cursor.close();
@@ -130,17 +130,17 @@ public class RepoDbManager {
         return cursor;
     }
 
-    public static long importRepo(String localPath, String status) {
+    public static long importRepo(final String localPath, final String status) {
         return createRepo(localPath, "", status);
     }
 
-    public static void setLocalPath(long repoId, String path) {
+    public static void setLocalPath(final long repoId, final String path) {
         ContentValues values = new ContentValues();
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH, path);
         updateRepo(repoId, values);
     }
 
-    public static long createRepo(String localPath, String remoteURL, String status) {
+    public static long createRepo(final String localPath, final String remoteURL, final String status) {
         ContentValues values = new ContentValues();
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH, localPath);
         values.put(RepoContract.RepoEntry.COLUMN_NAME_REMOTE_URL, remoteURL);
@@ -152,21 +152,21 @@ public class RepoDbManager {
         return id;
     }
 
-    public static void updateRepo(long id, ContentValues values) {
+    public static void updateRepo(final long id, final ContentValues values) {
         String selection = RepoContract.RepoEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id) };
         getInstance().mWritableDatabase.update(RepoContract.RepoEntry.TABLE_NAME, values,
             selection, selectionArgs);
         notifyObservers(RepoContract.RepoEntry.TABLE_NAME);
     }
 
-    public static void deleteRepo(long id) {
+    public static void deleteRepo(final long id) {
         getInstance()._deleteRepo(id);
     }
 
-    private void _deleteRepo(long id) {
+    private void _deleteRepo(final long id) {
         String selection = RepoContract.RepoEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id) };
         mWritableDatabase.delete(RepoContract.RepoEntry.TABLE_NAME, selection,
                 selectionArgs);
         notifyObservers(RepoContract.RepoEntry.TABLE_NAME);

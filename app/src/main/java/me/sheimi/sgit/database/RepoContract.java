@@ -32,7 +32,7 @@ public final class RepoContract {
         public static final String COLUMN_NAME_LATEST_COMMITTER_EMAIL = "latest_committer_email";
         public static final String COLUMN_NAME_LATEST_COMMIT_DATE = "latest_commit_date";
         public static final String COLUMN_NAME_LATEST_COMMIT_MSG = "latest_commit_msg";
-        public static final String[] ALL_COLUMNS = { _ID,
+        public static final String[] ALL_COLUMNS = {_ID,
                 COLUMN_NAME_LOCAL_PATH, COLUMN_NAME_REMOTE_URL,
                 COLUMN_NAME_REPO_STATUS, COLUMN_NAME_LATEST_COMMITTER_UNAME,
                 COLUMN_NAME_LATEST_COMMITTER_EMAIL,
@@ -57,31 +57,31 @@ public final class RepoContract {
     public static final String REPO_ENTRY_DROP = "DROP TABLE IF EXISTS "
             + RepoEntry.TABLE_NAME;
 
-    public static int getRepoID(Cursor cursor) {
+    public static int getRepoID(final Cursor cursor) {
         return cursor.getInt(0);
     }
 
-    public static String getLocalPath(Cursor cursor) {
+    public static String getLocalPath(final Cursor cursor) {
         return cursor.getString(1);
     }
 
-    public static String getRemoteURL(Cursor cursor) {
+    public static String getRemoteURL(final Cursor cursor) {
         return cursor.getString(2);
     }
 
-    public static String getRepoStatus(Cursor cursor) {
+    public static String getRepoStatus(final Cursor cursor) {
         return cursor.getString(3);
     }
 
-    public static String getLatestCommitterName(Cursor cursor) {
+    public static String getLatestCommitterName(final Cursor cursor) {
         return cursor.getString(4);
     }
 
-    public static String getLatestCommitterEmail(Cursor cursor) {
+    public static String getLatestCommitterEmail(final Cursor cursor) {
         return cursor.getString(5);
     }
 
-    public static Date getLatestCommitDate(Cursor cursor) {
+    public static Date getLatestCommitDate(final Cursor cursor) {
         String longStr = cursor.getString(6);
         if (longStr == null || longStr.isEmpty()) {
             return null;
@@ -90,15 +90,15 @@ public final class RepoContract {
         return new Date(time);
     }
 
-    public static String getLatestCommitMsg(Cursor cursor) {
+    public static String getLatestCommitMsg(final Cursor cursor) {
         return cursor.getString(7);
     }
 
-    public static String getUsername(Cursor cursor) {
+    public static String getUsername(final Cursor cursor) {
         return cursor.getString(8);
     }
 
-    public static String getPassword(Cursor cursor) {
+    public static String getPassword(final Cursor cursor) {
         return cursor.getString(9);
     }
 

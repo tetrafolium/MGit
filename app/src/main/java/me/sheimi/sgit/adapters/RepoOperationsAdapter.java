@@ -15,13 +15,13 @@ import android.widget.TextView;
 public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
         implements OnItemClickListener {
 
-    public RepoOperationsAdapter(Context context) {
+    public RepoOperationsAdapter(final Context context) {
         super(context, 0);
         setupDrawerItem();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         if (convertView == null) {
             convertView = newView(getContext(), parent);
         }
@@ -29,7 +29,7 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
         return convertView;
     }
 
-    public View newView(Context context, ViewGroup parent) {
+    public View newView(final Context context, final ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.drawer_list_item, parent, false);
         DrawerItemHolder holder = new DrawerItemHolder();
@@ -38,7 +38,7 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
         return view;
     }
 
-    public void bindView(View view, int position) {
+    public void bindView(final View view, final int position) {
         DrawerItemHolder holder = (DrawerItemHolder) view.getTag();
         DrawerItem item = getItem(position);
         holder.name.setText(item.name);
@@ -52,7 +52,7 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
         public String name;
         public int icon;
 
-        public DrawerItem(String name, int icon) {
+        public DrawerItem(final String name, final int icon) {
             this.name = name;
             this.icon = icon;
         }
@@ -67,8 +67,8 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-            long id) {
+    public void onItemClick(final AdapterView<?> parent, final View view, final int position,
+            final long id) {
         RepoDetailActivity context = (RepoDetailActivity) getContext();
         context.getRepoDelegate().executeAction(position);
     }

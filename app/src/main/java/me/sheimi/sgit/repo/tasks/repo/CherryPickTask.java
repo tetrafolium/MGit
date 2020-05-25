@@ -11,8 +11,8 @@ public class CherryPickTask extends RepoOpTask {
     public String mCommitStr;
     private AsyncTaskPostCallback mCallback;
 
-    public CherryPickTask(Repo repo, String commit,
-            AsyncTaskPostCallback callback) {
+    public CherryPickTask(final Repo repo, final String commit,
+            final AsyncTaskPostCallback callback) {
         super(repo);
         mCommitStr = commit;
         mCallback = callback;
@@ -20,11 +20,11 @@ public class CherryPickTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return cherrypick();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);

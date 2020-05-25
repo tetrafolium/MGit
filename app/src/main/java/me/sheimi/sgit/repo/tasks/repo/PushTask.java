@@ -23,8 +23,8 @@ public class PushTask extends RepoRemoteOpTask {
     private String mRemote;
     private StringBuffer resultMsg = new StringBuffer();
 
-    public PushTask(Repo repo, String remote, boolean pushAll, boolean forcePush,
-            AsyncTaskCallback callback) {
+    public PushTask(final Repo repo, final String remote, final boolean pushAll, final boolean forcePush,
+            final AsyncTaskCallback callback) {
         super(repo);
         mRemote = remote;
         mCallback = callback;
@@ -33,7 +33,7 @@ public class PushTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         boolean result = pushRepo();
         if (mCallback != null) {
             result = mCallback.doInBackground(params) & result;
@@ -42,7 +42,7 @@ public class PushTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected void onProgressUpdate(String... progress) {
+    protected void onProgressUpdate(final String... progress) {
         super.onProgressUpdate(progress);
         if (mCallback != null) {
             mCallback.onProgressUpdate(progress);
@@ -57,7 +57,7 @@ public class PushTask extends RepoRemoteOpTask {
         }
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);
@@ -117,7 +117,7 @@ public class PushTask extends RepoRemoteOpTask {
         return true;
     }
 
-    private void parseRemoteRefUpdate(RemoteRefUpdate update) {
+    private void parseRemoteRefUpdate(final RemoteRefUpdate update) {
         String msg = null;
         switch (update.getStatus()) {
             case AWAITING_REPORT:

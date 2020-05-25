@@ -16,8 +16,8 @@ public class MergeTask extends RepoOpTask {
     private String mFFModeStr;
     private boolean mAutoCommit;
 
-    public MergeTask(Repo repo, Ref commit, String ffModeStr,
-            boolean autoCommit, AsyncTaskPostCallback callback) {
+    public MergeTask(final Repo repo, final Ref commit, final String ffModeStr,
+            final boolean autoCommit, final AsyncTaskPostCallback callback) {
         super(repo);
         mCallback = callback;
         mCommit = commit;
@@ -27,11 +27,11 @@ public class MergeTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return mergeBranch();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);

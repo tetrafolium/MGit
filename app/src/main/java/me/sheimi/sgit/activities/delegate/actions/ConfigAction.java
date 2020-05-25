@@ -18,7 +18,7 @@ import timber.log.Timber;
 public class ConfigAction extends RepoAction {
 
 
-    public ConfigAction(Repo repo, RepoDetailActivity activity) {
+    public ConfigAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 

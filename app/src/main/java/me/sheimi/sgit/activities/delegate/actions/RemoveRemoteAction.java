@@ -21,7 +21,7 @@ import timber.log.Timber;
 
 public class RemoveRemoteAction extends RepoAction {
 
-    public RemoveRemoteAction(Repo repo, RepoDetailActivity activity) {
+    public RemoveRemoteAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -39,7 +39,7 @@ public class RemoveRemoteAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    public static void removeRemote(Repo repo, RepoDetailActivity activity, String remote) throws IOException {
+    public static void removeRemote(final Repo repo, final RepoDetailActivity activity, final String remote) throws IOException {
         repo.removeRemote(remote);
         activity.showToastMessage(R.string.success_remote_removed);
     }
@@ -51,7 +51,7 @@ public class RemoveRemoteAction extends RepoAction {
         private ArrayAdapter<String> mAdapter;
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             super.onCreateDialog(savedInstanceState);
             Bundle args = getArguments();
             if (args != null && args.containsKey(Repo.TAG)) {
@@ -73,8 +73,8 @@ public class RemoveRemoteAction extends RepoAction {
 
             mRemoteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
+                public void onItemClick(final AdapterView<?> parent, final View view,
+                                        final int position, final long id) {
                     String remote = mAdapter.getItem(position);
                     try {
                         removeRemote(mRepo, mActivity, remote);

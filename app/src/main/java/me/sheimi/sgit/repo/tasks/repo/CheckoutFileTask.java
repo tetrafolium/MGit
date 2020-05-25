@@ -9,8 +9,8 @@ public class CheckoutFileTask extends RepoOpTask {
     private AsyncTaskPostCallback mCallback;
     private String mPath;
 
-    public CheckoutFileTask(Repo repo, String path,
-            AsyncTaskPostCallback callback) {
+    public CheckoutFileTask(final Repo repo, final String path,
+            final AsyncTaskPostCallback callback) {
         super(repo);
         mCallback = callback;
         mPath = path;
@@ -18,11 +18,11 @@ public class CheckoutFileTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return checkout();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);

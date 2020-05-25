@@ -9,7 +9,7 @@ public class RebaseTask extends RepoOpTask {
     public String mUpstream;
     private AsyncTaskPostCallback mCallback;
 
-    public RebaseTask(Repo repo, String upstream, AsyncTaskPostCallback callback) {
+    public RebaseTask(final Repo repo, final String upstream, final AsyncTaskPostCallback callback) {
         super(repo);
         mUpstream = upstream;
         mCallback = callback;
@@ -17,11 +17,11 @@ public class RebaseTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return rebase();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);

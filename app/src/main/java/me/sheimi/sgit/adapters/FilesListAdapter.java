@@ -23,13 +23,13 @@ public class FilesListAdapter extends ArrayAdapter<File> {
     private File mDir;
     private FileFilter mFileFilter;
 
-    public FilesListAdapter(Context context, FileFilter fileFilter) {
+    public FilesListAdapter(final Context context, final FileFilter fileFilter) {
         super(context, 0);
         mFileFilter = fileFilter;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         FilesListItemHolder holder;
@@ -61,7 +61,7 @@ public class FilesListAdapter extends ArrayAdapter<File> {
         return convertView;
     }
 
-    public void setDir(File dir) {
+    public void setDir(final File dir) {
         mDir = dir;
         clear();
         File[] files = null;
@@ -76,7 +76,7 @@ public class FilesListAdapter extends ArrayAdapter<File> {
         }
         Arrays.sort(files, new Comparator<File>() {
             @Override
-            public int compare(File file1, File file2) {
+            public int compare(final File file1, final File file2) {
                 // if file1 and file2 are the same type (dir or file)
                 if ((!file1.isDirectory() && !file2.isDirectory() || (file1
                         .isDirectory() && file2.isDirectory()))) {

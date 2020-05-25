@@ -16,7 +16,7 @@ public class SgitTransportCallback implements TransportConfigCallback {
     }
 
     @Override
-    public void configure(Transport tn) {
+    public void configure(final Transport tn) {
         if (tn instanceof SshTransport) {
             ((SshTransport) tn).setSshSessionFactory(ssh);
         }

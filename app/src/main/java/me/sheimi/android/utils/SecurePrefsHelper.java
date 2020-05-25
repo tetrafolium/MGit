@@ -48,9 +48,9 @@ public class SecurePrefsHelper {
     SharedPreferences mSecurePrefs;
     private KeyStore mKeyStore;
 
-    public SecurePrefsHelper(Context context) throws SecurePrefsException {
+    public SecurePrefsHelper(final Context context) throws SecurePrefsException {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            throw new SecurePrefsException("Min Android version require:"+Build.VERSION_CODES.JELLY_BEAN_MR2);
+            throw new SecurePrefsException("Min Android version require:" + Build.VERSION_CODES.JELLY_BEAN_MR2);
         }
 
         try {
@@ -68,15 +68,15 @@ public class SecurePrefsHelper {
             Timber.w("pref password %s", prefsPassword);
             mSecurePrefs = new SecurePreferences(context, prefsPassword, SEC_PREFS_FILE_NAME);
 
-        } catch (KeyStoreException|CertificateException|NoSuchAlgorithmException|
-            InvalidAlgorithmParameterException|NoSuchProviderException|IOException|UnrecoverableEntryException e) {
+        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException
+            | InvalidAlgorithmParameterException | NoSuchProviderException | IOException | UnrecoverableEntryException e) {
             Timber.e(e, "keystore error");
             throw new SecurePrefsException(e);
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    void generateKeyPair(Context context) throws NoSuchProviderException, NoSuchAlgorithmException,
+    void generateKeyPair(final Context context) throws NoSuchProviderException, NoSuchAlgorithmException,
         InvalidAlgorithmParameterException, KeyStoreException {
         // Generate the RSA key pairs
         if (!mKeyStore.containsAlias(KEY_ALIAS)) {
@@ -103,7 +103,7 @@ public class SecurePrefsHelper {
      * @param pref
      * @return value of pref or null if no such pref
      */
-    public String get(String pref) {
+    public String get(final String pref) {
         return mSecurePrefs.getString(pref, null);
     }
 
@@ -112,7 +112,7 @@ public class SecurePrefsHelper {
      * @param name
      * @param value
      */
-    public void set(String name, String value) {
+    public void set(final String name, final String value) {
         mSecurePrefs.edit().putString(name, value).apply();
     }
 }

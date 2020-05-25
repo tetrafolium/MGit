@@ -29,7 +29,7 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     private static final int REQUEST_IMPORT_KEY = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         BasicFunctions.setActiveActivity(this);
         PrivateKeyUtils.migratePrivateKeys();
 
@@ -47,28 +47,28 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     }
 
     @Override
-    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+    public boolean onCreateActionMode(final ActionMode mode, final Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.action_mode_ssh_key, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	return false;
+    public boolean onPrepareActionMode(final ActionMode mode, final Menu menu) {
+        return false;
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	switch (item.getItemId()) {
-	case R.id.action_mode_rename_key:
-	    Bundle pathArg = new Bundle();
-	    pathArg.putString(RenameKeyDialog.FROM_PATH,
-			      mChosenFile.getAbsolutePath());
-	    mode.finish();
-	    RenameKeyDialog rkd = new RenameKeyDialog();
-	    rkd.setArguments(pathArg);
-	    rkd.show(getSupportFragmentManager(), "rename-dialog");
+    public boolean onActionItemClicked(final ActionMode mode, final MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.action_mode_rename_key:
+            Bundle pathArg = new Bundle();
+            pathArg.putString(RenameKeyDialog.FROM_PATH,
+                              mChosenFile.getAbsolutePath());
+            mode.finish();
+            RenameKeyDialog rkd = new RenameKeyDialog();
+            rkd.setArguments(pathArg);
+            rkd.show(getSupportFragmentManager(), "rename-dialog");
 	    return true;
 	case R.id.action_mode_show_private_key: {
 		Intent intent = new Intent(PrivateKeyManageActivity.this, ViewFileActivity.class);
@@ -112,7 +112,7 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
 		.setMessage(getString(R.string.dialog_key_delete_msg) + " " + mChosenFile)
 		.setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(final DialogInterface dialog, final int which) {
 			    FsUtils.deleteFile(mChosenFile);
 			    FsUtils.deleteFile(PrivateKeyUtils.getPublicKey(mChosenFile));
 			    refreshList();
@@ -132,12 +132,12 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     private File mChosenFile;
 
     @Override
-    public void onDestroyActionMode(ActionMode mode) {
+    public void onDestroyActionMode(final ActionMode mode) {
 	    mInActionMode = false;
         mFilesListAdapter.notifyDataSetChanged();
     }
 
-    private void runActionMode(View view, int positon) {
+    private void runActionMode(final View view, final int positon) {
 	if (mInActionMode) {
 	    return;
 	}
@@ -153,8 +153,8 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     protected AdapterView.OnItemClickListener getOnListItemClickListener() {
         return new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view,
-                                    int position, long id) {
+            public void onItemClick(final AdapterView<?> adapterView, final View view,
+                                    final int position, final long id) {
                 Intent intent = new Intent(PrivateKeyManageActivity.this, ViewFileActivity.class);
                 intent.putExtra(ViewFileActivity.TAG_FILE_NAME,
                         PrivateKeyUtils.getPublicKeyEnsure(mFilesListAdapter.getItem(position))
@@ -169,8 +169,8 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     protected AdapterView.OnItemLongClickListener getOnListItemLongClickListener() {
         return new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView,
-                    View view, int position, long id) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView,
+                    final View view, final int position, final long id) {
 		runActionMode(view, position);
 		return true;
             }
@@ -178,14 +178,14 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.private_key_manage, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
         case R.id.action_import:
             {
@@ -205,7 +205,7 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode != Activity.RESULT_OK)
             return;
         switch (requestCode) {

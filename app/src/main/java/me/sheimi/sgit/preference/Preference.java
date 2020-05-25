@@ -13,15 +13,15 @@ import me.sheimi.sgit.R;
 
 public class Preference extends android.preference.Preference {
 
-    public Preference(Context context, AttributeSet attrs, int defStyle) {
+    public Preference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public Preference(Context context, AttributeSet attrs) {
+    public Preference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public Preference(Context context) {
+    public Preference(final Context context) {
         super(context);
     }
 

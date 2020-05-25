@@ -26,7 +26,7 @@ public class CloneTask extends RepoRemoteOpTask {
     private final boolean mCloneRecursive;
     private final String mCloneStatusName;
 
-    public CloneTask(Repo repo, boolean cloneRecursive, String statusName, AsyncTaskCallback callback) {
+    public CloneTask(final Repo repo, final boolean cloneRecursive, final String statusName, final AsyncTaskCallback callback) {
         super(repo);
         mCloneRecursive = cloneRecursive;
         mCloneStatusName = statusName;
@@ -34,7 +34,7 @@ public class CloneTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... v) {
+    protected Boolean doInBackground(final Void... v) {
         boolean result = cloneRepo();
         if (!result) {
             Timber.e("del repo. clone failed");
@@ -45,7 +45,7 @@ public class CloneTask extends RepoRemoteOpTask {
         return result;
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (isTaskCanceled()) {
             return;
@@ -144,12 +144,12 @@ public class CloneTask extends RepoRemoteOpTask {
         }
 
         @Override
-        public void start(int totalTasks) {
+        public void start(final int totalTasks) {
             publishProgressInner();
         }
 
         @Override
-        public void beginTask(String title, int totalWork) {
+        public void beginTask(final String title, final int totalWork) {
             mTotalWork = totalWork;
             mWorkDone = 0;
             mLastProgress = 0;
@@ -158,7 +158,7 @@ public class CloneTask extends RepoRemoteOpTask {
         }
 
         @Override
-        public void update(int i) {
+        public void update(final int i) {
             mWorkDone += i;
             publishProgressInner();
         }

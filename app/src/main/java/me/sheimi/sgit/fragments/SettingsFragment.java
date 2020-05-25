@@ -16,7 +16,7 @@ public class SettingsFragment extends PreferenceFragment {
     private SharedPreferences.OnSharedPreferenceChangeListener mListener;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // need to set as for historical reasons SGit uses custom prefs file
@@ -32,7 +32,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         mListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
                 if (themePrefKey.equals(key)) {
                     // nice trick to recreate the back stack, to ensure existing activities onCreate() are
                     // called to set new theme, courtesy of: http://stackoverflow.com/a/28799124/85472
@@ -40,8 +40,7 @@ public class SettingsFragment extends PreferenceFragment {
                             .addNextIntent(new Intent(getActivity(), RepoListActivity.class))
                             .addNextIntent(getActivity().getIntent())
                             .startActivities();
-                }
-                else if (gravatarPrefKey.equals(key)) {
+                } else if (gravatarPrefKey.equals(key)) {
                     BasicFunctions.getImageLoader().clearMemoryCache();
                     BasicFunctions.getImageLoader().clearDiskCache();
                 }

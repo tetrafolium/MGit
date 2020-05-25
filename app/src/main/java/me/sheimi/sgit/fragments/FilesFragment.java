@@ -38,7 +38,7 @@ public class FilesFragment extends RepoDetailFragment {
 
     private Repo mRepo;
 
-    public static FilesFragment newInstance(Repo mRepo) {
+    public static FilesFragment newInstance(final Repo mRepo) {
         FilesFragment fragment = new FilesFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Repo.TAG, mRepo);
@@ -47,8 +47,8 @@ public class FilesFragment extends RepoDetailFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_files, container, false);
         getRawActivity().setFilesFragment(this);
 
@@ -67,7 +67,7 @@ public class FilesFragment extends RepoDetailFragment {
         mFilesListAdapter = new FilesListAdapter(getActivity(),
                 new FileFilter() {
                     @Override
-                    public boolean accept(File file) {
+                    public boolean accept(final File file) {
                         String name = file.getName();
                         if (name.equals(".git"))
                             return false;
@@ -79,8 +79,8 @@ public class FilesFragment extends RepoDetailFragment {
         mFilesList
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView,
-                            View view, int position, long id) {
+                    public void onItemClick(final AdapterView<?> adapterView,
+                            final View view, final int position, final long id) {
                         File file = mFilesListAdapter.getItem(position);
                         if (file.isDirectory()) {
                             setCurrentDir(file);
@@ -100,7 +100,7 @@ public class FilesFragment extends RepoDetailFragment {
                             FsUtils.openFile(((SheimiFragmentActivity) getActivity()), file);
                         } catch (ActivityNotFoundException e) {
                             Timber.e(e);
-                            ((SheimiFragmentActivity)getActivity()).showMessageDialog(R.string.dialog_error_title,
+                            ((SheimiFragmentActivity) getActivity()).showMessageDialog(R.string.dialog_error_title,
                                 getString(R.string.error_can_not_open_file));
                         }
                     }
@@ -109,8 +109,8 @@ public class FilesFragment extends RepoDetailFragment {
         mFilesList
                 .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView,
-                            View view, int position, long id) {
+                    public boolean onItemLongClick(final AdapterView<?> adapterView,
+                            final View view, final int position, final long id) {
                         File file = mFilesListAdapter.getItem(position);
                         RepoFileOperationDialog dialog = new RepoFileOperationDialog();
                         Bundle args = new Bundle();
@@ -134,7 +134,7 @@ public class FilesFragment extends RepoDetailFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(Repo.TAG, mRepo);
         if (mCurrentDir != null) {
@@ -146,7 +146,7 @@ public class FilesFragment extends RepoDetailFragment {
      * Set the directory listing currently being displayed
      * @param dir
      */
-    public void setCurrentDir(File dir) {
+    public void setCurrentDir(final File dir) {
         mCurrentDir = dir;
         if (mFilesListAdapter != null) {
             mFilesListAdapter.setDir(mCurrentDir);
@@ -168,7 +168,7 @@ public class FilesFragment extends RepoDetailFragment {
         resetCurrentDir();
     }
 
-    public void newDir(String name) {
+    public void newDir(final String name) {
         File file = new File(mCurrentDir, name);
         if (file.exists()) {
             showToastMessage(R.string.alert_file_exists);
@@ -183,7 +183,7 @@ public class FilesFragment extends RepoDetailFragment {
      *
      * @param name
      */
-    public void newFile(String name) throws IOException {
+    public void newFile(final String name) throws IOException {
         File file = new File(mCurrentDir, name);
         if (file.exists()) {
             showToastMessage(R.string.alert_file_exists);

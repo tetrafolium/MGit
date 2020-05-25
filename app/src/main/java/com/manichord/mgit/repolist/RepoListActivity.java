@@ -59,7 +59,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         checkAndRequestRequiredPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -73,7 +73,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
         binding.setViewModel(viewModel);
         binding.setClickHandler(new OnActionClickListener() {
             @Override
-            public void onActionClick(String action) {
+            public void onActionClick(final String action) {
                 if (ClickActions.CLONE.name().equals(action)) {
                     cloneRepo();
                 } else {
@@ -139,7 +139,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -148,7 +148,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_new:
@@ -167,7 +167,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void configSearchAction(MenuItem searchItem) {
+    public void configSearchAction(final MenuItem searchItem) {
         SearchView searchView = (SearchView) searchItem.getActionView();
         if (searchView == null)
             return;
@@ -178,7 +178,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode != Activity.RESULT_OK)
             return;
         switch (requestCode) {
@@ -201,7 +201,7 @@ public class RepoListActivity extends SheimiFragmentActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(
-                                    DialogInterface dialogInterface, int i) {
+                                    final DialogInterface dialogInterface, final int i) {
                                 Bundle args = new Bundle();
                                 args.putString(ImportLocalRepoDialog.FROM_PATH, path);
                                 ImportLocalRepoDialog rld = new ImportLocalRepoDialog();
@@ -218,23 +218,23 @@ public class RepoListActivity extends SheimiFragmentActivity {
             MenuItemCompat.OnActionExpandListener {
 
         @Override
-        public boolean onQueryTextSubmit(String s) {
+        public boolean onQueryTextSubmit(final String s) {
             return false;
         }
 
         @Override
-        public boolean onQueryTextChange(String s) {
+        public boolean onQueryTextChange(final String s) {
             mRepoListAdapter.searchRepo(s);
             return false;
         }
 
         @Override
-        public boolean onMenuItemActionExpand(MenuItem menuItem) {
+        public boolean onMenuItemActionExpand(final MenuItem menuItem) {
             return true;
         }
 
         @Override
-        public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        public boolean onMenuItemActionCollapse(final MenuItem menuItem) {
             mRepoListAdapter.queryAllRepo();
             return true;
         }

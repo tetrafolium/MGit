@@ -16,7 +16,7 @@ public class AndroidJschCredentialsProvider extends org.eclipse.jgit.transport.C
 
     private final SecurePrefsHelper mSecPrefsHelper;
 
-    public AndroidJschCredentialsProvider(SecurePrefsHelper securePrefsHelper) {
+    public AndroidJschCredentialsProvider(final SecurePrefsHelper securePrefsHelper) {
         mSecPrefsHelper = securePrefsHelper;
     }
 
@@ -26,12 +26,12 @@ public class AndroidJschCredentialsProvider extends org.eclipse.jgit.transport.C
     }
 
     @Override
-    public boolean supports(CredentialItem... items) {
+    public boolean supports(final CredentialItem... items) {
         return true;
     }
 
     @Override
-    public boolean get(URIish uri, CredentialItem... items) throws UnsupportedCredentialItem {
+    public boolean get(final URIish uri, final CredentialItem... items) throws UnsupportedCredentialItem {
         Timber.w("get for uri %s", uri);
         //FIXME: we will only handle the first *successfully* matched item
         for (final CredentialItem item : items) {
@@ -39,7 +39,7 @@ public class AndroidJschCredentialsProvider extends org.eclipse.jgit.transport.C
                 Timber.w("need credential for: %s ", item.getPromptText());
                 // the getPromptText() will be "Passphrase for /.../files/ssh/key_file_name_rsa"
                 String prompt = item.getPromptText();
-                String keyfileName = prompt.substring(prompt.lastIndexOf("/")+1, prompt.length());
+                String keyfileName = prompt.substring(prompt.lastIndexOf("/") + 1, prompt.length());
                 String password = mSecPrefsHelper.get(keyfileName);
                 if (password != null) {
                     ((CredentialItem.StringType) item).setValue(password);

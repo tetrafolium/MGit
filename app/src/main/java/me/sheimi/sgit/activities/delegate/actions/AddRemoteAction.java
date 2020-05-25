@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 public class AddRemoteAction extends RepoAction {
 
-    public AddRemoteAction(Repo repo, RepoDetailActivity activity) {
+    public AddRemoteAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -27,7 +27,7 @@ public class AddRemoteAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    public void addToRemote(String name, String url) throws IOException {
+    public void addToRemote(final String name, final String url) throws IOException {
         mRepo.setRemote(name, url);
         mRepo.updateRemote();
         mActivity.showToastMessage(R.string.success_remote_added);
@@ -49,7 +49,7 @@ public class AddRemoteAction extends RepoAction {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(
-                                    DialogInterface dialogInterface, int i) {
+                                    final DialogInterface dialogInterface, final int i) {
                                 String name = remoteName.getText().toString();
                                 String url = remoteUrl.getText().toString();
                                 try {

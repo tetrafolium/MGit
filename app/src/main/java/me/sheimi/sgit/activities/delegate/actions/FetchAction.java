@@ -13,7 +13,7 @@ import me.sheimi.sgit.dialogs.DummyDialogListener;
 import me.sheimi.sgit.repo.tasks.repo.FetchTask;
 
 public class FetchAction extends RepoAction {
-    public FetchAction(Repo repo, RepoDetailActivity activity) {
+    public FetchAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -23,7 +23,7 @@ public class FetchAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    private void fetch(String[] remotes) {
+    private void fetch(final String[] remotes) {
         final FetchTask fetchTask = new FetchTask(remotes, mRepo, mActivity.new ProgressCallback(R.string.fetch_msg_init));
         fetchTask.executeTask();
     }
@@ -35,7 +35,7 @@ public class FetchAction extends RepoAction {
         return builder.setTitle(R.string.dialog_fetch_title)
                 .setMultiChoiceItems(originRemotes, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int index, boolean isChecked) {
+                    public void onClick(final DialogInterface dialogInterface, final int index, final boolean isChecked) {
                         if (isChecked) {
                             remotes.add(originRemotes[index]);
                         } else {
@@ -49,13 +49,13 @@ public class FetchAction extends RepoAction {
                 })
                 .setPositiveButton(R.string.dialog_fetch_positive_button, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(final DialogInterface dialogInterface, final int i) {
                         fetch(remotes.toArray(new String[0]));
                     }
                 })
                 .setNeutralButton(R.string.dialog_fetch_all_button, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(final DialogInterface dialogInterface, final int i) {
                         fetch(originRemotes);
                     }
                 })

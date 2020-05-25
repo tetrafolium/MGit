@@ -8,18 +8,18 @@ public class AddToStageTask extends RepoOpTask {
 
     public String mFilePattern;
 
-    public AddToStageTask(Repo repo, String filepattern) {
+    public AddToStageTask(final Repo repo, final String filepattern) {
         super(repo);
         mFilePattern = filepattern;
         setSuccessMsg(R.string.success_add_to_stage);
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return addToStage();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
     }
 

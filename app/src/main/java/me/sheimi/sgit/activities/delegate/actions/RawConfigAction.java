@@ -13,7 +13,7 @@ import me.sheimi.sgit.database.models.Repo;
  */
 public class RawConfigAction extends RepoAction {
 
-    public RawConfigAction(Repo repo, RepoDetailActivity activity) {
+    public RawConfigAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 

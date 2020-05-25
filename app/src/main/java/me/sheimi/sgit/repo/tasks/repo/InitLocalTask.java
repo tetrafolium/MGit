@@ -7,12 +7,12 @@ import org.eclipse.jgit.api.Git;
 
 public class InitLocalTask extends RepoOpTask {
 
-    public InitLocalTask(Repo repo) {
+    public InitLocalTask(final Repo repo) {
         super(repo);
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         boolean result = init();
         if (!result) {
             mRepo.deleteRepoSync();
@@ -21,7 +21,7 @@ public class InitLocalTask extends RepoOpTask {
         return true;
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (isSuccess) {
             mRepo.updateLatestCommitInfo();

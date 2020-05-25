@@ -13,18 +13,18 @@ public class ResetCommitTask extends RepoOpTask {
 
     private AsyncTaskPostCallback mCallback;
 
-    public ResetCommitTask(Repo repo, AsyncTaskPostCallback callback) {
+    public ResetCommitTask(final Repo repo, final AsyncTaskPostCallback callback) {
         super(repo);
         mCallback = callback;
         setSuccessMsg(R.string.success_reset);
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return reset();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);

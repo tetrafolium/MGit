@@ -42,8 +42,8 @@ public class CommitDiffTask extends RepoOpTask {
                                List<String> diffStrs, RevCommit description);
     }
 
-    public CommitDiffTask(Repo repo, String oldCommit, String newCommit,
-                          CommitDiffResult callback, boolean showDescription) {
+    public CommitDiffTask(final Repo repo, final String oldCommit, final String newCommit,
+                          final CommitDiffResult callback, final boolean showDescription) {
         super(repo);
         mOldCommit = oldCommit;
         mNewCommit = newCommit;
@@ -52,7 +52,7 @@ public class CommitDiffTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         boolean result = getCommitDiff();
         if (!result) {
             return false;
@@ -69,7 +69,7 @@ public class CommitDiffTask extends RepoOpTask {
         return true;
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         RevCommit retCommit = null;
         if (isSuccess && mCallback != null && mDiffEntries != null) {
@@ -83,7 +83,7 @@ public class CommitDiffTask extends RepoOpTask {
         }
     }
 
-    private AbstractTreeIterator getTreeIterator(Repository repo, String commit) throws IOException {
+    private AbstractTreeIterator getTreeIterator(final Repository repo, final String commit) throws IOException {
         if (commit.equals("dircache")) {
             return new DirCacheIterator(repo.readDirCache());
         }
@@ -111,8 +111,8 @@ public class CommitDiffTask extends RepoOpTask {
             mDiffFormatter = new DiffFormatter(mDiffOutput);
             mDiffFormatter.setRepository(repo);
 
-            AbstractTreeIterator mOldCommitTreeIterator = mRepo.isInitialCommit(mNewCommit) ?
-                    new EmptyTreeIterator() : getTreeIterator(repo, mOldCommit);
+            AbstractTreeIterator mOldCommitTreeIterator = mRepo.isInitialCommit(mNewCommit)
+                    ? new EmptyTreeIterator() : getTreeIterator(repo, mOldCommit);
 
             AbstractTreeIterator mNewCommitTreeIterator = getTreeIterator(repo, mNewCommit);
             mDiffEntries = mDiffFormatter.scan(mOldCommitTreeIterator, mNewCommitTreeIterator);
@@ -142,7 +142,7 @@ public class CommitDiffTask extends RepoOpTask {
         return false;
     }
 
-    private String parseDiffEntry(DiffEntry diffEntry) throws StopTaskException {
+    private String parseDiffEntry(final DiffEntry diffEntry) throws StopTaskException {
         try {
             mDiffOutput.reset();
             mDiffFormatter.format(diffEntry);

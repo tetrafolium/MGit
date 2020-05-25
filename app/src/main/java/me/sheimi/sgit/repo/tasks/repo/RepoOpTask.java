@@ -17,12 +17,12 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
     protected boolean mIsTaskAdded;
     private int mSuccessMsg = 0;
 
-    public RepoOpTask(Repo repo) {
+    public RepoOpTask(final Repo repo) {
         mRepo = repo;
         mIsTaskAdded = repo.addTask(this);
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         mRepo.removeTask(this);
         if (!isSuccess && !isTaskCanceled()) {
@@ -33,7 +33,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         }
     }
 
-    protected void setSuccessMsg(int successMsg) {
+    protected void setSuccessMsg(final int successMsg) {
         mSuccessMsg = successMsg;
     }
 
@@ -46,7 +46,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
                 R.string.error_task_running);
     }
 
-    protected void setCredentials(TransportCommand command) {
+    protected void setCredentials(final TransportCommand command) {
         String username = mRepo.getUsername();
         String password = mRepo.getPassword();
 
@@ -61,7 +61,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
 
     }
 
-    protected void handleAuthError(OnPasswordEntered onPassEntered) {
+    protected void handleAuthError(final OnPasswordEntered onPassEntered) {
         String msg = mException.getMessage();
         Timber.w("clone Auth error: %s", msg);
 
@@ -87,11 +87,11 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         private String mTitle;
 
         @Override
-        public void start(int i) {
+        public void start(final int i) {
         }
 
         @Override
-        public void beginTask(String title, int totalWork) {
+        public void beginTask(final String title, final int totalWork) {
             mTotalWork = totalWork;
             mWorkDone = 0;
             mLastProgress = 0;
@@ -102,7 +102,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         }
 
         @Override
-        public void update(int i) {
+        public void update(final int i) {
             mWorkDone += i;
             if (mTotalWork != ProgressMonitor.UNKNOWN && mTotalWork != 0 && mTotalWork - mLastProgress >= 1) {
                 setProgress();

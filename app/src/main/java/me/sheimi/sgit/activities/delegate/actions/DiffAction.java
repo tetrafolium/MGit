@@ -5,7 +5,7 @@ import me.sheimi.sgit.database.models.Repo;
 
 public class DiffAction extends RepoAction {
 
-    public DiffAction(Repo repo, RepoDetailActivity activity) {
+    public DiffAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
