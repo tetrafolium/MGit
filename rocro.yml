@@ -2,17 +2,18 @@ inspecode:
 
   astyle:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 79 }
 
   checkstyle:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 999 }   # too many issues detected: 3043 > 1000
 
   clang-format:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 110 }
 
   cpd:
+    options: [ --skip-lexical-errors ]
     thresholds: { num-issues: 999 }
 
   #### not supported yet ??
@@ -20,24 +21,34 @@ inspecode:
   #  thresholds: { num-issues: 999 }
 
   fossology:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 6 }
 
   grep:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 5 }
 
+  ## A problem occurred configuring root project 'MGit'.
+  ## > Could not resolve all files for configuration ':classpath'.
+  ##    > Could not resolve org.apache.httpcomponents:httpmime:4.1.
+  ##    > Could not resolve net.sf.kxml:kxml2:2.3.0.
+  ##    > Could not resolve com.sun.activation:javax.activation:1.2.0.
+  ##    > Could not resolve org.glassfish.jaxb:jaxb-runtime:2.2.11.
+  ##    > Could not resolve com.google.jimfs:jimfs:1.1.
+  ##    > Could not resolve org.apache.httpcomponents:httpcore:4.2.5.
+  ##    > Could not resolve commons-logging:commons-logging:1.1.1.
+  ##    > Could not resolve commons-codec:commons-codec:1.6.
   infer:
     thresholds: { num-issues: 999 }
 
   jscpd:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 55 }
 
   misspell:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 9 }
 
   pmd:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 999 }   # too many issues detected: 2780 > 1000
 
   ## Classfiles/jarfiles of targets are not specified.
   ## Please specify targets with the "-targets", "-project" or "-analyzeFromFile" option.
@@ -46,11 +57,11 @@ inspecode:
 
   uncrustify:
     auto-fix: true
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 104 }
 
   #### not supported yet ??
   #understand:
   #  thresholds: { num-issues: 999 }
 
   unused:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 74 }
