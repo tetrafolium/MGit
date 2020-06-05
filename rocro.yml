@@ -14,7 +14,7 @@ inspecode:
 
   cpd:
     options: [ --skip-lexical-errors ]
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 9 }
 
   #### not supported yet ??
   #fortify:
@@ -26,18 +26,15 @@ inspecode:
   grep:
     thresholds: { num-issues: 5 }
 
-  ## A problem occurred configuring root project 'MGit'.
-  ## > Could not resolve all files for configuration ':classpath'.
-  ##    > Could not resolve org.apache.httpcomponents:httpmime:4.1.
-  ##    > Could not resolve net.sf.kxml:kxml2:2.3.0.
-  ##    > Could not resolve com.sun.activation:javax.activation:1.2.0.
-  ##    > Could not resolve org.glassfish.jaxb:jaxb-runtime:2.2.11.
-  ##    > Could not resolve com.google.jimfs:jimfs:1.1.
-  ##    > Could not resolve org.apache.httpcomponents:httpcore:4.2.5.
-  ##    > Could not resolve commons-logging:commons-logging:1.1.1.
-  ##    > Could not resolve commons-codec:commons-codec:1.6.
+  ## (codelift#1914)
+  ##
+  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/3/tasks/infer
+  ##   → Failed
+  ##
+  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/4/tasks/infer
+  ##   → Succeeded
   infer:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 62 }
 
   jscpd:
     thresholds: { num-issues: 55 }
