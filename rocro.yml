@@ -7,14 +7,6 @@ inspecode:
     thresholds: { num-issues: 999 }
   - options:
       -targets: app
-      -effort: min
-    thresholds: { num-issues: 999 }
-  - options:
-      -targets: app
-      -bugCategories: "BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE"
-    thresholds: { num-issues: 999 }
-  - options:
-      -targets: app
       -bugCategories: BAD_PRACTICE
     thresholds: { num-issues: 999 }
   - options:
@@ -24,10 +16,18 @@ inspecode:
   - options:
       -targets: app
       -bugCategories:
-        - BAD_PRACTICE
         - CORRECTNESS
+        - BAD_PRACTICE
     thresholds: { num-issues: 999 }
   - options:
       -targets: app
       -bugCategories: [ BAD_PRACTICE, CORRECTNESS ]
+    thresholds: { num-issues: 999 }
+  - options:
+      -targets: app
+      -bugCategories: "BAD_PRACTICE,CORRECTNESS"
+    thresholds: { num-issues: 999 }
+  - options:
+      -targets: app
+      -bugCategories: "BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE"
     thresholds: { num-issues: 999 }
