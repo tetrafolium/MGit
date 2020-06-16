@@ -2,5 +2,5 @@ inspecode:
 
   spotbugs:
     options:
-      -targets: app/src/main/java/
+      -targets: app
     thresholds: { num-issues: 999 }
