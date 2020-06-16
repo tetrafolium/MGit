@@ -1,6 +1,12 @@
 inspecode:
 
   spotbugs:
-    options:
+  - options:
       -targets: app
+      -effort: min
+      -high:
     thresholds: { num-issues: 999 }
+  - options:
+      -targets: app
+      -bugCategories: [ BAD_PRACTICE, CORRECTNESS, EXPERIMENTAL, I18N, MALICIOUS_CODE, MT_CORRECTNESS, PERFORMANCE ]
+      thresholds: { num-issues: 999 }
