@@ -2,5 +2,5 @@ inspecode:
 
   spotbugs:
     options:
-      -targets: gradle/wrapper/gradle-wrapper.jar
+      -targets: app/src/main/java/
     thresholds: { num-issues: 999 }
