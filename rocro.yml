@@ -1,64 +1,6 @@
 inspecode:
 
-  astyle:
-    auto-fix: true
-    thresholds: { num-issues: 79 }
-
-  checkstyle:
-    auto-fix: true
-    thresholds: { num-issues: 999 }   # too many issues detected: 3043 > 1000
-
-  clang-format:
-    auto-fix: true
-    thresholds: { num-issues: 110 }
-
-  cpd:
-    options: [ --skip-lexical-errors ]
-    thresholds: { num-issues: 9 }
-
-  #### not supported yet ??
-  #fortify:
-  #  thresholds: { num-issues: 999 }
-
-  fossology:
-    thresholds: { num-issues: 6 }
-
-  grep:
-    thresholds: { num-issues: 5 }
-
-  ## (codelift#1914)
-  ##
-  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/3/tasks/infer
-  ##   → Failed
-  ##
-  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/4/tasks/infer
-  ##   → Succeeded
-  infer:
-    thresholds: { num-issues: 62 }
-
-  jscpd:
-    thresholds: { num-issues: 55 }
-
-  misspell:
-    auto-fix: true
-    thresholds: { num-issues: 9 }
-
-  pmd:
-    auto-fix: true
-    thresholds: { num-issues: 999 }   # too many issues detected: 2780 > 1000
-
-  ## Classfiles/jarfiles of targets are not specified.
-  ## Please specify targets with the "-targets", "-project" or "-analyzeFromFile" option.
-  #spotbugs:
-  #  thresholds: { num-issues: 999 }
-
-  uncrustify:
-    auto-fix: true
-    thresholds: { num-issues: 104 }
-
-  #### not supported yet ??
-  #understand:
-  #  thresholds: { num-issues: 999 }
-
-  unused:
-    thresholds: { num-issues: 74 }
+  spotbugs:
+    options:
+      -targets: gradle/wrapper/gradle-wrapper.jar
+    thresholds: { num-issues: 999 }
