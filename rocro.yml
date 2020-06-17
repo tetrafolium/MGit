@@ -14,18 +14,18 @@ inspecode:
 
   clang-format:
     auto-fix: true
-    thresholds: { num-issues: 110 }
+    thresholds: { num-issues: 104 }
 
   cpd:
     options: [ --skip-lexical-errors ]
-    thresholds: { num-issues: 9 }
+    thresholds: { num-issues: 7 }
 
   #### not supported yet ??
   #fortify:
   #  thresholds: { num-issues: 999 }
 
   fossology:
-    thresholds: { num-issues: 6 }
+    thresholds: { num-issues: 5 }
 
   grep:
     thresholds: { num-issues: 5 }
@@ -45,11 +45,11 @@ inspecode:
 
   misspell:
     auto-fix: true
-    thresholds: { num-issues: 9 }
+    thresholds: { num-issues: 2 }
 
   pmd:
     auto-fix: true
-    thresholds: { num-issues: 999 }   # too many issues detected: 2780 > 1000
+    thresholds: { num-issues: 2 }
 
   spotbugs:
     options:
@@ -66,4 +66,4 @@ inspecode:
   #  thresholds: { num-issues: 999 }
 
   unused:
-    thresholds: { num-issues: 74 }
+    thresholds: { num-issues: 21 }
