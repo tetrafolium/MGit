@@ -4,66 +4,8 @@ inspecode:
     ignore:
     - app/src/main/assets/
 
-  astyle:
-    auto-fix: true
-    thresholds: { num-issues: 79 }
-
   checkstyle:
+  - thresholds: { num-issues: 999 }   # too many issues detected: 3043 > 1000
+  - config-file: .rocro/checkstyle.xml
     auto-fix: true
-    thresholds: { num-issues: 999 }   # too many issues detected: 3043 > 1000
-
-  clang-format:
-    auto-fix: true
-    thresholds: { num-issues: 104 }
-
-  cpd:
-    options: [ --skip-lexical-errors ]
-    thresholds: { num-issues: 7 }
-
-  #### not supported yet ??
-  #fortify:
-  #  thresholds: { num-issues: 999 }
-
-  fossology:
-    thresholds: { num-issues: 5 }
-
-  grep:
-    thresholds: { num-issues: 5 }
-
-  ## (codelift#1914)
-  ##
-  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/3/tasks/infer
-  ##   → Failed
-  ##
-  ## https://inspecode.rocro.com/jobs/github.com/tetrafolium/MGit/4/tasks/infer
-  ##   → Succeeded
-  infer:
-    thresholds: { num-issues: 62 }
-
-  jscpd:
-    thresholds: { num-issues: 55 }
-
-  misspell:
-    auto-fix: true
-    thresholds: { num-issues: 2 }
-
-  pmd:
-    auto-fix: true
-    thresholds: { num-issues: 2 }
-
-  spotbugs:
-    options:
-      -targets: app
-      -high:
-    thresholds: { num-issues: 41 }
-
-  uncrustify:
-    auto-fix: true
-    thresholds: { num-issues: 104 }
-
-  #### not supported yet ??
-  #understand:
-  #  thresholds: { num-issues: 999 }
-
-  unused:
-    thresholds: { num-issues: 21 }
+    thresholds: { num-issues: 553 }
