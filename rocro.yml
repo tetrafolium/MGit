@@ -47,10 +47,11 @@ inspecode:
     auto-fix: true
     thresholds: { num-issues: 999 }   # too many issues detected: 2780 > 1000
 
-  ## Classfiles/jarfiles of targets are not specified.
-  ## Please specify targets with the "-targets", "-project" or "-analyzeFromFile" option.
-  #spotbugs:
-  #  thresholds: { num-issues: 999 }
+  spotbugs:
+    options:
+      -targets: app
+      -high:
+    thresholds: { num-issues: 41 }
 
   uncrustify:
     auto-fix: true
