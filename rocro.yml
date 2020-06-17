@@ -1,5 +1,9 @@
 inspecode:
 
+  global:
+    ignore:
+    - app/src/main/assets/
+
   astyle:
     auto-fix: true
     thresholds: { num-issues: 79 }
