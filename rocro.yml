@@ -9,8 +9,9 @@ inspecode:
     thresholds: { num-issues: 79 }
 
   checkstyle:
+    # config-file: .rocro/checkstyle.xml  # (auto-detected)
     auto-fix: true
-    thresholds: { num-issues: 999 }   # too many issues detected: 3043 > 1000
+    thresholds: { num-issues: 553 }
 
   clang-format:
     auto-fix: true
