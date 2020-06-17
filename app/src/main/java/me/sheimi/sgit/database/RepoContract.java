@@ -32,7 +32,7 @@ public final class RepoContract {
         public static final String COLUMN_NAME_LATEST_COMMITTER_EMAIL = "latest_committer_email";
         public static final String COLUMN_NAME_LATEST_COMMIT_DATE = "latest_commit_date";
         public static final String COLUMN_NAME_LATEST_COMMIT_MSG = "latest_commit_msg";
-        public static final String[] ALL_COLUMNS = { _ID,
+        public static final String[] ALL_COLUMNS = {_ID,
                 COLUMN_NAME_LOCAL_PATH, COLUMN_NAME_REMOTE_URL,
                 COLUMN_NAME_REPO_STATUS, COLUMN_NAME_LATEST_COMMITTER_UNAME,
                 COLUMN_NAME_LATEST_COMMITTER_EMAIL,

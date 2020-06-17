@@ -76,7 +76,7 @@ public class PullTask extends RepoRemoteOpTask {
             if (mForcePull) {
                 branch = git.getRepository().getFullBranch();
                 if (!branch.startsWith("refs/heads/")) {
-                    setException(new GitAPIException("not on branch") {},
+                    setException(new GitAPIException("not on branch") { },
                             R.string.error_pull_failed_not_on_branch);
                     return false;
                 }

@@ -46,8 +46,8 @@ public class RenameBranchDialog extends DialogFragment implements
             mFromCommit = args.getString(FROM_COMMIT);
         }
         if (args != null && args.containsKey(Repo.TAG)) {
-	    mRepo = (Repo) args.getSerializable(Repo.TAG);
-	}
+            mRepo = (Repo) args.getSerializable(Repo.TAG);
+        }
 
         builder.setTitle(getString(R.string.dialog_rename_branch_title));
         View view = mActivity.getLayoutInflater().inflate(
@@ -87,20 +87,20 @@ public class RenameBranchDialog extends DialogFragment implements
     public void onClick(View view) {
         String newBranchname = mNewBranchname.getText().toString().trim();
         if (newBranchname.equals("")) {
-	    Toast.makeText(mActivity, getString(R.string.alert_new_branchname_required),
-			   Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity, getString(R.string.alert_new_branchname_required),
+                           Toast.LENGTH_LONG).show();
             mNewBranchname
                     .setError(getString(R.string.alert_new_branchname_required));
             return;
         }
 
 
-	int commitType = Repo.getCommitType(mFromCommit);
-	boolean fail = false;
-	try {
-	    switch (commitType) {
-	    case Repo.COMMIT_TYPE_HEAD:
-		mRepo.getGit().branchRename()
+        int commitType = Repo.getCommitType(mFromCommit);
+        boolean fail = false;
+        try {
+            switch (commitType) {
+            case Repo.COMMIT_TYPE_HEAD:
+                mRepo.getGit().branchRename()
 		    .setOldName(mFromCommit)
 		    .setNewName(newBranchname)
 		    .call();

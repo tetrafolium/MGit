@@ -63,7 +63,7 @@ public class CommitsFragment extends BaseFragment implements
         return fragment;
     }
 
-    public void setFilter(String query){
+    public void setFilter(String query) {
         mCommitsListAdapter.setFilter(query);
     }
 
@@ -107,10 +107,10 @@ public class CommitsFragment extends BaseFragment implements
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapterView,
                             View view, int position, long l) {
-			if (mActionMode == null) {
+                        if (mActionMode == null) {
                             enterDiffActionMode();
                         }
-			chooseItem(position);
+                        chooseItem(position);
                         return true;
                     }
                 });

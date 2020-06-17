@@ -30,17 +30,17 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	LayoutInflater inflater = getActivity().getLayoutInflater();
-	View view;
-	view = inflater.inflate(R.layout.dialog_generate_key, null);
-	mNewFilename = (EditText) view.findViewById(R.id.newFilename);
-	mKeyLength = (EditText) view.findViewById(R.id.key_size);
-	mKeyLength.setText("4096");
-	mDSAButton = (RadioButton) view.findViewById(R.id.radio_dsa);
-	mRSAButton = (RadioButton) view.findViewById(R.id.radio_rsa);
-	mRSAButton.setChecked(true);
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view;
+        view = inflater.inflate(R.layout.dialog_generate_key, null);
+        mNewFilename = (EditText) view.findViewById(R.id.newFilename);
+        mKeyLength = (EditText) view.findViewById(R.id.key_size);
+        mKeyLength.setText("4096");
+        mDSAButton = (RadioButton) view.findViewById(R.id.radio_dsa);
+        mRSAButton = (RadioButton) view.findViewById(R.id.radio_rsa);
+        mRSAButton.setChecked(true);
         builder.setMessage(R.string.label_dialog_generate_key)
-	    .setView(view)
+            .setView(view)
 	    .setPositiveButton(R.string.label_generate_key, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int id) {
 			generateKey();
@@ -87,8 +87,8 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
 	File newPubKey = new File(PrivateKeyUtils.getPublicKeyFolder(), newFilename);
 
 	try {
-	    JSch jsch=new JSch();
-	    KeyPair kpair=KeyPair.genKeyPair(jsch, type, key_size);
+	    JSch jsch = new JSch();
+	    KeyPair kpair = KeyPair.genKeyPair(jsch, type, key_size);
 	    kpair.writePrivateKey(new FileOutputStream(newKey));
 	    kpair.writePublicKey(new FileOutputStream(newPubKey), "sgit");
 	    kpair.dispose();
@@ -97,6 +97,6 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
 	    e.printStackTrace();
 	}
 
-		((PrivateKeyManageActivity)getActivity()).refreshList();
+		((PrivateKeyManageActivity) getActivity()).refreshList();
     }
 }

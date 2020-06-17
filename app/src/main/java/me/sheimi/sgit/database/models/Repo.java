@@ -167,11 +167,11 @@ public class Repo implements Comparable<Repo>, Serializable {
     }
 
     public String getLastCommitFullMsg() {
-	RevCommit commit = getLatestCommit();
-	if (commit == null) {
-	    return getLastCommitMsg();
-	}
-	return commit.getFullMessage();
+        RevCommit commit = getLatestCommit();
+        if (commit == null) {
+            return getLastCommitMsg();
+        }
+        return commit.getFullMessage();
     }
 
     public Date getLastCommitDate() {
@@ -333,7 +333,7 @@ public class Repo implements Comparable<Repo>, Serializable {
     public String getBranchName() {
         try {
             return getGit().getRepository().getFullBranch();
-        } catch (IOException|StopTaskException e) {
+        } catch (IOException | StopTaskException e) {
             Timber.e(e, "error getting branch name");
         }
         return "";
@@ -358,7 +358,7 @@ public class Repo implements Comparable<Repo>, Serializable {
                 branchList.add(name);
             }
             return branchList.toArray(new String[0]);
-        } catch (GitAPIException|StopTaskException e) {
+        } catch (GitAPIException | StopTaskException e) {
             Timber.e(e);
         }
         return new String[0];
@@ -371,7 +371,7 @@ public class Repo implements Comparable<Repo>, Serializable {
             if (!it.hasNext())
                 return null;
             return it.next();
-        } catch (GitAPIException|StopTaskException e) {
+        } catch (GitAPIException | StopTaskException e) {
             Timber.e(e);
         }
         return null;
@@ -398,7 +398,7 @@ public class Repo implements Comparable<Repo>, Serializable {
         try {
             List<Ref> localRefs = getGit().branchList().call();
             return localRefs;
-        } catch (GitAPIException|StopTaskException e) {
+        } catch (GitAPIException | StopTaskException e) {
             Timber.e(e);
         }
         return new ArrayList<Ref>();
@@ -413,7 +413,7 @@ public class Repo implements Comparable<Repo>, Serializable {
                 tags[i] = refs.get(i).getName();
             }
             return tags;
-        } catch (GitAPIException|StopTaskException e) {
+        } catch (GitAPIException | StopTaskException e) {
             Timber.e(e);
         }
         return new String[0];
@@ -504,11 +504,11 @@ public class Repo implements Comparable<Repo>, Serializable {
         File repoDir = preferenceHelper.getRepoRoot();
         if (repoDir == null) {
             repoDir = FsUtils.getExternalDir(REPO_DIR, true);
-            Timber.d("PRESET repo path:"+new File(repoDir, localpath).getAbsolutePath());
+            Timber.d("PRESET repo path:" + new File(repoDir, localpath).getAbsolutePath());
             return new File(repoDir, localpath);
         } else {
             repoDir = new File(preferenceHelper.getRepoRoot(), localpath);
-            Timber.d("CUSTOM repo path:"+repoDir);
+            Timber.d("CUSTOM repo path:" + repoDir);
             return repoDir;
         }
     }

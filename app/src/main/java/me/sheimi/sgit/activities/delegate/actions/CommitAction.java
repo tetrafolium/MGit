@@ -64,10 +64,10 @@ public class CommitAction extends RepoAction {
         private ArrayList<String> mKeywords;
         private final String SPLIT_KEYWORDS = " |\\.|-|_|@";
 
-        Author (String username, String email) {
+        Author(String username, String email) {
             mName = username;
             mEmail = email;
-            mKeywords = new ArrayList<String> ();
+            mKeywords = new ArrayList<String>();
             Collections.addAll(mKeywords, mName.toLowerCase().split(SPLIT_KEYWORDS));
             Collections.addAll(mKeywords, mEmail.toLowerCase().split(SPLIT_KEYWORDS));
         }
@@ -93,7 +93,7 @@ public class CommitAction extends RepoAction {
             if (!(o instanceof Author)) {
                 return false;
             }
-            return mName.equals(((Author) o).mName) && mEmail.equals (((Author) o).mEmail);
+            return mName.equals(((Author) o).mName) && mEmail.equals(((Author) o).mEmail);
         }
 
         @Override
@@ -188,7 +188,7 @@ public class CommitAction extends RepoAction {
 
                 @SuppressWarnings("unchecked")
                 @Override
-                protected void publishResults(CharSequence constraint,FilterResults results) {
+                protected void publishResults(CharSequence constraint, FilterResults results) {
                     arrayList = (List<Author>) results.values; // has the filtered values
                     notifyDataSetChanged();  // notifies the data with new filtered values
                 }
@@ -208,7 +208,7 @@ public class CommitAction extends RepoAction {
                     } else {
                         for (int i = 0; i < mOriginalValues.size(); i++) {
                             Author data = mOriginalValues.get(i);
-                            if (data.matches (constraint.toString())) {
+                            if (data.matches(constraint.toString())) {
                                 FilteredArrList.add(data);
                             }
                         }
@@ -229,12 +229,12 @@ public class CommitAction extends RepoAction {
         View layout = inflater.inflate(R.layout.dialog_commit, null);
         final EditText commitMsg = (EditText) layout
                 .findViewById(R.id.commitMsg);
-	    final AutoCompleteTextView commitAuthor = (AutoCompleteTextView) layout
+            final AutoCompleteTextView commitAuthor = (AutoCompleteTextView) layout
                 .findViewById(R.id.commitAuthor);
         final CheckBox isAmend = (CheckBox) layout.findViewById(R.id.isAmend);
         final CheckBox autoStage = (CheckBox) layout
                 .findViewById(R.id.autoStage);
-	    HashSet<Author> authors = new HashSet<Author>();
+            HashSet<Author> authors = new HashSet<Author>();
         try {
             Iterable<RevCommit> commits = mRepo.getGit().log().setMaxCount(500).call();
             for (RevCommit commit : commits) {
@@ -250,8 +250,8 @@ public class CommitAction extends RepoAction {
         }
         ArrayList<Author> authorList = new ArrayList<Author>(authors);
         Collections.sort(authorList);
-	    AuthorsAdapter adapter = new AuthorsAdapter(mActivity, authorList);
-	    commitAuthor.setAdapter(adapter);
+            AuthorsAdapter adapter = new AuthorsAdapter(mActivity, authorList);
+            commitAuthor.setAdapter(adapter);
             isAmend.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
                 @Override
@@ -286,7 +286,7 @@ public class CommitAction extends RepoAction {
                             commitMsg.setError(mActivity.getString(R.string.error_no_commit_msg));
                             return;
                         }
-                        if(!author.equals("")) {
+                        if (!author.equals("")) {
                             ltidx = author.indexOf('<');
                             if (!author.endsWith(">") || ltidx == -1) {
                                 commitAuthor.setError(mActivity.getString(R.string.error_invalid_author));

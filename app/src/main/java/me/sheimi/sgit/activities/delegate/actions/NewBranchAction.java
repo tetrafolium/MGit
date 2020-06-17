@@ -12,13 +12,13 @@ import me.sheimi.sgit.repo.tasks.repo.CheckoutTask;
  */
 public class NewBranchAction extends RepoAction {
     public NewBranchAction(Repo mRepo, RepoDetailActivity mActivity) {
-        super(mRepo,mActivity);
+        super(mRepo, mActivity);
     }
 
     @Override
     public void execute() {
         mActivity.showEditTextDialog(R.string.dialog_create_branch_title,
-                R.string.dialog_create_branch_hint,R.string.label_create,
+                R.string.dialog_create_branch_hint, R.string.label_create,
                 new SheimiFragmentActivity.OnEditTextDialogClicked() {
                     @Override
                     public void onClicked(String branchName) {

@@ -252,7 +252,7 @@ public class ViewFileFragment extends BaseFragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ((SheimiFragmentActivity)getActivity()).
+                ((SheimiFragmentActivity) getActivity()).
                     showMessageDialog(R.string.dialog_error_title, getString(errorMessageId));
             }
         });

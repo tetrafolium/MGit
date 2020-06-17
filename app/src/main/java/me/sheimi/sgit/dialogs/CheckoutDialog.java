@@ -39,14 +39,14 @@ public class CheckoutDialog extends SheimiDialogFragment implements
         if (args != null && args.containsKey(BASE_COMMIT)) {
             mCommit = args.getString(BASE_COMMIT);
         } else {
-	    mCommit = "";
-	}
+            mCommit = "";
+        }
 
-	mRepo = (Repo) args.getSerializable(Repo.TAG);
+        mRepo = (Repo) args.getSerializable(Repo.TAG);
 
-	String message = getString(R.string.dialog_comfirm_checkout_commit_msg)
-	    + " "
-	    + Repo.getCommitDisplayName(mCommit);
+        String message = getString(R.string.dialog_comfirm_checkout_commit_msg)
+            + " "
+            + Repo.getCommitDisplayName(mCommit);
 
         builder.setTitle(getString(R.string.dialog_comfirm_checkout_commit_title));
         View view = mActivity.getLayoutInflater().inflate(
@@ -58,7 +58,7 @@ public class CheckoutDialog extends SheimiDialogFragment implements
         // set button listener
         builder.setNegativeButton(R.string.label_cancel,
                 new DummyDialogListener());
-	builder.setNeutralButton(R.string.label_anonymous_checkout, this);
+        builder.setNeutralButton(R.string.label_anonymous_checkout, this);
         builder.setPositiveButton(R.string.label_checkout,
                 new DummyDialogListener());
 
@@ -77,14 +77,14 @@ public class CheckoutDialog extends SheimiDialogFragment implements
         AlertDialog dialog = (AlertDialog) getDialog();
         if (dialog == null)
             return;
-	Button positiveButton = (Button) dialog
-	    .getButton(Dialog.BUTTON_POSITIVE);
+        Button positiveButton = (Button) dialog
+            .getButton(Dialog.BUTTON_POSITIVE);
         positiveButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-	String newBranch = mBranchName.getText().toString().trim();
+        String newBranch = mBranchName.getText().toString().trim();
 	mActivity.getRepoDelegate().checkoutCommit(mCommit, newBranch);	
         dismiss();
     }

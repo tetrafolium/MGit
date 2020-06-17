@@ -55,20 +55,20 @@ public class PrivateKeyManageActivity extends FileExplorerActivity implements Ac
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	return false;
+        return false;
     }
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	switch (item.getItemId()) {
-	case R.id.action_mode_rename_key:
-	    Bundle pathArg = new Bundle();
-	    pathArg.putString(RenameKeyDialog.FROM_PATH,
-			      mChosenFile.getAbsolutePath());
-	    mode.finish();
-	    RenameKeyDialog rkd = new RenameKeyDialog();
-	    rkd.setArguments(pathArg);
-	    rkd.show(getSupportFragmentManager(), "rename-dialog");
+        switch (item.getItemId()) {
+        case R.id.action_mode_rename_key:
+            Bundle pathArg = new Bundle();
+            pathArg.putString(RenameKeyDialog.FROM_PATH,
+                              mChosenFile.getAbsolutePath());
+            mode.finish();
+            RenameKeyDialog rkd = new RenameKeyDialog();
+            rkd.setArguments(pathArg);
+            rkd.show(getSupportFragmentManager(), "rename-dialog");
 	    return true;
 	case R.id.action_mode_show_private_key: {
 		Intent intent = new Intent(PrivateKeyManageActivity.this, ViewFileActivity.class);

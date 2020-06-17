@@ -58,7 +58,8 @@ public class FsUtils {
      * @param dirname
      * @return
      */
-    public static File getInternalDir(String dirname) { return getExternalDir(dirname, true, false); }
+    public static File getInternalDir(String dirname) {
+        return getExternalDir(dirname, true, false); }
 
     /**
      * Get a File representing a dir within the external shared location where files can be stored specific to this app
@@ -67,7 +68,8 @@ public class FsUtils {
      * @param isCreate  create the dir if it does not already exist
      * @return
      */
-    public static File getExternalDir(String dirname, boolean isCreate) { return getExternalDir(dirname, isCreate, true); }
+    public static File getExternalDir(String dirname, boolean isCreate) {
+        return getExternalDir(dirname, isCreate, true); }
 
     /**
      *
@@ -135,8 +137,7 @@ public class FsUtils {
             try {
                 activity.startActivity(intent);
                 activity.forwardTransition();
-            }
-            catch (ActivityNotFoundException e1) {
+            } catch (ActivityNotFoundException e1) {
                 activity.showMessageDialog(R.string.dialog_error_title, activity.getString(R.string.error_can_not_open_file));
             }
         }

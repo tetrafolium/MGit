@@ -50,7 +50,7 @@ public class SecurePrefsHelper {
 
     public SecurePrefsHelper(Context context) throws SecurePrefsException {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            throw new SecurePrefsException("Min Android version require:"+Build.VERSION_CODES.JELLY_BEAN_MR2);
+            throw new SecurePrefsException("Min Android version require:" + Build.VERSION_CODES.JELLY_BEAN_MR2);
         }
 
         try {
@@ -68,8 +68,8 @@ public class SecurePrefsHelper {
             Timber.w("pref password %s", prefsPassword);
             mSecurePrefs = new SecurePreferences(context, prefsPassword, SEC_PREFS_FILE_NAME);
 
-        } catch (KeyStoreException|CertificateException|NoSuchAlgorithmException|
-            InvalidAlgorithmParameterException|NoSuchProviderException|IOException|UnrecoverableEntryException e) {
+        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException
+            | InvalidAlgorithmParameterException | NoSuchProviderException | IOException | UnrecoverableEntryException e) {
             Timber.e(e, "keystore error");
             throw new SecurePrefsException(e);
         }

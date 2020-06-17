@@ -195,7 +195,7 @@ public class MGitHttpConnection implements HttpConnection {
         SSLContext ctx = SSLContext.getInstance("TLS"); //$NON-NLS-1$
         ctx.init(km, tm, random);
         SSLSocketFactory factory = ctx.getSocketFactory();
-        if(! (factory instanceof MGitSSLSocketFactory))
+        if (!(factory instanceof MGitSSLSocketFactory))
         {
             factory = new MGitSSLSocketFactory(factory);
         }

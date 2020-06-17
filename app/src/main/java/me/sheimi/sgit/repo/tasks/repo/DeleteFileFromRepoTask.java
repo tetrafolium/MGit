@@ -14,7 +14,7 @@ public class DeleteFileFromRepoTask extends RepoOpTask {
     private DeleteOperationType mOperationType;
 
     public DeleteFileFromRepoTask(Repo repo, String filepattern,
-            DeleteOperationType deleteOperationType,AsyncTaskPostCallback callback) {
+            DeleteOperationType deleteOperationType, AsyncTaskPostCallback callback) {
         super(repo);
         mFilePattern = filepattern;
         mCallback = callback;
@@ -61,6 +61,6 @@ public class DeleteFileFromRepoTask extends RepoOpTask {
      * Created by lee on 2015-01-30.
      */
     public static enum DeleteOperationType {
-        DELETE,REMOVE_CACHED,REMOVE_FORCE
+        DELETE, REMOVE_CACHED, REMOVE_FORCE
     }
 }

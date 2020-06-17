@@ -96,12 +96,12 @@ public class RenameKeyDialog extends SheimiDialogFragment implements
             return;
         }
         mFromFile.renameTo(file);
-	try {
-	    PrivateKeyUtils.getPublicKey(mFromFile).renameTo(PrivateKeyUtils.getPublicKey(file));
-	} catch (Exception e) {
-	    //TODO 
-	    e.printStackTrace();
-	}
+        try {
+            PrivateKeyUtils.getPublicKey(mFromFile).renameTo(PrivateKeyUtils.getPublicKey(file));
+        } catch (Exception e) {
+            //TODO 
+            e.printStackTrace();
+        }
         mActivity.refreshList();
         dismiss();
     }

@@ -17,7 +17,7 @@ public class CheckoutTask extends RepoOpTask {
         super(repo);
         mCallback = callback;
         mCommitName = name;
-	    mBranch = branch;
+            mBranch = branch;
     }
 
     @Override
@@ -37,14 +37,14 @@ public class CheckoutTask extends RepoOpTask {
             if (name == null) {
                 checkoutNewBranch(newBranch);
             } else {
-		if (Repo.COMMIT_TYPE_REMOTE == Repo.getCommitType(name)) {
-		    checkoutFromRemote(name, newBranch == null || newBranch.equals("") ? Repo.getCommitName(name) : newBranch);
-		} else if (newBranch == null || newBranch.equals("")) {
-		    checkoutFromLocal(name);
-		} else {
-		    checkoutFromLocal(name, newBranch);
-		}
-	    }
+                if (Repo.COMMIT_TYPE_REMOTE == Repo.getCommitType(name)) {
+                    checkoutFromRemote(name, newBranch == null || newBranch.equals("") ? Repo.getCommitName(name) : newBranch);
+                } else if (newBranch == null || newBranch.equals("")) {
+                    checkoutFromLocal(name);
+                } else {
+                    checkoutFromLocal(name, newBranch);
+                }
+            }
         } catch (StopTaskException e) {
             return false;
         } catch (GitAPIException e) {
@@ -72,7 +72,7 @@ public class CheckoutTask extends RepoOpTask {
     }
 
     public void checkoutFromLocal(String name, String branch) throws GitAPIException,
-	    JGitInternalException, StopTaskException {
+            JGitInternalException, StopTaskException {
         mRepo.getGit().checkout().setCreateBranch(true).setName(branch)
                 .setStartPoint(name).call();
     }

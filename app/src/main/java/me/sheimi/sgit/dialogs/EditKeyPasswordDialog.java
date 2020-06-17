@@ -76,7 +76,7 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
     public void onClick(View view) {
         String newPassword = mPassword.getText().toString().trim();
         try {
-            ((SGitApplication)getActivity().getApplicationContext()).getSecurePrefsHelper().
+            ((SGitApplication) getActivity().getApplicationContext()).getSecurePrefsHelper().
                 set(mKeyFile.getName(), newPassword);
         } catch (Exception e) {
             Timber.e(e);

@@ -49,7 +49,7 @@ public class RepoOperationDelegate {
     }
 
     private void initActions() {
-        mActions.add(new NewBranchAction(mRepo,mActivity));
+        mActions.add(new NewBranchAction(mRepo, mActivity));
         mActions.add(new PullAction(mRepo, mActivity));
         mActions.add(new PushAction(mRepo, mActivity));
         mActions.add(new AddAllAction(mRepo, mActivity));
@@ -122,10 +122,10 @@ public class RepoOperationDelegate {
         task.executeTask();
     }
 
-    public void deleteFileFromRepo(String filepath,DeleteOperationType deleteOperationType) {
+    public void deleteFileFromRepo(String filepath, DeleteOperationType deleteOperationType) {
         String relative = getRelativePath(filepath);
         DeleteFileFromRepoTask task = new DeleteFileFromRepoTask(mRepo,
-                relative,deleteOperationType, new AsyncTaskPostCallback() {
+                relative, deleteOperationType, new AsyncTaskPostCallback() {
                     @Override
                     public void onPostExecute(Boolean isSuccess) {
                         // TODO Auto-generated method stub
