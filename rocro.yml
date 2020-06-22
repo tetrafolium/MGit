@@ -1,33 +1,23 @@
 inspecode:
 
   spotbugs:
-  - options:
-      -targets: app
-      -high:
-    thresholds: { num-issues: 999 }
-  - options:
-      -targets: app
-      -bugCategories: BAD_PRACTICE
-    thresholds: { num-issues: 999 }
+  #- options:
+  #    -targets: app
+  #    -high:
+  #  thresholds: { num-issues: 999 }
   - options:
       -targets: app
       -bugCategories: CORRECTNESS
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 30 }
   - options:
       -targets: app
-      -bugCategories:
-        - CORRECTNESS
-        - BAD_PRACTICE
-    thresholds: { num-issues: 999 }
+      -bugCategories: EXPERIMENTAL
+    thresholds: { num-issues: 1 }
   - options:
       -targets: app
-      -bugCategories: [ BAD_PRACTICE, CORRECTNESS ]
-    thresholds: { num-issues: 999 }
+      -bugCategories: PERFORMANCE
+    thresholds: { num-issues: 49 }
   - options:
       -targets: app
-      -bugCategories: "BAD_PRACTICE,CORRECTNESS"
-    thresholds: { num-issues: 999 }
-  - options:
-      -targets: app
-      -bugCategories: "BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE"
-    thresholds: { num-issues: 999 }
+      -bugCategories: [ CORRECTNESS, PERFORMANCE, EXPERIMENTAL ]
+    thresholds: { num-issues: 80 }
