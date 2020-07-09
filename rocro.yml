@@ -2,7 +2,7 @@ inspecode:
 
   global:
     ignore:
-    - app/src/main/assets/
+    #- app/src/main/assets/
 
   astyle:
     auto-fix: true
