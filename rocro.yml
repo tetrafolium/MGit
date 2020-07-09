@@ -53,10 +53,14 @@ inspecode:
     thresholds: { num-issues: 2 }
 
   spotbugs:
-    options:
+  - options:
       -targets: app
       -high:
     thresholds: { num-issues: 41 }
+  - options:
+      -targets: app
+      -bugCategories: [ CORRECTNESS, PERFORMANCE, EXPERIMENTAL ]
+    thresholds: { num-issues: 80 }
 
   uncrustify:
     auto-fix: true
