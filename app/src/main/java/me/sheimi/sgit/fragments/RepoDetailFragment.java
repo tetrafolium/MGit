@@ -7,5 +7,5 @@ public abstract class RepoDetailFragment extends BaseFragment {
     public RepoDetailActivity getRawActivity() {
         return (RepoDetailActivity) super.getRawActivity();
     }
-    
+
 }

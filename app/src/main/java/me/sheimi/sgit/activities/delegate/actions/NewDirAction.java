@@ -14,13 +14,13 @@ public class NewDirAction extends RepoAction {
     @Override
     public void execute() {
         mActivity.showEditTextDialog(R.string.dialog_create_dir_title,
-                R.string.dialog_create_dir_hint, R.string.label_create,
-                new OnEditTextDialogClicked() {
-                    @Override
-                    public void onClicked(String text) {
-                        mActivity.getFilesFragment().newDir(text);
-                    }
-                });
+                                     R.string.dialog_create_dir_hint, R.string.label_create,
+        new OnEditTextDialogClicked() {
+            @Override
+            public void onClicked(String text) {
+                mActivity.getFilesFragment().newDir(text);
+            }
+        });
         mActivity.closeOperationDrawer();
     }
 }

@@ -28,7 +28,7 @@ import android.app.DialogFragment;
  */
 
 public class RenameBranchDialog extends DialogFragment implements
-        View.OnClickListener, DialogInterface.OnClickListener {
+    View.OnClickListener, DialogInterface.OnClickListener {
 
     private String mFromCommit;
     private EditText mNewBranchname;
@@ -46,12 +46,12 @@ public class RenameBranchDialog extends DialogFragment implements
             mFromCommit = args.getString(FROM_COMMIT);
         }
         if (args != null && args.containsKey(Repo.TAG)) {
-	    mRepo = (Repo) args.getSerializable(Repo.TAG);
-	}
+            mRepo = (Repo) args.getSerializable(Repo.TAG);
+        }
 
         builder.setTitle(getString(R.string.dialog_rename_branch_title));
         View view = mActivity.getLayoutInflater().inflate(
-                R.layout.dialog_rename_branch, null);
+                        R.layout.dialog_rename_branch, null);
 
         builder.setView(view);
         mNewBranchname = (EditText) view.findViewById(R.id.newBranchname);
@@ -59,9 +59,9 @@ public class RenameBranchDialog extends DialogFragment implements
 
         // set button listener
         builder.setNegativeButton(R.string.label_cancel,
-                new DummyDialogListener());
+                                  new DummyDialogListener());
         builder.setPositiveButton(R.string.label_rename,
-                new DummyDialogListener());
+                                  new DummyDialogListener());
 
         return builder.create();
     }
@@ -79,7 +79,7 @@ public class RenameBranchDialog extends DialogFragment implements
         if (dialog == null)
             return;
         Button positiveButton = (Button) dialog
-                .getButton(Dialog.BUTTON_POSITIVE);
+                                .getButton(Dialog.BUTTON_POSITIVE);
         positiveButton.setOnClickListener(this);
     }
 
@@ -87,66 +87,66 @@ public class RenameBranchDialog extends DialogFragment implements
     public void onClick(View view) {
         String newBranchname = mNewBranchname.getText().toString().trim();
         if (newBranchname.equals("")) {
-	    Toast.makeText(mActivity, getString(R.string.alert_new_branchname_required),
-			   Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity, getString(R.string.alert_new_branchname_required),
+                           Toast.LENGTH_LONG).show();
             mNewBranchname
-                    .setError(getString(R.string.alert_new_branchname_required));
+            .setError(getString(R.string.alert_new_branchname_required));
             return;
         }
 
 
-	int commitType = Repo.getCommitType(mFromCommit);
-	boolean fail = false;
-	try {
-	    switch (commitType) {
-	    case Repo.COMMIT_TYPE_HEAD:
-		mRepo.getGit().branchRename()
-		    .setOldName(mFromCommit)
-		    .setNewName(newBranchname)
-		    .call();
-		break;
-	    case Repo.COMMIT_TYPE_TAG:
-		RevTag tag = null;
-		List<Ref> refs = mRepo.getGit().tagList().call();
-		for (int i = 0; i < refs.size(); ++i) {
-		    if (refs.get(i).getName().equals(mFromCommit)) {
-			tag = new RevWalk(mRepo.getGit().getRepository()).lookupTag(refs.get(i).getObjectId());
-			break;
-		    }
-		}   
+        int commitType = Repo.getCommitType(mFromCommit);
+        boolean fail = false;
+        try {
+            switch (commitType) {
+            case Repo.COMMIT_TYPE_HEAD:
+                mRepo.getGit().branchRename()
+                .setOldName(mFromCommit)
+                .setNewName(newBranchname)
+                .call();
+                break;
+            case Repo.COMMIT_TYPE_TAG:
+                RevTag tag = null;
+                List<Ref> refs = mRepo.getGit().tagList().call();
+                for (int i = 0; i < refs.size(); ++i) {
+                    if (refs.get(i).getName().equals(mFromCommit)) {
+                        tag = new RevWalk(mRepo.getGit().getRepository()).lookupTag(refs.get(i).getObjectId());
+                        break;
+                    }
+                }
 
-		if (tag == null) {
-		    fail = true;
-		    break;
-		}
+                if (tag == null) {
+                    fail = true;
+                    break;
+                }
 
-		mRepo.getGit().tag()
-		    .setMessage(tag.getFullMessage())
-		    .setName(newBranchname)
-		    .setObjectId(tag.getObject())
-		    .setTagger(tag.getTaggerIdent())
-		    .call();
-		mRepo.getGit().tagDelete()
-		    .setTags(mFromCommit)
-		    .call();
-		break;
-				}
-	} catch (StopTaskException e) {
-	    fail = true;
-	} catch (GitAPIException e) {
-	    fail = true;
-	}
-	if (fail) {
-	    mActivity.runOnUiThread(new Runnable() {
-		    @Override
-		    public void run() {
-			Toast.makeText(mActivity, "can't rename " + mFromCommit,
-				       Toast.LENGTH_LONG).show();
-		    }
-		});
-	}
+                mRepo.getGit().tag()
+                .setMessage(tag.getFullMessage())
+                .setName(newBranchname)
+                .setObjectId(tag.getObject())
+                .setTagger(tag.getTaggerIdent())
+                .call();
+                mRepo.getGit().tagDelete()
+                .setTags(mFromCommit)
+                .call();
+                break;
+            }
+        } catch (StopTaskException e) {
+            fail = true;
+        } catch (GitAPIException e) {
+            fail = true;
+        }
+        if (fail) {
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mActivity, "can't rename " + mFromCommit,
+                                   Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
-	mActivity.refreshList();
+        mActivity.refreshList();
         dismiss();
     }
 

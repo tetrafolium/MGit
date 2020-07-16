@@ -48,13 +48,13 @@ public class CommitAction extends RepoAction {
     private void commit(String commitMsg, boolean isAmend, boolean stageAll, String authorName,
                         String authorEmail) {
         CommitChangesTask commitTask = new CommitChangesTask(mRepo, commitMsg,
-                isAmend, stageAll, authorName, authorEmail, new AsyncTaskPostCallback() {
+        isAmend, stageAll, authorName, authorEmail, new AsyncTaskPostCallback() {
 
-                    @Override
-                    public void onPostExecute(Boolean isSuccess) {
-                        mActivity.reset();
-                    }
-                });
+            @Override
+            public void onPostExecute(Boolean isSuccess) {
+                mActivity.reset();
+            }
+        });
         commitTask.executeTask();
     }
 
@@ -228,13 +228,13 @@ public class CommitAction extends RepoAction {
         LayoutInflater inflater = mActivity.getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialog_commit, null);
         final EditText commitMsg = (EditText) layout
-                .findViewById(R.id.commitMsg);
-	    final AutoCompleteTextView commitAuthor = (AutoCompleteTextView) layout
+                                   .findViewById(R.id.commitMsg);
+        final AutoCompleteTextView commitAuthor = (AutoCompleteTextView) layout
                 .findViewById(R.id.commitAuthor);
         final CheckBox isAmend = (CheckBox) layout.findViewById(R.id.isAmend);
         final CheckBox autoStage = (CheckBox) layout
-                .findViewById(R.id.autoStage);
-	    HashSet<Author> authors = new HashSet<Author>();
+                                   .findViewById(R.id.autoStage);
+        HashSet<Author> authors = new HashSet<Author>();
         try {
             Iterable<RevCommit> commits = mRepo.getGit().log().setMaxCount(500).call();
             for (RevCommit commit : commits) {
@@ -250,25 +250,25 @@ public class CommitAction extends RepoAction {
         }
         ArrayList<Author> authorList = new ArrayList<Author>(authors);
         Collections.sort(authorList);
-	    AuthorsAdapter adapter = new AuthorsAdapter(mActivity, authorList);
-	    commitAuthor.setAdapter(adapter);
-            isAmend.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        AuthorsAdapter adapter = new AuthorsAdapter(mActivity, authorList);
+        commitAuthor.setAdapter(adapter);
+        isAmend.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView,
-                                             boolean isChecked) {
-                    if (isChecked) {
-                        commitMsg.setText(mRepo.getLastCommitFullMsg());
-                    } else {
-                        commitMsg.setText("");
-                    }
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                if (isChecked) {
+                    commitMsg.setText(mRepo.getLastCommitFullMsg());
+                } else {
+                    commitMsg.setText("");
                 }
-            });
+            }
+        });
         final AlertDialog d = builder.setTitle(R.string.dialog_commit_title)
-                .setView(layout)
-                .setPositiveButton(R.string.dialog_commit_positive_label, null)
-                .setNegativeButton(R.string.label_cancel,
-                        new DummyDialogListener()).create();
+                              .setView(layout)
+                              .setPositiveButton(R.string.dialog_commit_positive_label, null)
+                              .setNegativeButton(R.string.label_cancel,
+                                      new DummyDialogListener()).create();
         d.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -303,13 +303,13 @@ public class CommitAction extends RepoAction {
                         commit(msg, amend, stage, authorName, authorEmail);
 
                         d.dismiss();
+                    }
                 }
-            }
 
-            );
+                                    );
+            }
         }
-    }
-            );
+                           );
         d.show();
     }
 }

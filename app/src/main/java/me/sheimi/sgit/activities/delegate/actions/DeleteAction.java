@@ -14,14 +14,14 @@ public class DeleteAction extends RepoAction {
     @Override
     public void execute() {
         mActivity.showMessageDialog(R.string.dialog_delete_repo_title,
-                R.string.dialog_delete_repo_msg, R.string.label_delete,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mRepo.deleteRepo();
-                        mActivity.finish();
-                    }
-                });
+                                    R.string.dialog_delete_repo_msg, R.string.label_delete,
+        new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mRepo.deleteRepo();
+                mActivity.finish();
+            }
+        });
         mActivity.closeOperationDrawer();
     }
 }

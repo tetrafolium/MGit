@@ -69,7 +69,7 @@ public class SecurePrefsHelper {
             mSecurePrefs = new SecurePreferences(context, prefsPassword, SEC_PREFS_FILE_NAME);
 
         } catch (KeyStoreException|CertificateException|NoSuchAlgorithmException|
-            InvalidAlgorithmParameterException|NoSuchProviderException|IOException|UnrecoverableEntryException e) {
+                     InvalidAlgorithmParameterException|NoSuchProviderException|IOException|UnrecoverableEntryException e) {
             Timber.e(e, "keystore error");
             throw new SecurePrefsException(e);
         }
@@ -85,12 +85,12 @@ public class SecurePrefsHelper {
             Calendar end = Calendar.getInstance();
             end.add(Calendar.YEAR, 30);
             KeyPairGeneratorSpec spec = new KeyPairGeneratorSpec.Builder(context)
-                .setAlias(KEY_ALIAS)
-                .setSubject(new X500Principal("CN=" + KEY_ALIAS))
-                .setSerialNumber(BigInteger.TEN)
-                .setStartDate(start.getTime())
-                .setEndDate(end.getTime())
-                .build();
+            .setAlias(KEY_ALIAS)
+            .setSubject(new X500Principal("CN=" + KEY_ALIAS))
+            .setSerialNumber(BigInteger.TEN)
+            .setStartDate(start.getTime())
+            .setEndDate(end.getTime())
+            .build();
             KeyPairGenerator kpg = KeyPairGenerator.getInstance(KEY_ALGORITHM_RSA, AndroidKeyStore);
             kpg.initialize(spec);
             kpg.generateKeyPair();

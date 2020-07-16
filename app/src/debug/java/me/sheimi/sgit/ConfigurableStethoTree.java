@@ -61,31 +61,31 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
         Console.MessageLevel logLevel;
 
         switch (priority) {
-            case Log.VERBOSE:
-            case Log.DEBUG:
-                logLevel = Console.MessageLevel.DEBUG;
-                break;
-            case Log.INFO:
-                logLevel = Console.MessageLevel.LOG;
-                break;
-            case Log.WARN:
-                logLevel = Console.MessageLevel.WARNING;
-                break;
-            case Log.ERROR:
-            case Log.ASSERT:
-                logLevel = Console.MessageLevel.ERROR;
-                break;
-            default:
-                logLevel = Console.MessageLevel.LOG;
+        case Log.VERBOSE:
+        case Log.DEBUG:
+            logLevel = Console.MessageLevel.DEBUG;
+            break;
+        case Log.INFO:
+            logLevel = Console.MessageLevel.LOG;
+            break;
+        case Log.WARN:
+            logLevel = Console.MessageLevel.WARNING;
+            break;
+        case Log.ERROR:
+        case Log.ASSERT:
+            logLevel = Console.MessageLevel.ERROR;
+            break;
+        default:
+            logLevel = Console.MessageLevel.LOG;
         }
 
         StringBuilder messageBuilder = new StringBuilder();
 
         if(mConfiguration.mShowTags && tag != null) {
             messageBuilder
-                .append("[")
-                .append(tag)
-                .append("] ");
+            .append("[")
+            .append(tag)
+            .append("] ");
         }
 
         messageBuilder.append(message);
