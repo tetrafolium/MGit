@@ -10,27 +10,27 @@ import me.sheimi.sgit.database.models.Repo;
 public abstract class RepoRemoteOpTask extends RepoOpTask implements SheimiFragmentActivity.OnPasswordEntered {
 
 
-    public RepoRemoteOpTask(Repo repo) {
-        super(repo);
-    }
+public RepoRemoteOpTask(Repo repo) {
+	super(repo);
+}
 
 
-    @Override
-    public void onClicked(String username, String password, boolean savePassword) {
-        mRepo.setUsername(username);
-        mRepo.setPassword(password);
-        if (savePassword) {
-            mRepo.saveCredentials();
-        }
+@Override
+public void onClicked(String username, String password, boolean savePassword) {
+	mRepo.setUsername(username);
+	mRepo.setPassword(password);
+	if (savePassword) {
+		mRepo.saveCredentials();
+	}
 
-        mRepo.removeTask(this);
-        getNewTask().executeTask();
-    }
+	mRepo.removeTask(this);
+	getNewTask().executeTask();
+}
 
-    @Override
-    public void onCanceled() {
+@Override
+public void onCanceled() {
 
-    }
+}
 
-    public abstract RepoRemoteOpTask getNewTask();
+public abstract RepoRemoteOpTask getNewTask();
 }
