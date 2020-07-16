@@ -69,7 +69,7 @@ public class MGitHttpConnectionFactory implements HttpConnectionFactory {
     }
 
     public static void install() {
-        if(HttpTransport.getConnectionFactory() instanceof MGitHttpConnectionFactory)
+        if (HttpTransport.getConnectionFactory() instanceof MGitHttpConnectionFactory)
         {
             return;
         }

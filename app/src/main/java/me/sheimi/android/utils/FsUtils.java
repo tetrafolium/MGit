@@ -139,8 +139,7 @@ public class FsUtils {
             try {
                 activity.startActivity(intent);
                 activity.forwardTransition();
-            }
-            catch (ActivityNotFoundException e1) {
+            } catch (ActivityNotFoundException e1) {
                 activity.showMessageDialog(R.string.dialog_error_title, activity.getString(R.string.error_can_not_open_file));
             }
         }

@@ -64,7 +64,7 @@ public class RepoDbManager {
         }
     }
 
-    public static void persistCredentials(long repoId,String username, String password) {
+    public static void persistCredentials(long repoId, String username, String password) {
         ContentValues values = new ContentValues();
         if (username != null && password != null) {
             values.put(RepoContract.RepoEntry.COLUMN_NAME_USERNAME, username);
@@ -93,7 +93,7 @@ public class RepoDbManager {
                            + RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMIT_MSG
                            + " LIKE ?";
         query = "%" + query + "%";
-        String[] selectionArgs = { query, query, query, query };
+        String[] selectionArgs = {query, query, query, query };
         Cursor cursor = mReadableDatabase.query(true,
                                                 RepoContract.RepoEntry.TABLE_NAME,
                                                 RepoContract.RepoEntry.ALL_COLUMNS, selection, selectionArgs,
@@ -121,7 +121,7 @@ public class RepoDbManager {
         Cursor cursor = mReadableDatabase.query(true,
                                                 RepoContract.RepoEntry.TABLE_NAME,
                                                 RepoContract.RepoEntry.ALL_COLUMNS, RepoContract.RepoEntry._ID
-                                                + "= ?", new String[] { String.valueOf(id) }, null,
+                                                + "= ?", new String[] {String.valueOf(id) }, null,
                                                 null, null, null);
         if (cursor.getCount() < 1) {
             cursor.close();
@@ -154,7 +154,7 @@ public class RepoDbManager {
 
     public static void updateRepo(long id, ContentValues values) {
         String selection = RepoContract.RepoEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id) };
         getInstance().mWritableDatabase.update(RepoContract.RepoEntry.TABLE_NAME, values,
                                                selection, selectionArgs);
         notifyObservers(RepoContract.RepoEntry.TABLE_NAME);
@@ -166,7 +166,7 @@ public class RepoDbManager {
 
     private void _deleteRepo(long id) {
         String selection = RepoContract.RepoEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id) };
         mWritableDatabase.delete(RepoContract.RepoEntry.TABLE_NAME, selection,
                                  selectionArgs);
         notifyObservers(RepoContract.RepoEntry.TABLE_NAME);
