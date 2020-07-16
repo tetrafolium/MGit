@@ -19,7 +19,7 @@ public class UserSettingsActivity extends SheimiFragmentActivity {
     protected void onResume() {
         super.onResume();
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new SettingsFragment())
-                .commit();
+        .replace(android.R.id.content, new SettingsFragment())
+        .commit();
     }
 }

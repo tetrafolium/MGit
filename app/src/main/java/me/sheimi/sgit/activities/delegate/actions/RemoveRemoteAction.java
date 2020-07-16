@@ -66,7 +66,7 @@ public class RemoveRemoteAction extends RepoAction {
             mRemoteList = (ListView) layout.findViewById(R.id.remoteList);
 
             mAdapter = new ArrayAdapter<String>(mActivity,
-                    android.R.layout.simple_list_item_1);
+                                                android.R.layout.simple_list_item_1);
             Set<String> remotes = mRepo.getRemotes();
             mAdapter.addAll(remotes);
             mRemoteList.setAdapter(mAdapter);
@@ -87,8 +87,8 @@ public class RemoveRemoteAction extends RepoAction {
             });
 
             builder.setTitle(R.string.dialog_remove_remote_title)
-                    .setView(layout)
-                    .setNegativeButton(R.string.label_cancel, new DummyDialogListener());
+            .setView(layout)
+            .setNegativeButton(R.string.label_cancel, new DummyDialogListener());
             return builder.create();
         }
     }

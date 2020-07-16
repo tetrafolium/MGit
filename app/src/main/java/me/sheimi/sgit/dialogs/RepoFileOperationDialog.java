@@ -38,56 +38,56 @@ public class RepoFileOperationDialog extends SheimiDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
 
         builder.setTitle(R.string.dialog_title_you_want_to).setItems(
-                R.array.repo_file_operations,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case ADD_TO_STAGE: // Add to stage
-                                mActivity.getRepoDelegate().addToStage(
-                                        mFilePath);
-                                break;
-                            case CHECKOUT_FILE:
-                                mActivity.getRepoDelegate().checkoutFile(mFilePath);
-                                break;
-                            case DELETE:
-                                showRemoveFileMessageDialog(R.string.dialog_file_delete,
-                                        R.string.dialog_file_delete_msg,
-                                        R.string.label_delete,
-                                        DeleteOperationType.DELETE);
-                                break;
-                            case REMOVE_CACHED:
-                                showRemoveFileMessageDialog(R.string.dialog_file_remove_cached,
-                                        R.string.dialog_file_remove_cached_msg,
-                                        R.string.label_delete,
-                                        DeleteOperationType.REMOVE_CACHED);
-                                break;
-                            case REMOVE_FORCE:
-                                showRemoveFileMessageDialog(R.string.dialog_file_remove_force,
-                                        R.string.dialog_file_remove_force_msg,
-                                        R.string.label_delete,
-                                        DeleteOperationType.REMOVE_FORCE);
-                                break;
-                        }
-                    }
-                });
+            R.array.repo_file_operations,
+        new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                case ADD_TO_STAGE: // Add to stage
+                    mActivity.getRepoDelegate().addToStage(
+                        mFilePath);
+                    break;
+                case CHECKOUT_FILE:
+                    mActivity.getRepoDelegate().checkoutFile(mFilePath);
+                    break;
+                case DELETE:
+                    showRemoveFileMessageDialog(R.string.dialog_file_delete,
+                                                R.string.dialog_file_delete_msg,
+                                                R.string.label_delete,
+                                                DeleteOperationType.DELETE);
+                    break;
+                case REMOVE_CACHED:
+                    showRemoveFileMessageDialog(R.string.dialog_file_remove_cached,
+                                                R.string.dialog_file_remove_cached_msg,
+                                                R.string.label_delete,
+                                                DeleteOperationType.REMOVE_CACHED);
+                    break;
+                case REMOVE_FORCE:
+                    showRemoveFileMessageDialog(R.string.dialog_file_remove_force,
+                                                R.string.dialog_file_remove_force_msg,
+                                                R.string.label_delete,
+                                                DeleteOperationType.REMOVE_FORCE);
+                    break;
+                }
+            }
+        });
 
         return builder.create();
     }
 
     private void showRemoveFileMessageDialog(int dialog_title, int dialog_msg, int dialog_positive_button, final DeleteOperationType deleteOperationType) {
         showMessageDialog(dialog_title,
-                dialog_msg,
-                dialog_positive_button,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(
-                            DialogInterface dialogInterface,
-                            int i) {
+                          dialog_msg,
+                          dialog_positive_button,
+        new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(
+                DialogInterface dialogInterface,
+                int i) {
 
-                        mActivity.getRepoDelegate()
-                                .deleteFileFromRepo(
-                                        mFilePath, deleteOperationType);
-                    }
-                });
+                mActivity.getRepoDelegate()
+                .deleteFileFromRepo(
+                    mFilePath, deleteOperationType);
+            }
+        });
     }
 }

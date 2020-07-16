@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
-        implements OnItemClickListener {
+    implements OnItemClickListener {
 
     public RepoOperationsAdapter(Context context) {
         super(context, 0);
@@ -60,7 +60,7 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
 
     private void setupDrawerItem() {
         String[] ops = getContext().getResources().getStringArray(
-                R.array.repo_operation_names);
+                           R.array.repo_operation_names);
         for (String op : ops) {
             add(new DrawerItem(op, 0));
         }
@@ -68,7 +68,7 @@ public class RepoOperationsAdapter extends ArrayAdapter<DrawerItem>
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
-            long id) {
+                            long id) {
         RepoDetailActivity context = (RepoDetailActivity) getContext();
         context.getRepoDelegate().executeAction(position);
     }

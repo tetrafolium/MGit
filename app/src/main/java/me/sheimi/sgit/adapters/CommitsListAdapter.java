@@ -39,7 +39,7 @@ public class CommitsListAdapter extends BaseAdapter {
 
     private Repo mRepo;
     private static final SimpleDateFormat COMMITTIME_FORMATTER = new SimpleDateFormat(
-            "MM/dd/yyyy", Locale.getDefault());
+        "MM/dd/yyyy", Locale.getDefault());
     private Set<Integer> mChosenItems;
     private String mFilter;
     private ArrayList<RevCommit> mAll;
@@ -223,18 +223,18 @@ public class CommitsListAdapter extends BaseAdapter {
         }
         if (holder == null) {
             convertView = inflater.inflate(R.layout.listitem_commits, parent,
-                    false);
+                                           false);
             holder = new CommitsListItemHolder();
             holder.commitsTitle = (TextView) convertView
-                    .findViewById(R.id.commitTitle);
+                                  .findViewById(R.id.commitTitle);
             holder.commitsIcon = (ImageView) convertView
-                    .findViewById(R.id.commitIcon);
+                                 .findViewById(R.id.commitIcon);
             holder.commitAuthor = (TextView) convertView
-                    .findViewById(R.id.commitAuthor);
+                                  .findViewById(R.id.commitAuthor);
             holder.commitsMsg = (TextView) convertView
-                    .findViewById(R.id.commitMsg);
+                                .findViewById(R.id.commitMsg);
             holder.commitTime = (TextView) convertView
-                    .findViewById(R.id.commitTime);
+                                .findViewById(R.id.commitTime);
             convertView.setTag(holder);
         }
         RevCommit commit = getItem(position);
@@ -243,7 +243,7 @@ public class CommitsListAdapter extends BaseAdapter {
         String email = person.getEmailAddress();
 
         holder.commitsTitle
-                .setText(Repo.getCommitDisplayName(commit.getName()));
+        .setText(Repo.getCommitDisplayName(commit.getName()));
         holder.commitAuthor.setText(person.getName());
         holder.commitsMsg.setText(commit.getShortMessage());
         holder.commitTime.setText(COMMITTIME_FORMATTER.format(date));
@@ -278,20 +278,20 @@ public class CommitsListAdapter extends BaseAdapter {
     public void resetCommit() {
         clear();
         GetCommitTask getCommitTask = new GetCommitTask(mRepo, mFile,
-                new GetCommitCallback() {
+        new GetCommitCallback() {
 
-                    @Override
-                    public void postCommits(List<RevCommit> commits) {
-                        if (commits != null) {
-                            // TODO why == null
-                            synchronized (mProgressLock) {
-                                stopFiltering();
-                                mAll = new ArrayList<>(commits);
-                                doFiltering();
-                            }
-                        }
+            @Override
+            public void postCommits(List<RevCommit> commits) {
+                if (commits != null) {
+                    // TODO why == null
+                    synchronized (mProgressLock) {
+                        stopFiltering();
+                        mAll = new ArrayList<>(commits);
+                        doFiltering();
                     }
-                });
+                }
+            }
+        });
         getCommitTask.executeTask();
     }
 

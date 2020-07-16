@@ -16,14 +16,14 @@ public class CherryPickAction extends RepoAction {
     @Override
     public void execute() {
         mActivity.showEditTextDialog(R.string.dialog_cherrypick_title,
-                R.string.dialog_cherrypick_msg_hint,
-                R.string.dialog_label_cherrypick,
-                new OnEditTextDialogClicked() {
-                    @Override
-                    public void onClicked(String text) {
-                        cherrypick(text);
-                    }
-                });
+                                     R.string.dialog_cherrypick_msg_hint,
+                                     R.string.dialog_label_cherrypick,
+        new OnEditTextDialogClicked() {
+            @Override
+            public void onClicked(String text) {
+                cherrypick(text);
+            }
+        });
         mActivity.closeOperationDrawer();
     }
 

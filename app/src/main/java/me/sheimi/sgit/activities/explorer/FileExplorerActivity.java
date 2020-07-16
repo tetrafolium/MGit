@@ -83,13 +83,13 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        case android.R.id.home:
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -118,7 +118,7 @@ public abstract class FileExplorerActivity extends SheimiFragmentActivity {
         }
 
     }
-    
+
     protected File getCurrentDir() {
         return mCurrentDir;
     }
