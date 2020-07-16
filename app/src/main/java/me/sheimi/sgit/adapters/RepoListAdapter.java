@@ -204,7 +204,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
 
         boolean repoHasHttpRemote = (remoteRaw != null && !remoteRaw.equals("local repository") && remoteRaw.contains("http"));
 
-        if(repoHasHttpRemote) {
+        if (repoHasHttpRemote) {
             //TODO : Transform ssh uri in http?
             dialog[2] = new SheimiFragmentActivity.onOptionDialogClicked() {
                 @Override
@@ -212,9 +212,9 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
 
                     //remove git extension if present
                     String repoUrl =
-                        remoteRaw.endsWith(context.getString(R.string.git_extension)) ?
-                        remoteRaw.substring(0, remoteRaw.lastIndexOf('.')) :
-                        remoteRaw;
+                        remoteRaw.endsWith(context.getString(R.string.git_extension))
+                        ? remoteRaw.substring(0, remoteRaw.lastIndexOf('.'))
+                        : remoteRaw;
 
                     Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(repoUrl));
 
@@ -249,14 +249,14 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
                         } else
                         {
                             Log.i(TAG, context.getString(R.string.dialog_open_remote_no_app_available));
-                            Toast.makeText(context,R.string.dialog_open_remote_no_app_available, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.dialog_open_remote_no_app_available, Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             };
         }
 
-        if(repoHasHttpRemote) {
+        if (repoHasHttpRemote) {
             List<String> stringList = new ArrayList<>(3);
             stringList.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dialog_choose_repo_action_items)));
             stringList.add(context.getString(R.string.dialog_open_remote));

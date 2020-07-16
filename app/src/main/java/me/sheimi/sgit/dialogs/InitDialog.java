@@ -35,7 +35,7 @@ public class InitDialog extends SheimiDialogFragment implements
         super.onCreateDialog(savedInstanceState);
         mActivity = (RepoListActivity) getActivity();
 
-        mPrefsHelper = ((SGitApplication)mActivity.getApplicationContext()).getPrefenceHelper();
+        mPrefsHelper = ((SGitApplication) mActivity.getApplicationContext()).getPrefenceHelper();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         LayoutInflater inflater = mActivity.getLayoutInflater();

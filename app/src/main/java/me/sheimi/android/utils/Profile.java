@@ -62,7 +62,7 @@ public class Profile {
     }
 
     public static int getThemeResource(Context context) {
-        final int[] themes = { R.style.AppTheme, R.style.DarkAppTheme };
+        final int[] themes = {R.style.AppTheme, R.style.DarkAppTheme };
         return themes[getTheme(context)];
     }
 

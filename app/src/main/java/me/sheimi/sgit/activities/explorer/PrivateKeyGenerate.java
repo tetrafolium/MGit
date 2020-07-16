@@ -87,8 +87,8 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
         File newPubKey = new File(PrivateKeyUtils.getPublicKeyFolder(), newFilename);
 
         try {
-            JSch jsch=new JSch();
-            KeyPair kpair=KeyPair.genKeyPair(jsch, type, key_size);
+            JSch jsch = new JSch();
+            KeyPair kpair = KeyPair.genKeyPair(jsch, type, key_size);
             kpair.writePrivateKey(new FileOutputStream(newKey));
             kpair.writePublicKey(new FileOutputStream(newPubKey), "sgit");
             kpair.dispose();
@@ -97,6 +97,6 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
             e.printStackTrace();
         }
 
-        ((PrivateKeyManageActivity)getActivity()).refreshList();
+        ((PrivateKeyManageActivity) getActivity()).refreshList();
     }
 }
