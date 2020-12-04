@@ -146,13 +146,13 @@ public class PrivateKeyManageActivity
     mFilesListAdapter.notifyDataSetChanged();
   }
 
-  private void runActionMode(final View view, final int positon) {
+  private void runActionMode(final View view, final int position) {
     if (mInActionMode) {
       return;
     }
 
     mInActionMode = true;
-    mChosenFile = mFilesListAdapter.getItem(positon);
+    mChosenFile = mFilesListAdapter.getItem(position);
     PrivateKeyManageActivity.this.startActionMode(
         PrivateKeyManageActivity.this);
     view.setSelected(true);
