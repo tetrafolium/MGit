@@ -1,10 +1,8 @@
 package me.sheimi.sgit.database.models;
 
-import org.eclipse.jgit.lib.StoredConfig;
-
 import java.io.IOException;
-
 import me.sheimi.sgit.exception.StopTaskException;
+import org.eclipse.jgit.lib.StoredConfig;
 import timber.log.Timber;
 
 /**
@@ -13,53 +11,47 @@ import timber.log.Timber;
 
 public class GitConfig {
 
+  private final StoredConfig mConfig;
 
-private final StoredConfig mConfig;
+  private final String USER_SECTION = "name";
+  private final String NAME_SUBSECTION = "name";
+  private final String EMAIL_SUBSECTION = "email";
 
-private final String USER_SECTION = "name";
-private final String NAME_SUBSECTION = "name";
-private final String EMAIL_SUBSECTION = "email";
+  /**
+   * Create a Git Config for a specific repo
+   *
+   * @param repo
+   */
+  public GitConfig(final Repo repo) throws StopTaskException {
+    mConfig = repo.getStoredConfig();
+  }
 
+  public String getUserName() { return getSubsection(NAME_SUBSECTION); }
 
-/**
- * Create a Git Config for a specific repo
- *
- * @param repo
- */
-public GitConfig(final Repo repo) throws StopTaskException {
-	mConfig = repo.getStoredConfig();
-}
+  public void setUserName(final String name) {
+    setSubsection(NAME_SUBSECTION, name);
+  }
 
-public String getUserName() {
-	return getSubsection(NAME_SUBSECTION);
-}
+  public String getUserEmail() { return getSubsection(EMAIL_SUBSECTION); }
 
-public void setUserName(final String name) {
-	setSubsection(NAME_SUBSECTION, name);
-}
+  public void setUserEmail(final String email) {
+    setSubsection(EMAIL_SUBSECTION, email);
+  }
 
-public String getUserEmail() {
-	return getSubsection(EMAIL_SUBSECTION);
-}
+  private void setSubsection(final String subsection, final String value) {
+    if (value == null || value.equals("")) {
+      mConfig.unset(USER_SECTION, null, subsection);
+    } else {
+      mConfig.setString(USER_SECTION, null, subsection, value);
+    }
+    try {
+      mConfig.save();
+    } catch (IOException e) {
+      Timber.e(e);
+    }
+  }
 
-public void setUserEmail(final String email) {
-	setSubsection(EMAIL_SUBSECTION, email);
-}
-
-private void setSubsection(final String subsection, final String value) {
-	if (value == null || value.equals("")) {
-		mConfig.unset(USER_SECTION, null, subsection);
-	} else {
-		mConfig.setString(USER_SECTION, null, subsection, value);
-	}
-	try {
-		mConfig.save();
-	} catch (IOException e) {
-		Timber.e(e);
-	}
-}
-
-private String getSubsection(final String subsection) {
-	return mConfig.getString(USER_SECTION, null, subsection);
-}
+  private String getSubsection(final String subsection) {
+    return mConfig.getString(USER_SECTION, null, subsection);
+  }
 }

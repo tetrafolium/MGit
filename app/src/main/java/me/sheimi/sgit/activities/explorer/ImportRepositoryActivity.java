@@ -9,97 +9,96 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-
 import java.io.File;
 import java.io.FileFilter;
-
 import me.sheimi.sgit.R;
 import me.sheimi.sgit.database.models.Repo;
 import me.sheimi.sgit.repo.tasks.repo.InitLocalTask;
 
 public class ImportRepositoryActivity extends FileExplorerActivity {
 
-@Override
-protected File getRootFolder() {
-	return Environment.getExternalStorageDirectory();
-}
+  @Override
+  protected File getRootFolder() {
+    return Environment.getExternalStorageDirectory();
+  }
 
-@Override
-protected FileFilter getExplorerFileFilter() {
-	return new FileFilter() {
-		       @Override
-		       public boolean accept(final File file) {
-			       return file.isDirectory();
-		       }
-	};
-}
+  @Override
+  protected FileFilter getExplorerFileFilter() {
+    return new FileFilter() {
+      @Override
+      public boolean accept(final File file) {
+        return file.isDirectory();
+      }
+    };
+  }
 
-@Override
-public boolean onCreateOptionsMenu(final Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.import_repo, menu);
-	return true;
-}
+  @Override
+  public boolean onCreateOptionsMenu(final Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.import_repo, menu);
+    return true;
+  }
 
-@Override
-public boolean onOptionsItemSelected(final MenuItem item) {
-	switch (item.getItemId()) {
-	case R.id.action_create_external:
-		File dotGit = new File(getCurrentDir(), Repo.DOT_GIT_DIR);
-		if (dotGit.exists()) {
-			showToastMessage(R.string.alert_is_already_a_git_repo);
-			return true;
-		}
-		showMessageDialog(R.string.dialog_create_external_title,
-		                  R.string.dialog_create_external_msg,
-		                  R.string.dialog_create_external_positive_label,
-		                  new OnClickListener() {
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem item) {
+    switch (item.getItemId()) {
+    case R.id.action_create_external:
+      File dotGit = new File(getCurrentDir(), Repo.DOT_GIT_DIR);
+      if (dotGit.exists()) {
+        showToastMessage(R.string.alert_is_already_a_git_repo);
+        return true;
+      }
+      showMessageDialog(R.string.dialog_create_external_title,
+                        R.string.dialog_create_external_msg,
+                        R.string.dialog_create_external_positive_label,
+                        new OnClickListener() {
+                          @Override
+                          public void onClick(final DialogInterface dialog,
+                                              final int which) {
+                            createExternalGitRepo();
+                          }
+                        });
+      return true;
+    case R.id.action_import_external:
+      Intent intent = new Intent();
+      intent.putExtra(RESULT_PATH, getCurrentDir().getAbsolutePath());
+      setResult(Activity.RESULT_OK, intent);
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 
-				@Override
-				public void onClick(final DialogInterface dialog,
-				                    final int which) {
-				        createExternalGitRepo();
-				}
-			});
-		return true;
-	case R.id.action_import_external:
-		Intent intent = new Intent();
-		intent.putExtra(RESULT_PATH, getCurrentDir().getAbsolutePath());
-		setResult(Activity.RESULT_OK, intent);
-		finish();
-		return true;
-	}
-	return super.onOptionsItemSelected(item);
-}
+  @Override
+  protected AdapterView.OnItemClickListener getOnListItemClickListener() {
+    return new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(final AdapterView<?> adapterView, final View view,
+                              final int position, final long id) {
+        File file = mFilesListAdapter.getItem(position);
+        if (file.isDirectory()) {
+          setCurrentDir(file);
+          return;
+        }
+      }
+    };
+  }
 
-@Override
-protected AdapterView.OnItemClickListener getOnListItemClickListener() {
-	return new AdapterView.OnItemClickListener() {
-		       @Override
-		       public void onItemClick(final AdapterView<?> adapterView, final View view,
-		                               final int position, final long id) {
-			       File file = mFilesListAdapter.getItem(position);
-			       if (file.isDirectory()) {
-				       setCurrentDir(file);
-				       return;
-			       }
-		       }
-	};
-}
+  @Override
+  protected AdapterView.OnItemLongClickListener
+  getOnListItemLongClickListener() {
+    return null;
+  }
 
-@Override
-protected AdapterView.OnItemLongClickListener getOnListItemLongClickListener() {
-	return null;
-}
+  void createExternalGitRepo() {
+    File current = getCurrentDir();
+    String localPath = Repo.EXTERNAL_PREFIX + current;
 
-void createExternalGitRepo() {
-	File current = getCurrentDir();
-	String localPath = Repo.EXTERNAL_PREFIX + current;
+    Repo repo = Repo.createRepo(localPath, "local repository",
+                                getString(R.string.importing));
 
-	Repo repo = Repo.createRepo(localPath, "local repository", getString(R.string.importing));
-
-	InitLocalTask task = new InitLocalTask(repo);
-	task.executeTask();
-	finish();
-}
+    InitLocalTask task = new InitLocalTask(repo);
+    task.executeTask();
+    finish();
+  }
 }

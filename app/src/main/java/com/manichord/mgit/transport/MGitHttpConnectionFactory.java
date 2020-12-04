@@ -41,14 +41,14 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// This file was copied from JGit and modified to work inside the MGit package and to include an {@code install} function.
+// This file was copied from JGit and modified to work inside the MGit package
+// and to include an {@code install} function.
 
 package com.manichord.mgit.transport;
 
 import java.io.IOException;
 import java.net.Proxy;
 import java.net.URL;
-
 import org.eclipse.jgit.transport.HttpTransport;
 import org.eclipse.jgit.transport.http.HttpConnection;
 import org.eclipse.jgit.transport.http.HttpConnectionFactory;
@@ -59,20 +59,20 @@ import org.eclipse.jgit.transport.http.HttpConnectionFactory;
  * @since 3.3
  */
 public class MGitHttpConnectionFactory implements HttpConnectionFactory {
-public HttpConnection create(final URL url) throws IOException {
-	return new MGitHttpConnection(url);
-}
+  public HttpConnection create(final URL url) throws IOException {
+    return new MGitHttpConnection(url);
+  }
 
-public HttpConnection create(final URL url, final Proxy proxy)
-throws IOException {
-	return new MGitHttpConnection(url, proxy);
-}
+  public HttpConnection create(final URL url, final Proxy proxy)
+      throws IOException {
+    return new MGitHttpConnection(url, proxy);
+  }
 
-public static void install() {
-	if (HttpTransport.getConnectionFactory() instanceof MGitHttpConnectionFactory)
-	{
-		return;
-	}
-	HttpTransport.setConnectionFactory(new MGitHttpConnectionFactory());
-}
+  public static void install() {
+    if (HttpTransport.getConnectionFactory() instanceof
+        MGitHttpConnectionFactory) {
+      return;
+    }
+    HttpTransport.setConnectionFactory(new MGitHttpConnectionFactory());
+  }
 }
