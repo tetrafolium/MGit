@@ -53,7 +53,7 @@ public class SGitApplication extends Application {
 
 
     @Override
-    protected void attachBaseContext(Context base) {
+    protected void attachBaseContext(final Context base) {
         super.attachBaseContext(base);
 
         // The following line triggers the initialization of ACRA

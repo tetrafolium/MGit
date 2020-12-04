@@ -68,7 +68,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
     private int mSelectedTab;
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         switch (requestCode) {
         case BRANCH_CHOOSE_ACTIVITY:
             String branchName = mRepo.getBranchName();
@@ -82,7 +82,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRepo = (Repo) getIntent().getSerializableExtra(Repo.TAG);
         // aweful hack! workaround for null repo when returning from BranchChooser, but going to
@@ -103,7 +103,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         mCommitType = (ImageView) findViewById(R.id.commitType);
         mCommitNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Intent intent = new Intent(RepoDetailActivity.this, BranchChooserActivity.class);
                 intent.putExtra(Repo.TAG, mRepo);
                 startActivityForResult(intent, BRANCH_CHOOSE_ACTIVITY);
@@ -164,7 +164,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         mStatusFragment = StatusFragment.newInstance(mRepo);
     }
 
-    private void resetCommitButtonName(String commitName) {
+    private void resetCommitButtonName(final String commitName) {
         int commitType = Repo.getCommitType(commitName);
         switch (commitType) {
         case Repo.COMMIT_TYPE_REMOTE:
@@ -186,7 +186,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         mCommitNameButton.setText(displayName);
     }
 
-    public void reset(String commitName) {
+    public void reset(final String commitName) {
         resetCommitButtonName(commitName);
         reset();
     }
@@ -197,7 +197,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         mStatusFragment.reset();
     }
 
-    public void setFilesFragment(FilesFragment filesFragment) {
+    public void setFilesFragment(final FilesFragment filesFragment) {
         mFilesFragment = filesFragment;
     }
 
@@ -205,18 +205,18 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         return mFilesFragment;
     }
 
-    public void setCommitsFragment(CommitsFragment commitsFragment) {
+    public void setCommitsFragment(final CommitsFragment commitsFragment) {
         mCommitsFragment = commitsFragment;
     }
 
-    public void setStatusFragment(StatusFragment statusFragment) {
+    public void setStatusFragment(final StatusFragment statusFragment) {
         mStatusFragment = statusFragment;
     }
 
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.repo_detail, menu);
         mSearchItem = menu.findItem(R.id.action_search);
         MenuItemCompat.setOnActionExpandListener(mSearchItem, mTabItemPagerAdapter);
@@ -230,7 +230,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
+    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         switch (keyCode) {
         case KeyEvent.KEYCODE_BACK:
         case KeyEvent.KEYCODE_DEL:
@@ -275,7 +275,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
 
         private int mInitMsg;
 
-        public ProgressCallback(int initMsg) {
+        public ProgressCallback(final int initMsg) {
             mInitMsg = initMsg;
         }
 
@@ -291,7 +291,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public void onProgressUpdate(String... progress) {
+        public void onProgressUpdate(final String... progress) {
             mPullMsg.setText(progress[0]);
             mPullLeftHint.setText(progress[1]);
             mPullRightHint.setText(progress[2]);
@@ -299,7 +299,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public void onPostExecute(Boolean isSuccess) {
+        public void onPostExecute(final Boolean isSuccess) {
             Animation anim = AnimationUtils.loadAnimation(
                                  RepoDetailActivity.this, R.anim.fade_out);
             mPullProgressContainer.setAnimation(anim);
@@ -308,7 +308,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public boolean doInBackground(Void... params) {
+        public boolean doInBackground(final Void... params) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -320,7 +320,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
             finish();
@@ -352,16 +352,16 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
 
     class TabItemPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
-        private final int[] PAGE_TITLE = { R.string.tab_files_label,
+        private final int[] PAGE_TITLE = {R.string.tab_files_label,
                                            R.string.tab_commits_label, R.string.tab_status_label
                                          };
 
-        public TabItemPagerAdapter(FragmentManager fm) {
+        public TabItemPagerAdapter(final FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public BaseFragment getItem(int position) {
+        public BaseFragment getItem(final int position) {
             switch (position) {
             case FILES_FRAGMENT_INDEX:
                 return mFilesFragment;
@@ -375,7 +375,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(final int position) {
             return getString(PAGE_TITLE[position]);
         }
 
@@ -385,12 +385,12 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
 
         }
 
         @Override
-        public void onPageSelected(int position) {
+        public void onPageSelected(final int position) {
             mSelectedTab = position;
             if (mSearchItem != null) {
                 mSearchItem.setVisible(position == COMMITS_FRAGMENT_INDEX);
@@ -398,12 +398,12 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
+        public void onPageScrollStateChanged(final int state) {
 
         }
 
         @Override
-        public boolean onQueryTextSubmit(String query) {
+        public boolean onQueryTextSubmit(final String query) {
             switch (mViewPager.getCurrentItem()) {
             case COMMITS_FRAGMENT_INDEX:
                 mCommitsFragment.setFilter(query);
@@ -413,7 +413,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public boolean onQueryTextChange(String query) {
+        public boolean onQueryTextChange(final String query) {
             switch (mViewPager.getCurrentItem()) {
             case COMMITS_FRAGMENT_INDEX:
                 mCommitsFragment.setFilter(query);
@@ -423,12 +423,12 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
         }
 
         @Override
-        public boolean onMenuItemActionExpand(MenuItem menuItem) {
+        public boolean onMenuItemActionExpand(final MenuItem menuItem) {
             return true;
         }
 
         @Override
-        public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        public boolean onMenuItemActionCollapse(final MenuItem menuItem) {
             switch (mViewPager.getCurrentItem()) {
             case COMMITS_FRAGMENT_INDEX:
                 mCommitsFragment.setFilter(null);

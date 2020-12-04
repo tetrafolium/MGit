@@ -82,7 +82,7 @@ public class MGitHttpConnection implements HttpConnection {
      * @throws MalformedURLException
      * @throws IOException
      */
-    protected MGitHttpConnection(URL url)
+    protected MGitHttpConnection(final URL url)
     throws MalformedURLException,
         IOException {
         this.wrappedUrlConnection = (HttpURLConnection) url.openConnection();
@@ -94,7 +94,7 @@ public class MGitHttpConnection implements HttpConnection {
      * @throws MalformedURLException
      * @throws IOException
      */
-    protected MGitHttpConnection(URL url, Proxy proxy)
+    protected MGitHttpConnection(final URL url, final Proxy proxy)
     throws MalformedURLException, IOException {
         this.wrappedUrlConnection = (HttpURLConnection) url
                                     .openConnection(proxy);
@@ -116,23 +116,23 @@ public class MGitHttpConnection implements HttpConnection {
         return wrappedUrlConnection.getHeaderFields();
     }
 
-    public void setRequestProperty(String key, String value) {
+    public void setRequestProperty(final String key, final String value) {
         wrappedUrlConnection.setRequestProperty(key, value);
     }
 
-    public void setRequestMethod(String method) throws ProtocolException {
+    public void setRequestMethod(final String method) throws ProtocolException {
         wrappedUrlConnection.setRequestMethod(method);
     }
 
-    public void setUseCaches(boolean usecaches) {
+    public void setUseCaches(final boolean usecaches) {
         wrappedUrlConnection.setUseCaches(usecaches);
     }
 
-    public void setConnectTimeout(int timeout) {
+    public void setConnectTimeout(final int timeout) {
         wrappedUrlConnection.setConnectTimeout(timeout);
     }
 
-    public void setReadTimeout(int timeout) {
+    public void setReadTimeout(final int timeout) {
         wrappedUrlConnection.setReadTimeout(timeout);
     }
 
@@ -144,7 +144,7 @@ public class MGitHttpConnection implements HttpConnection {
         return wrappedUrlConnection.getInputStream();
     }
 
-    public String getHeaderField(String name) {
+    public String getHeaderField(final String name) {
         return wrappedUrlConnection.getHeaderField(name);
     }
 
@@ -152,15 +152,15 @@ public class MGitHttpConnection implements HttpConnection {
         return wrappedUrlConnection.getContentLength();
     }
 
-    public void setInstanceFollowRedirects(boolean followRedirects) {
+    public void setInstanceFollowRedirects(final boolean followRedirects) {
         wrappedUrlConnection.setInstanceFollowRedirects(followRedirects);
     }
 
-    public void setDoOutput(boolean dooutput) {
+    public void setDoOutput(final boolean dooutput) {
         wrappedUrlConnection.setDoOutput(dooutput);
     }
 
-    public void setFixedLengthStreamingMode(int contentLength) {
+    public void setFixedLengthStreamingMode(final int contentLength) {
         wrappedUrlConnection.setFixedLengthStreamingMode(contentLength);
     }
 
@@ -168,7 +168,7 @@ public class MGitHttpConnection implements HttpConnection {
         return wrappedUrlConnection.getOutputStream();
     }
 
-    public void setChunkedStreamingMode(int chunklen) {
+    public void setChunkedStreamingMode(final int chunklen) {
         wrappedUrlConnection.setChunkedStreamingMode(chunklen);
     }
 
@@ -184,18 +184,18 @@ public class MGitHttpConnection implements HttpConnection {
         wrappedUrlConnection.connect();
     }
 
-    public void setHostnameVerifier(HostnameVerifier hostnameverifier) {
+    public void setHostnameVerifier(final HostnameVerifier hostnameverifier) {
         ((HttpsURLConnection) wrappedUrlConnection)
         .setHostnameVerifier(hostnameverifier);
     }
 
-    public void configure(KeyManager[] km, TrustManager[] tm,
-                          SecureRandom random) throws NoSuchAlgorithmException,
+    public void configure(final KeyManager[] km, final TrustManager[] tm,
+                          final SecureRandom random) throws NoSuchAlgorithmException,
         KeyManagementException {
         SSLContext ctx = SSLContext.getInstance("TLS"); //$NON-NLS-1$
         ctx.init(km, tm, random);
         SSLSocketFactory factory = ctx.getSocketFactory();
-        if(! (factory instanceof MGitSSLSocketFactory))
+        if (!(factory instanceof MGitSSLSocketFactory))
         {
             factory = new MGitSSLSocketFactory(factory);
         }

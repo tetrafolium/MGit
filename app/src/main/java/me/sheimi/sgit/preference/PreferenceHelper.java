@@ -21,7 +21,7 @@ public class PreferenceHelper {
 
     private final Context mContext;
 
-    public PreferenceHelper(Context context) {
+    public PreferenceHelper(final Context context) {
         mContext = context.getApplicationContext();
     }
 
@@ -39,9 +39,9 @@ public class PreferenceHelper {
         }
     }
 
-    public void setRepoRoot(String repoRootPath) {
+    public void setRepoRoot(final String repoRootPath) {
         edit(mContext.getString(R.string.pref_key_repo_root_location), repoRootPath);
-        Timber.d("set root:"+repoRootPath);
+        Timber.d("set root:" + repoRootPath);
     }
 
 
@@ -51,33 +51,33 @@ public class PreferenceHelper {
     }
 
 
-    private void edit(String name, String value) {
+    private void edit(final String name, final String value) {
         SharedPreferences.Editor editor = getSharedPrefs().edit();
         editor.putString(name, value);
         editor.apply();
     }
 
-    private void edit(String name, int value) {
+    private void edit(final String name, final int value) {
         SharedPreferences.Editor editor =  getSharedPrefs().edit();
         editor.putInt(name, value);
         editor.apply();
     }
 
-    private void edit(String name, boolean value) {
+    private void edit(final String name, final boolean value) {
         SharedPreferences.Editor editor =  getSharedPrefs().edit();
         editor.putBoolean(name, value);
         editor.apply();
     }
 
-    private String getString(String name) {
+    private String getString(final String name) {
         return getSharedPrefs().getString(name, DEFAULT_STRING);
     }
 
-    private int getInt(String name) {
+    private int getInt(final String name) {
         return  getSharedPrefs().getInt(name, DEFAULT_INT);
     }
 
-    private boolean getBoolean(String name) {
+    private boolean getBoolean(final String name) {
         return  getSharedPrefs().getBoolean(name, DEFAULT_BOOLEAN);
     }
 }

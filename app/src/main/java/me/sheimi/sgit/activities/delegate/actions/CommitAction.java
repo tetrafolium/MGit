@@ -35,7 +35,7 @@ import java.util.List;
 
 public class CommitAction extends RepoAction {
 
-    public CommitAction(Repo repo, RepoDetailActivity activity) {
+    public CommitAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -45,13 +45,13 @@ public class CommitAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    private void commit(String commitMsg, boolean isAmend, boolean stageAll, String authorName,
-                        String authorEmail) {
+    private void commit(final String commitMsg, final boolean isAmend, final boolean stageAll, final String authorName,
+                        final String authorEmail) {
         CommitChangesTask commitTask = new CommitChangesTask(mRepo, commitMsg,
         isAmend, stageAll, authorName, authorEmail, new AsyncTaskPostCallback() {
 
             @Override
-            public void onPostExecute(Boolean isSuccess) {
+            public void onPostExecute(final Boolean isSuccess) {
                 mActivity.reset();
             }
         });
@@ -64,15 +64,15 @@ public class CommitAction extends RepoAction {
         private ArrayList<String> mKeywords;
         private final String SPLIT_KEYWORDS = " |\\.|-|_|@";
 
-        Author (String username, String email) {
+        Author(final String username, final String email) {
             mName = username;
             mEmail = email;
-            mKeywords = new ArrayList<String> ();
+            mKeywords = new ArrayList<String>();
             Collections.addAll(mKeywords, mName.toLowerCase().split(SPLIT_KEYWORDS));
             Collections.addAll(mKeywords, mEmail.toLowerCase().split(SPLIT_KEYWORDS));
         }
 
-        Author(PersonIdent personIdent) {
+        Author(final PersonIdent personIdent) {
             this(personIdent.getName(), personIdent.getEmailAddress());
         }
 
@@ -89,11 +89,11 @@ public class CommitAction extends RepoAction {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (!(o instanceof Author)) {
                 return false;
             }
-            return mName.equals(((Author) o).mName) && mEmail.equals (((Author) o).mEmail);
+            return mName.equals(((Author) o).mName) && mEmail.equals(((Author) o).mEmail);
         }
 
         @Override
@@ -102,7 +102,7 @@ public class CommitAction extends RepoAction {
         }
 
         @Override
-        public int compareTo(Author another) {
+        public int compareTo(final Author another) {
             int c1;
             c1 = mName.compareTo(another.mName);
             if (c1 != 0)
@@ -110,7 +110,7 @@ public class CommitAction extends RepoAction {
             return mEmail.compareTo(another.mEmail);
         }
 
-        public boolean matches(String constraint) {
+        public boolean matches(final String constraint) {
             constraint = constraint.toLowerCase();
             if (mEmail.toLowerCase().startsWith(constraint)) {
                 return true;
@@ -140,7 +140,7 @@ public class CommitAction extends RepoAction {
         List<Author> mOriginalValues;
         LayoutInflater inflater;
 
-        public AuthorsAdapter(Context context, List<Author> arrayList) {
+        public AuthorsAdapter(final Context context, final List<Author> arrayList) {
             this.arrayList = arrayList;
             inflater = LayoutInflater.from(context);
         }
@@ -151,12 +151,12 @@ public class CommitAction extends RepoAction {
         }
 
         @Override
-        public Object getItem(int position) {
+        public Object getItem(final int position) {
             return arrayList.get(position).displayString();
         }
 
         @Override
-        public long getItemId(int position) {
+        public long getItemId(final int position) {
             return position;
         }
 
@@ -165,7 +165,7 @@ public class CommitAction extends RepoAction {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
 
             ViewHolder holder = null;
 
@@ -188,13 +188,13 @@ public class CommitAction extends RepoAction {
 
                 @SuppressWarnings("unchecked")
                 @Override
-                protected void publishResults(CharSequence constraint,FilterResults results) {
+                protected void publishResults(final CharSequence constraint, final FilterResults results) {
                     arrayList = (List<Author>) results.values; // has the filtered values
                     notifyDataSetChanged();  // notifies the data with new filtered values
                 }
 
                 @Override
-                protected FilterResults performFiltering(CharSequence constraint) {
+                protected FilterResults performFiltering(final CharSequence constraint) {
                     FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
                     List<Author> FilteredArrList = new ArrayList<Author>();
 
@@ -208,7 +208,7 @@ public class CommitAction extends RepoAction {
                     } else {
                         for (int i = 0; i < mOriginalValues.size(); i++) {
                             Author data = mOriginalValues.get(i);
-                            if (data.matches (constraint.toString())) {
+                            if (data.matches(constraint.toString())) {
                                 FilteredArrList.add(data);
                             }
                         }
@@ -255,8 +255,8 @@ public class CommitAction extends RepoAction {
         isAmend.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
+            public void onCheckedChanged(final CompoundButton buttonView,
+                                         final boolean isChecked) {
                 if (isChecked) {
                     commitMsg.setText(mRepo.getLastCommitFullMsg());
                 } else {
@@ -271,13 +271,13 @@ public class CommitAction extends RepoAction {
                                       new DummyDialogListener()).create();
         d.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onShow(DialogInterface dialog) {
+            public void onShow(final DialogInterface dialog) {
 
                 Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
                 b.setOnClickListener(new View.OnClickListener() {
 
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(final View view) {
                         String msg = commitMsg.getText().toString();
                         String author = commitAuthor.getText().toString().trim();
                         String authorName = null, authorEmail = null;
@@ -286,7 +286,7 @@ public class CommitAction extends RepoAction {
                             commitMsg.setError(mActivity.getString(R.string.error_no_commit_msg));
                             return;
                         }
-                        if(!author.equals("")) {
+                        if (!author.equals("")) {
                             ltidx = author.indexOf('<');
                             if (!author.endsWith(">") || ltidx == -1) {
                                 commitAuthor.setError(mActivity.getString(R.string.error_invalid_author));

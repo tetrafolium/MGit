@@ -27,7 +27,7 @@ public class RepoFileOperationDialog extends SheimiDialogFragment {
     private static String mFilePath;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         Bundle args = getArguments();
         if (args != null && args.containsKey(FILE_PATH)) {
@@ -40,7 +40,7 @@ public class RepoFileOperationDialog extends SheimiDialogFragment {
         builder.setTitle(R.string.dialog_title_you_want_to).setItems(
             R.array.repo_file_operations,
         new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 switch (which) {
                 case ADD_TO_STAGE: // Add to stage
                     mActivity.getRepoDelegate().addToStage(
@@ -74,15 +74,15 @@ public class RepoFileOperationDialog extends SheimiDialogFragment {
         return builder.create();
     }
 
-    private void showRemoveFileMessageDialog(int dialog_title, int dialog_msg, int dialog_positive_button, final DeleteOperationType deleteOperationType) {
+    private void showRemoveFileMessageDialog(final int dialog_title, final int dialog_msg, final int dialog_positive_button, final DeleteOperationType deleteOperationType) {
         showMessageDialog(dialog_title,
                           dialog_msg,
                           dialog_positive_button,
         new DialogInterface.OnClickListener() {
             @Override
             public void onClick(
-                DialogInterface dialogInterface,
-                int i) {
+                final DialogInterface dialogInterface,
+                final int i) {
 
                 mActivity.getRepoDelegate()
                 .deleteFileFromRepo(

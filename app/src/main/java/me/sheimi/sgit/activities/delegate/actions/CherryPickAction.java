@@ -9,7 +9,7 @@ import me.sheimi.sgit.repo.tasks.repo.CherryPickTask;
 
 public class CherryPickAction extends RepoAction {
 
-    public CherryPickAction(Repo repo, RepoDetailActivity activity) {
+    public CherryPickAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -20,17 +20,17 @@ public class CherryPickAction extends RepoAction {
                                      R.string.dialog_label_cherrypick,
         new OnEditTextDialogClicked() {
             @Override
-            public void onClicked(String text) {
+            public void onClicked(final String text) {
                 cherrypick(text);
             }
         });
         mActivity.closeOperationDrawer();
     }
 
-    public void cherrypick(String commit) {
+    public void cherrypick(final String commit) {
         CherryPickTask task = new CherryPickTask(mRepo, commit, new AsyncTaskPostCallback() {
             @Override
-            public void onPostExecute(Boolean isSuccess) {
+            public void onPostExecute(final Boolean isSuccess) {
                 mActivity.reset();
             }
         });

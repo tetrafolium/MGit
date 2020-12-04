@@ -27,7 +27,7 @@ public class StatusFragment extends RepoDetailFragment {
     private Button mUnstagedDiff;
     private Button mStagedDiff;
 
-    public static StatusFragment newInstance(Repo mRepo) {
+    public static StatusFragment newInstance(final Repo mRepo) {
         StatusFragment fragment = new StatusFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Repo.TAG, mRepo);
@@ -36,8 +36,8 @@ public class StatusFragment extends RepoDetailFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_status, container, false);
         getRawActivity().setStatusFragment(this);
 
@@ -55,13 +55,13 @@ public class StatusFragment extends RepoDetailFragment {
         mUnstagedDiff = (Button) v.findViewById(R.id.button_unstaged_diff);
         mStagedDiff.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 showDiff("HEAD", "dircache");
             }
         });
         mUnstagedDiff.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 showDiff("dircache", "filetree");
             }
         });
@@ -69,7 +69,7 @@ public class StatusFragment extends RepoDetailFragment {
         return v;
     }
 
-    private void showDiff(String oldCommit, String newCommit) {
+    private void showDiff(final String oldCommit, final String newCommit) {
         Intent intent = new Intent(getRawActivity(),
                                    CommitDiffActivity.class);
         intent.putExtra(CommitDiffActivity.OLD_COMMIT, oldCommit);
@@ -87,7 +87,7 @@ public class StatusFragment extends RepoDetailFragment {
         mStatus.setVisibility(View.GONE);
         StatusTask task = new StatusTask(mRepo, new GetStatusCallback() {
             @Override
-            public void postStatus(String result) {
+            public void postStatus(final String result) {
                 mStatus.setText(result);
                 mLoadding.setVisibility(View.GONE);
                 mStatus.setVisibility(View.VISIBLE);

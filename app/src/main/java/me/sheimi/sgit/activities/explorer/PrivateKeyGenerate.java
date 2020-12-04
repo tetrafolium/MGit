@@ -27,7 +27,7 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
     private RadioButton mRSAButton;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -42,12 +42,12 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
         builder.setMessage(R.string.label_dialog_generate_key)
         .setView(view)
         .setPositiveButton(R.string.label_generate_key, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(final DialogInterface dialog, final int id) {
                 generateKey();
             }
         })
         .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(final DialogInterface dialog, final int id) {
                 // Nothing to do
             }
         });
@@ -87,8 +87,8 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
         File newPubKey = new File(PrivateKeyUtils.getPublicKeyFolder(), newFilename);
 
         try {
-            JSch jsch=new JSch();
-            KeyPair kpair=KeyPair.genKeyPair(jsch, type, key_size);
+            JSch jsch = new JSch();
+            KeyPair kpair = KeyPair.genKeyPair(jsch, type, key_size);
             kpair.writePrivateKey(new FileOutputStream(newKey));
             kpair.writePublicKey(new FileOutputStream(newPubKey), "sgit");
             kpair.dispose();
@@ -97,6 +97,6 @@ public class PrivateKeyGenerate extends SheimiDialogFragment {
             e.printStackTrace();
         }
 
-        ((PrivateKeyManageActivity)getActivity()).refreshList();
+        ((PrivateKeyManageActivity) getActivity()).refreshList();
     }
 }

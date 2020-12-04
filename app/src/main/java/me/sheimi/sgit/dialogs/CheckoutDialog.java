@@ -31,7 +31,7 @@ public class CheckoutDialog extends SheimiDialogFragment implements
     private Repo mRepo;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         mActivity = (RepoDetailActivity) getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
@@ -66,7 +66,7 @@ public class CheckoutDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(BASE_COMMIT, mCommit);
     }
@@ -83,14 +83,14 @@ public class CheckoutDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         String newBranch = mBranchName.getText().toString().trim();
         mActivity.getRepoDelegate().checkoutCommit(mCommit, newBranch);
         dismiss();
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
+    public void onClick(final DialogInterface dialogInterface, final int i) {
         mActivity.getRepoDelegate().checkoutCommit(mCommit);
         dismiss();
     }

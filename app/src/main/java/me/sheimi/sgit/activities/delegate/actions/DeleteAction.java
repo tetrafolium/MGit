@@ -7,7 +7,7 @@ import me.sheimi.sgit.database.models.Repo;
 
 public class DeleteAction extends RepoAction {
 
-    public DeleteAction(Repo repo, RepoDetailActivity activity) {
+    public DeleteAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -17,7 +17,7 @@ public class DeleteAction extends RepoAction {
                                     R.string.dialog_delete_repo_msg, R.string.label_delete,
         new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(final DialogInterface dialogInterface, final int i) {
                 mRepo.deleteRepo();
                 mActivity.finish();
             }

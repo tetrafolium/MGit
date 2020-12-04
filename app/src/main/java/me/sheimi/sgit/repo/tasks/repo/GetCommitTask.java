@@ -24,18 +24,18 @@ public class GetCommitTask extends RepoOpTask {
         execute();
     }
 
-    public GetCommitTask(Repo repo, String file, GetCommitCallback callback) {
+    public GetCommitTask(final Repo repo, final String file, final GetCommitCallback callback) {
         super(repo);
         mFile = file;
         mCallback = callback;
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return getCommitsList();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.postCommits(mResult);

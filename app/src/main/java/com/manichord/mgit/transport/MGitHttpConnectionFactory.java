@@ -59,17 +59,17 @@ import org.eclipse.jgit.transport.http.HttpConnectionFactory;
  * @since 3.3
  */
 public class MGitHttpConnectionFactory implements HttpConnectionFactory {
-    public HttpConnection create(URL url) throws IOException {
+    public HttpConnection create(final URL url) throws IOException {
         return new MGitHttpConnection(url);
     }
 
-    public HttpConnection create(URL url, Proxy proxy)
+    public HttpConnection create(final URL url, final Proxy proxy)
     throws IOException {
         return new MGitHttpConnection(url, proxy);
     }
 
     public static void install() {
-        if(HttpTransport.getConnectionFactory() instanceof MGitHttpConnectionFactory)
+        if (HttpTransport.getConnectionFactory() instanceof MGitHttpConnectionFactory)
         {
             return;
         }

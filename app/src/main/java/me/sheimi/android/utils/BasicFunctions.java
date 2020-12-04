@@ -44,7 +44,7 @@ public class BasicFunctions {
         return "";
     }
 
-    public static void setAvatarImage(ImageView imageView, String email) {
+    public static void setAvatarImage(final ImageView imageView, final String email) {
         String avatarUri = "";
         if (!email.isEmpty())
             avatarUri = "avatar://" + md5(email);
@@ -59,7 +59,7 @@ public class BasicFunctions {
         return mActiveActivity;
     }
 
-    public static void setActiveActivity(SheimiFragmentActivity activity) {
+    public static void setActiveActivity(final SheimiFragmentActivity activity) {
         mActiveActivity = activity;
     }
 
@@ -68,7 +68,7 @@ public class BasicFunctions {
     }
 
 
-    public static void showException(@NonNull @NotNull SheimiFragmentActivity activity, Throwable throwable, @StringRes final int errorTitleRes, @StringRes final int errorRes) {
+    public static void showException(final @NonNull @NotNull SheimiFragmentActivity activity, final Throwable throwable, @StringRes final int errorTitleRes, @StringRes final int errorRes) {
         ExceptionDialog exceptionDialog = new ExceptionDialog();
         exceptionDialog.setThrowable(throwable);
         exceptionDialog.setErrorRes(errorRes);
@@ -77,11 +77,11 @@ public class BasicFunctions {
     }
 
 
-    public static void showException(@NonNull @NotNull SheimiFragmentActivity activity, @NonNull Throwable throwable, @StringRes final int errorRes) {
+    public static void showException(final @NonNull @NotNull SheimiFragmentActivity activity, final @NonNull Throwable throwable, @StringRes final int errorRes) {
         showException(activity, throwable, 0, errorRes);
     }
 
-    public static void showException(@NonNull @NotNull SheimiFragmentActivity activity, @NonNull Throwable throwable) {
+    public static void showException(final @NonNull @NotNull SheimiFragmentActivity activity, final @NonNull Throwable throwable) {
         showException(activity, throwable, 0);
     }
 }

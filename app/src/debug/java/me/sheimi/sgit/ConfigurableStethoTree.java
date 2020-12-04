@@ -41,14 +41,14 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
         this.mConfiguration = new Configuration.Builder().build();
     }
 
-    public ConfigurableStethoTree(Configuration configuration) {
+    public ConfigurableStethoTree(final Configuration configuration) {
         this.mConfiguration = configuration;
     }
 
     @Override
-    protected void log(int priority, String tag, String message, Throwable t) {
+    protected void log(final int priority, final String tag, final String message, final Throwable t) {
 
-        if(priority < mConfiguration.mMinimumPriority) {
+        if (priority < mConfiguration.mMinimumPriority) {
             return;
         }
 
@@ -81,7 +81,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
 
         StringBuilder messageBuilder = new StringBuilder();
 
-        if(mConfiguration.mShowTags && tag != null) {
+        if (mConfiguration.mShowTags && tag != null) {
             messageBuilder
             .append("[")
             .append(tag)
@@ -103,7 +103,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
         private final boolean mShowTags;
         private final int mMinimumPriority;
 
-        private Configuration(boolean showTags, int minimumPriority) {
+        private Configuration(final boolean showTags, final int minimumPriority) {
             this.mShowTags = showTags;
             this.mMinimumPriority = minimumPriority;
         }
@@ -118,7 +118,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
              *                 Default is false.
              * @return This {@link Configuration.Builder} instance.
              */
-            public Builder showTags(boolean showTags) {
+            public Builder showTags(final boolean showTags) {
                 this.mShowTags = showTags;
                 return this;
             }
@@ -129,7 +129,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
              *                 Default is {@link Log#VERBOSE}.
              * @return This {@link Configuration.Builder} instance.
              */
-            public Builder minimumPriority(int priority) {
+            public Builder minimumPriority(final int priority) {
                 this.mMinimumPriority = priority;
                 return this;
             }

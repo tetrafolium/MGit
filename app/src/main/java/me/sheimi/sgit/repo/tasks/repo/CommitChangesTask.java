@@ -26,9 +26,9 @@ public class CommitChangesTask extends RepoOpTask {
     private boolean mIsAmend;
     private boolean mStageAll;
 
-    public CommitChangesTask(Repo repo, String commitMsg, boolean isAmend,
-                             boolean stageAll, String authorName, String authorEmail,
-                             AsyncTaskPostCallback callback) {
+    public CommitChangesTask(final Repo repo, final String commitMsg, final boolean isAmend,
+                             final boolean stageAll, final String authorName, final String authorEmail,
+                             final AsyncTaskPostCallback callback) {
         super(repo);
         mCallback = callback;
         mCommitMsg = commitMsg;
@@ -40,11 +40,11 @@ public class CommitChangesTask extends RepoOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         return commit();
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);
@@ -67,8 +67,8 @@ public class CommitChangesTask extends RepoOpTask {
         return true;
     }
 
-    public static void commit(Repo repo, boolean stageAll, boolean isAmend,
-                              String msg, String authorName, String authorEmail) throws Exception, NoHeadException, NoMessageException,
+    public static void commit(final Repo repo, final boolean stageAll, final boolean isAmend,
+                              final String msg, final String authorName, final String authorEmail) throws Exception, NoHeadException, NoMessageException,
                                          UnmergedPathsException, ConcurrentRefUpdateException,
         WrongRepositoryStateException, GitAPIException, StopTaskException {
         Context context = SGitApplication.getContext();

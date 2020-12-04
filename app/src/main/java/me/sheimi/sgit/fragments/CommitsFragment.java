@@ -52,7 +52,7 @@ public class CommitsFragment extends BaseFragment implements
 
     private ClipboardManager mClipboard;
 
-    public static CommitsFragment newInstance(Repo mRepo, String file) {
+    public static CommitsFragment newInstance(final Repo mRepo, final String file) {
         CommitsFragment fragment = new CommitsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Repo.TAG, mRepo);
@@ -63,13 +63,13 @@ public class CommitsFragment extends BaseFragment implements
         return fragment;
     }
 
-    public void setFilter(String query) {
+    public void setFilter(final String query) {
         mCommitsListAdapter.setFilter(query);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_commits, container, false);
         if (getRawActivity() instanceof RepoDetailActivity) {
             ((RepoDetailActivity) getRawActivity()).setCommitsFragment(this);
@@ -92,8 +92,8 @@ public class CommitsFragment extends BaseFragment implements
         mCommitsList
         .setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
+            public void onItemClick(final AdapterView<?> adapterView,
+                                    final View view, final int position, final long id) {
                 if (mActionMode == null) {
                     RevCommit newCommit = mCommitsListAdapter.getItem(position);
                     showDiff(null, null, newCommit.getName(), true);
@@ -105,8 +105,8 @@ public class CommitsFragment extends BaseFragment implements
         mCommitsList
         .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView,
-                                           View view, int position, long l) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView,
+                                           final View view, final int position, final long l) {
                 if (mActionMode == null) {
                     enterDiffActionMode();
                 }
@@ -119,7 +119,7 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
+    public void onViewStateRestored(final Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState == null) {
             return;
@@ -135,7 +135,7 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(IS_ACTION_MODE, mActionMode != null);
         ArrayList<Integer> itemsList = new ArrayList<Integer>(mChosenItem);
@@ -159,7 +159,7 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+    public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
         MenuInflater inflater = actionMode.getMenuInflater();
         inflater.inflate(R.menu.action_mode_commit_diff, menu);
         actionMode.setTitle(R.string.action_mode_diff);
@@ -167,12 +167,12 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+    public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
         return true;
     }
 
-    private void showDiff(ActionMode actionMode, String oldCommit, String newCommit,
-                          boolean showDescription) {
+    private void showDiff(final ActionMode actionMode, final String oldCommit, final String newCommit,
+                          final boolean showDescription) {
         Intent intent = new Intent(getRawActivity(),
                                    CommitDiffActivity.class);
         if (oldCommit != null) {
@@ -188,7 +188,7 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+    public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
         switch (menuItem.getItemId()) {
         case R.id.action_mode_diff:
             Integer[] items = mChosenItem.toArray(new Integer[0]);
@@ -249,13 +249,13 @@ public class CommitsFragment extends BaseFragment implements
     }
 
     @Override
-    public void onDestroyActionMode(ActionMode actionMode) {
+    public void onDestroyActionMode(final ActionMode actionMode) {
         mActionMode = null;
         mChosenItem.clear();
         mCommitsListAdapter.notifyDataSetChanged();
     }
 
-    private void chooseItem(int position) {
+    private void chooseItem(final int position) {
         if (mCommitsListAdapter.isProgressBar(position))
             return;
         if (mChosenItem.contains(position)) {

@@ -18,7 +18,7 @@ public class PullTask extends RepoRemoteOpTask {
     private String mRemote;
     private boolean mForcePull;
 
-    public PullTask(Repo repo, String remote, boolean forcePull, AsyncTaskCallback callback) {
+    public PullTask(final Repo repo, final String remote, final boolean forcePull, final AsyncTaskCallback callback) {
         super(repo);
         mCallback = callback;
         mRemote = remote;
@@ -26,7 +26,7 @@ public class PullTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         boolean result = pullRepo();
         if (mCallback != null) {
             result = mCallback.doInBackground(params) & result;
@@ -35,7 +35,7 @@ public class PullTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected void onProgressUpdate(String... progress) {
+    protected void onProgressUpdate(final String... progress) {
         super.onProgressUpdate(progress);
         if (mCallback != null) {
             mCallback.onProgressUpdate(progress);
@@ -50,7 +50,7 @@ public class PullTask extends RepoRemoteOpTask {
         }
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);
@@ -76,7 +76,7 @@ public class PullTask extends RepoRemoteOpTask {
             if (mForcePull) {
                 branch = git.getRepository().getFullBranch();
                 if (!branch.startsWith("refs/heads/")) {
-                    setException(new GitAPIException("not on branch") {},
+                    setException(new GitAPIException("not on branch") { },
                     R.string.error_pull_failed_not_on_branch);
                     return false;
                 }

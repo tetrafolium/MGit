@@ -24,12 +24,12 @@ public class AvatarDownloader extends BaseImageDownloader {
 
     private boolean useGravatar;
 
-    public AvatarDownloader(Context context) {
+    public AvatarDownloader(final Context context) {
         super(context);
         useGravatar = isGravatarEnabled();
     }
 
-    public AvatarDownloader(Context context, int connectTimeout, int readTimeout) {
+    public AvatarDownloader(final Context context, final int connectTimeout, final int readTimeout) {
         super(context, connectTimeout, readTimeout);
         useGravatar = isGravatarEnabled();
     }
@@ -57,7 +57,7 @@ public class AvatarDownloader extends BaseImageDownloader {
      * @throws UnsupportedOperationException if image URI has unsupported scheme(protocol)
      */
     @Override
-    protected InputStream getStreamFromOtherSource(String imageUri, Object extra) throws IOException {
+    protected InputStream getStreamFromOtherSource(final String imageUri, final Object extra) throws IOException {
         if (imageUri.toLowerCase(Locale.US).startsWith(AVATAR_SCHEME)) {
             if (!useGravatar)
                 return null;

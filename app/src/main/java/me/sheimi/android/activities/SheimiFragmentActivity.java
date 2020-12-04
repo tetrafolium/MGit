@@ -39,7 +39,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BasicFunctions.setActiveActivity(this);
         setTheme(Profile.getThemeResource(getApplicationContext()));
@@ -60,7 +60,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
+    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
             return true;
@@ -69,7 +69,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
         switch (requestCode) {
         case MGIT_PERMISSIONS_REQUEST: {
             // If request is cancelled, the result arrays are empty.
@@ -85,7 +85,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
         }
     }
 
-    protected void checkAndRequestRequiredPermissions(String permission) {
+    protected void checkAndRequestRequiredPermissions(final String permission) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted, so request it from user
             ActivityCompat.requestPermissions(this, new String[] {permission}, MGIT_PERMISSIONS_REQUEST);
@@ -103,57 +103,57 @@ public class SheimiFragmentActivity extends AppCompatActivity {
         });
     }
 
-    public void showToastMessage(int resId) {
+    public void showToastMessage(final int resId) {
         showToastMessage(getString(resId));
     }
 
-    public void showMessageDialog(int title, int msg, int positiveBtn,
-                                  DialogInterface.OnClickListener positiveListener) {
+    public void showMessageDialog(final int title, final int msg, final int positiveBtn,
+                                  final DialogInterface.OnClickListener positiveListener) {
         showMessageDialog(title, getString(msg), positiveBtn,
                           R.string.label_cancel, positiveListener,
                           new DummyDialogListener());
     }
 
-    public void showMessageDialog(int title, String msg, int positiveBtn,
-                                  DialogInterface.OnClickListener positiveListener) {
+    public void showMessageDialog(final int title, final String msg, final int positiveBtn,
+                                  final DialogInterface.OnClickListener positiveListener) {
         showMessageDialog(title, msg, positiveBtn, R.string.label_cancel,
                           positiveListener, new DummyDialogListener());
     }
 
-    public void showMessageDialog(int title, String msg, int positiveBtn,
-                                  int negativeBtn, DialogInterface.OnClickListener positiveListener,
-                                  DialogInterface.OnClickListener negativeListener) {
+    public void showMessageDialog(final int title, final String msg, final int positiveBtn,
+                                  final int negativeBtn, final DialogInterface.OnClickListener positiveListener,
+                                  final DialogInterface.OnClickListener negativeListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title).setMessage(msg)
         .setPositiveButton(positiveBtn, positiveListener)
         .setNegativeButton(negativeBtn, negativeListener).show();
     }
 
-    public void showMessageDialog(int title, String msg) {
+    public void showMessageDialog(final int title, final String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title).setMessage(msg)
         .setPositiveButton(R.string.label_ok, new DummyDialogListener()).show();
     }
 
-    public void showOptionsDialog(int title,final int option_names,
+    public void showOptionsDialog(final int title, final int option_names,
                                   final onOptionDialogClicked[] option_listeners) {
         CharSequence[] options_values = getResources().getStringArray(option_names);
         showOptionsDialog(title, options_values, option_listeners);
     }
 
-    public void showOptionsDialog(int title, CharSequence[] option_values,
+    public void showOptionsDialog(final int title, final CharSequence[] option_values,
                                   final onOptionDialogClicked[] option_listeners) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
-        builder.setItems(option_values,new DialogInterface.OnClickListener() {
+        builder.setItems(option_values, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 option_listeners[which].onClicked();
             }
         }).create().show();
     }
 
-    public void showEditTextDialog(int title, int hint, int positiveBtn,
+    public void showEditTextDialog(final int title, final int hint, final int positiveBtn,
                                    final OnEditTextDialogClicked positiveListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -166,7 +166,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
         new DialogInterface.OnClickListener() {
             @Override
             public void onClick(
-                DialogInterface dialogInterface, int i) {
+                final DialogInterface dialogInterface, final int i) {
                 String text = editText.getText().toString();
                 if (text == null || text.trim().isEmpty()) {
                     showToastMessage(R.string.alert_you_should_input_something);
@@ -179,8 +179,8 @@ public class SheimiFragmentActivity extends AppCompatActivity {
                            new DummyDialogListener()).show();
     }
 
-    public void promptForPassword(OnPasswordEntered onPasswordEntered,
-                                  int errorId) {
+    public void promptForPassword(final OnPasswordEntered onPasswordEntered,
+                                  final int errorId) {
         promptForPassword(onPasswordEntered, errorId);
     }
 
@@ -195,7 +195,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     }
 
     private void promptForPasswordInner(
-        final OnPasswordEntered onPasswordEntered, String errorInfo) {
+        final OnPasswordEntered onPasswordEntered, final String errorInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialog_prompt_for_password,
@@ -212,7 +212,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
         .setPositiveButton(R.string.label_done,
         new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(final DialogInterface dialogInterface, final int i) {
                 onPasswordEntered.onClicked(username.getText()
                                             .toString(), password.getText()
                                             .toString(), checkBox.isChecked());
@@ -223,7 +223,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
         new DialogInterface.OnClickListener() {
             @Override
             public void onClick(
-                DialogInterface dialogInterface, int i) {
+                final DialogInterface dialogInterface, final int i) {
                 onPasswordEntered.onCanceled();
             }
         }).show();
@@ -258,7 +258,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     /* View Utils End */
 
     /* Switch Activity Animation Start */
-    public void startActivity(Intent intent) {
+    public void startActivity(final Intent intent) {
         super.startActivity(intent);
         forwardTransition();
     }

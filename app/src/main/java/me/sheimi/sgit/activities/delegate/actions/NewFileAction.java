@@ -10,7 +10,7 @@ import timber.log.Timber;
 
 public class NewFileAction extends RepoAction {
 
-    public NewFileAction(Repo repo, RepoDetailActivity activity) {
+    public NewFileAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -20,7 +20,7 @@ public class NewFileAction extends RepoAction {
                                      R.string.dialog_create_file_hint, R.string.label_create,
         new OnEditTextDialogClicked() {
             @Override
-            public void onClicked(String text) {
+            public void onClicked(final String text) {
                 try {
                     mActivity.getFilesFragment().newFile(text);
                 } catch (IOException e) {

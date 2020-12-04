@@ -37,12 +37,12 @@ public class ImportLocalRepoDialog extends SheimiDialogFragment implements
     public static final String FROM_PATH = "from path";
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
 
         mActivity = getActivity();
 
-        mPrefsHelper = ((SGitApplication)mActivity.getApplicationContext()).getPrefenceHelper();
+        mPrefsHelper = ((SGitApplication) mActivity.getApplicationContext()).getPrefenceHelper();
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(FROM_PATH)) {
@@ -62,8 +62,8 @@ public class ImportLocalRepoDialog extends SheimiDialogFragment implements
         mImportAsExternal
         .setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
+            public void onCheckedChanged(final CompoundButton buttonView,
+                                         final boolean isChecked) {
                 if (isChecked) {
                     mLocalPath.setText(Repo.EXTERNAL_PREFIX
                                        + mFile.getAbsolutePath());
@@ -95,7 +95,7 @@ public class ImportLocalRepoDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         final String localPath = mLocalPath.getText().toString().trim();
         if (!mImportAsExternal.isChecked()) {
             if (localPath.equals("")) {
@@ -142,7 +142,7 @@ public class ImportLocalRepoDialog extends SheimiDialogFragment implements
         dismiss();
     }
 
-    private void updateRepoInformation(Repo repo) {
+    private void updateRepoInformation(final Repo repo) {
         repo.updateLatestCommitInfo();
         repo.updateRemote();
         repo.updateStatus(RepoContract.REPO_STATUS_NULL);

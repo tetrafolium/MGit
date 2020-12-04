@@ -30,7 +30,7 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
     private EditText mPassword;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         mActivity = (PrivateKeyManageActivity) getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
@@ -56,7 +56,7 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_FILE_EXTRA, mKeyFile.getAbsolutePath());
     }
@@ -73,10 +73,10 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         String newPassword = mPassword.getText().toString().trim();
         try {
-            ((SGitApplication)getActivity().getApplicationContext()).getSecurePrefsHelper().
+            ((SGitApplication) getActivity().getApplicationContext()).getSecurePrefsHelper().
             set(mKeyFile.getName(), newPassword);
         } catch (Exception e) {
             Timber.e(e);
@@ -86,7 +86,7 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
+    public void onClick(final DialogInterface dialogInterface, final int i) {
     }
 
 }

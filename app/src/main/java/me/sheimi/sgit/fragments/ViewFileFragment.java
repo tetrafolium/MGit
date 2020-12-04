@@ -40,8 +40,8 @@ public class ViewFileFragment extends BaseFragment {
     private boolean mEditMode = false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_view_file, container, false);
 
         mFileContent = (WebView) v.findViewById(R.id.fileContent);
@@ -63,13 +63,13 @@ public class ViewFileFragment extends BaseFragment {
         webSettings.setJavaScriptEnabled(true);
         mFileContent.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void onConsoleMessage(String message, int lineNumber,
-                                         String sourceID) {
+            public void onConsoleMessage(final String message, final int lineNumber,
+                                         final String sourceID) {
                 Log.d("MyApplication", message + " -- From line " + lineNumber
                       + " of " + sourceID);
             }
 
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
                 return false;
             }
         });
@@ -104,7 +104,7 @@ public class ViewFileFragment extends BaseFragment {
         return mFile;
     }
 
-    public void setEditMode(boolean mode) {
+    public void setEditMode(final boolean mode) {
         mEditMode = mode;
         mFileContent.setFocusable(mEditMode);
         mFileContent.setFocusableInTouchMode(mEditMode);
@@ -121,7 +121,7 @@ public class ViewFileFragment extends BaseFragment {
         mFileContent.loadUrl(CodeGuesser.wrapUrlScript("copy_all();"));
     }
 
-    public void setLanguage(String lang) {
+    public void setLanguage(final String lang) {
         String js = String.format("setLang('%s')", lang);
         mFileContent.loadUrl(CodeGuesser.wrapUrlScript(js));
     }
@@ -219,7 +219,7 @@ public class ViewFileFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             mEditMode = savedInstanceState.getBoolean("EditMode", false);
@@ -227,7 +227,7 @@ public class ViewFileFragment extends BaseFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean("EditMode", mEditMode);
     }
@@ -247,12 +247,12 @@ public class ViewFileFragment extends BaseFragment {
     }
 
 
-    private void showUserError(Throwable e, final int errorMessageId) {
+    private void showUserError(final Throwable e, final int errorMessageId) {
         Timber.e(e);
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ((SheimiFragmentActivity)getActivity()).
+                ((SheimiFragmentActivity) getActivity()).
                 showMessageDialog(R.string.dialog_error_title, getString(errorMessageId));
             }
         });

@@ -31,11 +31,11 @@ public class InitDialog extends SheimiDialogFragment implements
     private PreferenceHelper mPrefsHelper;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         mActivity = (RepoListActivity) getActivity();
 
-        mPrefsHelper = ((SGitApplication)mActivity.getApplicationContext()).getPrefenceHelper();
+        mPrefsHelper = ((SGitApplication) mActivity.getApplicationContext()).getPrefenceHelper();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         LayoutInflater inflater = mActivity.getLayoutInflater();
@@ -67,7 +67,7 @@ public class InitDialog extends SheimiDialogFragment implements
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         String localPath = mLocalPath.getText().toString().trim();
 
         if (localPath.equals("")) {

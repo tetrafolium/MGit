@@ -42,13 +42,13 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
     private String mChosenCommit;
 
     @Override
-    public void onDestroyActionMode(ActionMode mode) {
+    public void onDestroyActionMode(final ActionMode mode) {
         mInActionMode = false;
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+    public boolean onActionItemClicked(final ActionMode mode, final MenuItem item) {
         switch (item.getItemId()) {
         case R.id.action_mode_rename_branch:
             Bundle pathArg = new Bundle();
@@ -69,7 +69,7 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
             .setMessage(R.string.dialog_branch_delete_msg)
             .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(final DialogInterface dialog, final int which) {
                     int commitType = Repo.getCommitType(mChosenCommit);
                     try {
                         switch (commitType) {
@@ -127,14 +127,14 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
     }
 
     @Override
-    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+    public boolean onCreateActionMode(final ActionMode mode, final Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.action_mode_branch, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+    public boolean onPrepareActionMode(final ActionMode mode, final Menu menu) {
         return false;
     }
 
@@ -148,7 +148,7 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View v = getLayoutInflater().inflate(R.layout.fragment_branches, null);
         mRepo = (Repo) getIntent().getSerializableExtra(Repo.TAG);
@@ -164,13 +164,13 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
         mBranchTagList
         .setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
+            public void onItemClick(final AdapterView<?> adapterView,
+                                    final View view, final int position, final long id) {
                 String commitName = mAdapter.getItem(position);
                 CheckoutTask checkoutTask = new CheckoutTask(mRepo, commitName, null,
                 new AsyncTaskPostCallback() {
                     @Override
-                    public void onPostExecute(Boolean isSuccess) {
+                    public void onPostExecute(final Boolean isSuccess) {
                         finish();
                     }
                 });
@@ -183,8 +183,8 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
         mBranchTagList
         .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView,
-                                           View view, int position, long id) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView,
+                                           final View view, final int position, final long id) {
 
                 if (mInActionMode) {
                     return true;
@@ -204,12 +204,12 @@ public class BranchChooserActivity extends SheimiFragmentActivity implements Act
 
     private class BranchTagListAdapter extends ArrayAdapter<String> {
 
-        public BranchTagListAdapter(Context context) {
+        public BranchTagListAdapter(final Context context) {
             super(context, 0);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             ListItemHolder holder;
             if (convertView == null) {

@@ -53,14 +53,14 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
     private RepoListActivity mActivity;
     private static final String TAG = RepoListAdapter.class.getSimpleName();
 
-    public RepoListAdapter(Context context) {
+    public RepoListAdapter(final Context context) {
         super(context, 0);
         RepoDbManager.registerDbObserver(RepoContract.RepoEntry.TABLE_NAME,
                                          this);
         mActivity = (RepoListActivity) context;
     }
 
-    public void searchRepo(String query) {
+    public void searchRepo(final String query) {
         mQueryType = QUERY_TYPE_SEARCH;
         mSearchQueryString = query;
         requery();
@@ -90,7 +90,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         if (convertView == null) {
             convertView = newView(getContext(), parent);
         }
@@ -98,7 +98,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
         return convertView;
     }
 
-    public View newView(Context context, ViewGroup parent) {
+    public View newView(final Context context, final ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.repo_listitem, parent, false);
         RepoListItemHolder holder = new RepoListItemHolder();
@@ -116,7 +116,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
         return view;
     }
 
-    public void bindView(View view, int position) {
+    public void bindView(final View view, final int position) {
         RepoListItemHolder holder = (RepoListItemHolder) view.getTag();
         final Repo repo = getItem(position);
 
@@ -129,7 +129,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
             holder.progressMsg.setText(repo.getRepoStatus());
             holder.cancelBtn.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     repo.deleteRepo();
                     repo.cancelTask();
                 }
@@ -161,8 +161,8 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view,
-                            int position, long id) {
+    public void onItemClick(final AdapterView<?> adapterView, final View view,
+                            final int position, final long id) {
         Repo repo = getItem(position);
         Intent intent = new Intent(mActivity, RepoDetailActivity.class);
         intent.putExtra(Repo.TAG, repo);
@@ -170,8 +170,8 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view,
-                                   int position, long id) {
+    public boolean onItemLongClick(final AdapterView<?> adapterView, final View view,
+                                   final int position, final long id) {
         final Repo repo = getItem(position);
         if (!repo.getRepoStatus().equals(RepoContract.REPO_STATUS_NULL))
             return false;
@@ -204,7 +204,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
 
         boolean repoHasHttpRemote = (remoteRaw != null && !remoteRaw.equals("local repository") && remoteRaw.contains("http"));
 
-        if(repoHasHttpRemote) {
+        if (repoHasHttpRemote) {
             //TODO : Transform ssh uri in http?
             dialog[2] = new SheimiFragmentActivity.onOptionDialogClicked() {
                 @Override
@@ -212,9 +212,9 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
 
                     //remove git extension if present
                     String repoUrl =
-                        remoteRaw.endsWith(context.getString(R.string.git_extension)) ?
-                        remoteRaw.substring(0, remoteRaw.lastIndexOf('.')) :
-                        remoteRaw;
+                        remoteRaw.endsWith(context.getString(R.string.git_extension))
+                        ? remoteRaw.substring(0, remoteRaw.lastIndexOf('.'))
+                        : remoteRaw;
 
                     Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(repoUrl));
 
@@ -249,14 +249,14 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
                         } else
                         {
                             Log.i(TAG, context.getString(R.string.dialog_open_remote_no_app_available));
-                            Toast.makeText(context,R.string.dialog_open_remote_no_app_available, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.dialog_open_remote_no_app_available, Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             };
         }
 
-        if(repoHasHttpRemote) {
+        if (repoHasHttpRemote) {
             List<String> stringList = new ArrayList<>(3);
             stringList.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dialog_choose_repo_action_items)));
             stringList.add(context.getString(R.string.dialog_open_remote));
@@ -276,14 +276,14 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
         }
     }
 
-    private void showRemoveRepoDialog(SheimiFragmentActivity context, final Repo repo) {
+    private void showRemoveRepoDialog(final SheimiFragmentActivity context, final Repo repo) {
         context.showMessageDialog(
             R.string.dialog_delete_repo_title,
             R.string.dialog_delete_repo_msg,
             R.string.label_delete,
         new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(final DialogInterface dialogInterface, final int i) {
                 repo.deleteRepo();
                 repo.cancelTask();
             }
@@ -298,7 +298,7 @@ public class RepoListAdapter extends ArrayAdapter<Repo> implements
             R.string.label_rename,
         new SheimiFragmentActivity.OnEditTextDialogClicked() {
             @Override
-            public void onClicked(String newRepoName) {
+            public void onClicked(final String newRepoName) {
                 if (!repo.renameRepo(newRepoName)) {
                     context.showToastMessage(R.string.error_rename_repo_fail);
                 }

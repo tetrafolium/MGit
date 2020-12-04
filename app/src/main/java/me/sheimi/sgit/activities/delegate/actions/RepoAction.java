@@ -8,7 +8,7 @@ public abstract class RepoAction {
     protected Repo mRepo;
     protected RepoDetailActivity mActivity;
 
-    public RepoAction(Repo repo, RepoDetailActivity activity) {
+    public RepoAction(final Repo repo, final RepoDetailActivity activity) {
         mRepo = repo;
         mActivity = activity;
     }

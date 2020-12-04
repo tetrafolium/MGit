@@ -16,14 +16,14 @@ public class FetchTask extends RepoRemoteOpTask {
     private final AsyncTaskCallback mCallback;
     private final String[] mRemotes;
 
-    public FetchTask(String[] remotes, Repo repo, AsyncTaskCallback callback) {
+    public FetchTask(final String[] remotes, final Repo repo, final AsyncTaskCallback callback) {
         super(repo);
         mCallback = callback;
         mRemotes = remotes;
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(final Void... params) {
         boolean result = true;
         for (final String remote : mRemotes) {
             result = fetchRepo(remote) & result;
@@ -35,7 +35,7 @@ public class FetchTask extends RepoRemoteOpTask {
     }
 
     @Override
-    protected void onProgressUpdate(String... progress) {
+    protected void onProgressUpdate(final String... progress) {
         super.onProgressUpdate(progress);
         if (mCallback != null) {
             mCallback.onProgressUpdate(progress);
@@ -50,14 +50,14 @@ public class FetchTask extends RepoRemoteOpTask {
         }
     }
 
-    protected void onPostExecute(Boolean isSuccess) {
+    protected void onPostExecute(final Boolean isSuccess) {
         super.onPostExecute(isSuccess);
         if (mCallback != null) {
             mCallback.onPostExecute(isSuccess);
         }
     }
 
-    private boolean fetchRepo(String remote) {
+    private boolean fetchRepo(final String remote) {
         Git git;
         try {
             git = mRepo.getGit();

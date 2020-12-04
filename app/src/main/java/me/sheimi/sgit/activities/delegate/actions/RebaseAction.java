@@ -23,7 +23,7 @@ import me.sheimi.sgit.repo.tasks.repo.RebaseTask;
 
 public class RebaseAction extends RepoAction {
 
-    public RebaseAction(Repo repo, RepoDetailActivity activity) {
+    public RebaseAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -35,12 +35,12 @@ public class RebaseAction extends RepoAction {
         mActivity.closeOperationDrawer();
     }
 
-    private static void rebase(Repo repo, String branch,
+    private static void rebase(final Repo repo, final String branch,
                                final RepoDetailActivity activity) {
         RebaseTask rebaseTask = new RebaseTask(repo, branch,
         new AsyncTaskPostCallback() {
             @Override
-            public void onPostExecute(Boolean isSuccess) {
+            public void onPostExecute(final Boolean isSuccess) {
                 activity.reset();
             }
         });
@@ -55,7 +55,7 @@ public class RebaseAction extends RepoAction {
         private BranchTagListAdapter mAdapter;
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             super.onCreateDialog(savedInstanceState);
             Bundle args = getArguments();
             if (args != null && args.containsKey(Repo.TAG)) {
@@ -83,8 +83,8 @@ public class RebaseAction extends RepoAction {
             mBranchTagList
             .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView,
-                                        View view, int position, long id) {
+                public void onItemClick(final AdapterView<?> adapterView,
+                                        final View view, final int position, final long id) {
                     String commit = mAdapter.getItem(position);
                     rebase(mRepo, commit, mActivity);
                     getDialog().cancel();
@@ -96,12 +96,12 @@ public class RebaseAction extends RepoAction {
 
         private static class BranchTagListAdapter extends ArrayAdapter<String> {
 
-            public BranchTagListAdapter(Context context) {
+            public BranchTagListAdapter(final Context context) {
                 super(context, 0);
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 ListItemHolder holder;
                 if (convertView == null) {

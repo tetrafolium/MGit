@@ -28,21 +28,21 @@ public class ImportRepositoryActivity extends FileExplorerActivity {
     protected FileFilter getExplorerFileFilter() {
         return new FileFilter() {
             @Override
-            public boolean accept(File file) {
+            public boolean accept(final File file) {
                 return file.isDirectory();
             }
         };
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.import_repo, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
         case R.id.action_create_external:
             File dotGit = new File(getCurrentDir(), Repo.DOT_GIT_DIR);
@@ -56,8 +56,8 @@ public class ImportRepositoryActivity extends FileExplorerActivity {
             new OnClickListener() {
 
                 @Override
-                public void onClick(DialogInterface dialog,
-                                    int which) {
+                public void onClick(final DialogInterface dialog,
+                                    final int which) {
                     createExternalGitRepo();
                 }
             });
@@ -76,8 +76,8 @@ public class ImportRepositoryActivity extends FileExplorerActivity {
     protected AdapterView.OnItemClickListener getOnListItemClickListener() {
         return new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view,
-                                    int position, long id) {
+            public void onItemClick(final AdapterView<?> adapterView, final View view,
+                                    final int position, final long id) {
                 File file = mFilesListAdapter.getItem(position);
                 if (file.isDirectory()) {
                     setCurrentDir(file);

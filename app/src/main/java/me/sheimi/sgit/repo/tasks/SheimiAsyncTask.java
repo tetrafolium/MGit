@@ -11,12 +11,12 @@ public abstract class SheimiAsyncTask<A, B, C> extends AsyncTask<A, B, C> {
     protected Throwable mException;
     protected int mErrorRes = 0;
 
-    protected void setException(Throwable e) {
+    protected void setException(final Throwable e) {
         Timber.e(e, "set exception");
         mException = e;
     }
 
-    protected void setException(Throwable e, int errorRes) {
+    protected void setException(final Throwable e, final int errorRes) {
         Timber.e(e, "set error [%d] exception", errorRes);
         mException = e;
         mErrorRes = errorRes;

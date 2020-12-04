@@ -7,7 +7,7 @@ import me.sheimi.sgit.database.models.Repo;
 
 public class NewDirAction extends RepoAction {
 
-    public NewDirAction(Repo repo, RepoDetailActivity activity) {
+    public NewDirAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -17,7 +17,7 @@ public class NewDirAction extends RepoAction {
                                      R.string.dialog_create_dir_hint, R.string.label_create,
         new OnEditTextDialogClicked() {
             @Override
-            public void onClicked(String text) {
+            public void onClicked(final String text) {
                 mActivity.getFilesFragment().newDir(text);
             }
         });

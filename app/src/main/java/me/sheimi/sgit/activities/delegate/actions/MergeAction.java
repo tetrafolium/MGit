@@ -27,7 +27,7 @@ import me.sheimi.sgit.database.models.Repo;
 
 public class MergeAction extends RepoAction {
 
-    public MergeAction(Repo repo, RepoDetailActivity activity) {
+    public MergeAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -49,7 +49,7 @@ public class MergeAction extends RepoAction {
         private CheckBox mCheckbox;
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             super.onCreateDialog(savedInstanceState);
             Bundle args = getArguments();
             if (args != null && args.containsKey(Repo.TAG)) {
@@ -81,8 +81,8 @@ public class MergeAction extends RepoAction {
             mBranchTagList
             .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView,
-                                        View view, int position, long id) {
+                public void onItemClick(final AdapterView<?> adapterView,
+                                        final View view, final int position, final long id) {
                     Ref commit = mAdapter.getItem(position);
                     String mFFString = mSpinner.getSelectedItem()
                                        .toString();
@@ -97,12 +97,12 @@ public class MergeAction extends RepoAction {
 
         private static class BranchTagListAdapter extends ArrayAdapter<Ref> {
 
-            public BranchTagListAdapter(Context context) {
+            public BranchTagListAdapter(final Context context) {
                 super(context, 0);
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 ListItemHolder holder;
                 if (convertView == null) {

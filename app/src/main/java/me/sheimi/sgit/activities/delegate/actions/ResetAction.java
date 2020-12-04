@@ -9,7 +9,7 @@ import me.sheimi.sgit.repo.tasks.repo.ResetCommitTask;
 
 public class ResetAction extends RepoAction {
 
-    public ResetAction(Repo repo, RepoDetailActivity activity) {
+    public ResetAction(final Repo repo, final RepoDetailActivity activity) {
         super(repo, activity);
     }
 
@@ -19,7 +19,7 @@ public class ResetAction extends RepoAction {
                                     R.string.dialog_reset_commit_msg, R.string.action_reset,
         new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(final DialogInterface dialogInterface, final int i) {
                 reset();
             }
         });
@@ -30,7 +30,7 @@ public class ResetAction extends RepoAction {
         ResetCommitTask resetTask = new ResetCommitTask(mRepo,
         new AsyncTaskPostCallback() {
             @Override
-            public void onPostExecute(Boolean isSuccess) {
+            public void onPostExecute(final Boolean isSuccess) {
                 mActivity.reset();
             }
         });

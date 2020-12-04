@@ -26,7 +26,7 @@ public class SSLProviderInstaller {
     private static Provider provider = null;
 
     // The other implementation uses the param.
-    public static synchronized void install(@SuppressWarnings("unused") Context ctx) {
+    public static synchronized void install(final @SuppressWarnings("unused") Context ctx) {
         if (provider == null) {
             provider = Conscrypt.newProvider("MGit_OpenSSL");
         }

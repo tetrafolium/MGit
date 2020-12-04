@@ -34,7 +34,7 @@ public class FsUtils {
     private FsUtils() {
     }
 
-    public static File createTempFile(String subfix) throws IOException {
+    public static File createTempFile(final String subfix) throws IOException {
         File dir = getExternalDir(TEMP_DIR);
         String fileName = TIMESTAMP_FORMATTER.format(new Date());
         File file = File.createTempFile(fileName, subfix, dir);
@@ -49,7 +49,7 @@ public class FsUtils {
      * @param dirname
      * @return
      */
-    public static File getExternalDir(String dirname) {
+    public static File getExternalDir(final String dirname) {
         return getExternalDir(dirname, true);
     }
 
@@ -58,7 +58,7 @@ public class FsUtils {
      * @param dirname
      * @return
      */
-    public static File getInternalDir(String dirname) {
+    public static File getInternalDir(final String dirname) {
         return getExternalDir(dirname, true, false);
     }
 
@@ -69,7 +69,7 @@ public class FsUtils {
      * @param isCreate  create the dir if it does not already exist
      * @return
      */
-    public static File getExternalDir(String dirname, boolean isCreate) {
+    public static File getExternalDir(final String dirname, final boolean isCreate) {
         return getExternalDir(dirname, isCreate, true);
     }
 
@@ -82,7 +82,7 @@ public class FsUtils {
      * @param isExternal if true, will use external *shared* storage
      * @return
      */
-    public static File getExternalDir(String dirname, boolean isCreate, boolean isExternal) {
+    public static File getExternalDir(final String dirname, final boolean isCreate, final boolean isExternal) {
         File mDir = new File(getAppDir(isExternal), dirname);
         if (!mDir.exists() && isCreate) {
             mDir.mkdir();
@@ -96,7 +96,7 @@ public class FsUtils {
      * @param isExternal if true, will use external *shared* storage
      * @return
      */
-    public static File getAppDir(boolean isExternal) {
+    public static File getAppDir(final boolean isExternal) {
         SheimiFragmentActivity activeActivity = BasicFunctions.getActiveActivity();
         if (isExternal) {
             return activeActivity.getExternalFilesDir(null);
@@ -105,7 +105,7 @@ public class FsUtils {
         }
     }
 
-    public static String getMimeType(String url) {
+    public static String getMimeType(final String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url
                            .toLowerCase(Locale.getDefault()));
@@ -119,11 +119,11 @@ public class FsUtils {
         return type;
     }
 
-    public static String getMimeType(File file) {
+    public static String getMimeType(final File file) {
         return getMimeType(Uri.fromFile(file).toString());
     }
 
-    public static void openFile(SheimiFragmentActivity activity, File file) {
+    public static void openFile(final SheimiFragmentActivity activity, final File file) {
         Uri uri = FileProvider.getUriForFile(activity, PROVIDER_AUTHORITY, file);
         String mimeType = FsUtils.getMimeType(uri.toString());
         Intent intent = new Intent(Intent.ACTION_EDIT);
@@ -139,20 +139,19 @@ public class FsUtils {
             try {
                 activity.startActivity(intent);
                 activity.forwardTransition();
-            }
-            catch (ActivityNotFoundException e1) {
+            } catch (ActivityNotFoundException e1) {
                 activity.showMessageDialog(R.string.dialog_error_title, activity.getString(R.string.error_can_not_open_file));
             }
         }
     }
 
-    public static void deleteFile(File file) {
+    public static void deleteFile(final File file) {
         File to = new File(file.getAbsolutePath() + System.currentTimeMillis());
         file.renameTo(to);
         deleteFileInner(to);
     }
 
-    private static void deleteFileInner(File file) {
+    private static void deleteFileInner(final File file) {
         if (!file.isDirectory()) {
             file.delete();
             return;
@@ -165,7 +164,7 @@ public class FsUtils {
         }
     }
 
-    public static void copyFile(File from, File to) {
+    public static void copyFile(final File from, final File to) {
         try {
             FileUtils.copyFile(from, to);
         } catch (IOException e) {
@@ -173,7 +172,7 @@ public class FsUtils {
         }
     }
 
-    public static void copyDirectory(File from, File to) {
+    public static void copyDirectory(final File from, final File to) {
         if (!from.exists())
             return;
         try {
@@ -183,18 +182,18 @@ public class FsUtils {
         }
     }
 
-    public static boolean renameDirectory(File dir, String name) {
+    public static boolean renameDirectory(final File dir, final String name) {
         String newDirPath = dir.getParent() + File.separator + name;
         File newDirFile = new File(newDirPath);
 
         return dir.renameTo(newDirFile);
     }
 
-    public static String getRelativePath(File file, File base) {
+    public static String getRelativePath(final File file, final File base) {
         return base.toURI().relativize(file.toURI()).getPath();
     }
 
-    public static File joinPath(File dir, String relative_path) {
+    public static File joinPath(final File dir, final String relative_path) {
         return new File(dir.getAbsolutePath() + File.separator + relative_path);
     }
 
