@@ -11,46 +11,47 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.KeyPair;
 
 public class PrivateKeyUtils {
-    private PrivateKeyUtils() { }
+private PrivateKeyUtils() {
+}
 
-    public static File getPrivateKeyFolder() {
-        return FsUtils.getInternalDir("ssh");
-    }
+public static File getPrivateKeyFolder() {
+	return FsUtils.getInternalDir("ssh");
+}
 
-    public static File getPublicKeyFolder() {
-        return FsUtils.getInternalDir("sshpub");
-    }
+public static File getPublicKeyFolder() {
+	return FsUtils.getInternalDir("sshpub");
+}
 
-    public static File getPublicKey(final File privateKey) {
-        return new File(PrivateKeyUtils.getPublicKeyFolder(),
-                        privateKey.getName());
-    }
+public static File getPublicKey(final File privateKey) {
+	return new File(PrivateKeyUtils.getPublicKeyFolder(),
+	                privateKey.getName());
+}
 
-    public static File getPublicKeyEnsure(final File privateKey) {
-        File publicKey = getPublicKey(privateKey);
-        if (!publicKey.exists()) {
-            try {
-                JSch jsch = new JSch();
-                KeyPair kpair = KeyPair.load(jsch, privateKey.getAbsolutePath());
-                kpair.writePublicKey(new FileOutputStream(publicKey), "mgit");
-                kpair.dispose();
-            } catch (Exception e) {
-                //TODO
-                e.printStackTrace();
-            }
-        }
-        return publicKey;
-    }
+public static File getPublicKeyEnsure(final File privateKey) {
+	File publicKey = getPublicKey(privateKey);
+	if (!publicKey.exists()) {
+		try {
+			JSch jsch = new JSch();
+			KeyPair kpair = KeyPair.load(jsch, privateKey.getAbsolutePath());
+			kpair.writePublicKey(new FileOutputStream(publicKey), "mgit");
+			kpair.dispose();
+		} catch (Exception e) {
+			//TODO
+			e.printStackTrace();
+		}
+	}
+	return publicKey;
+}
 
-    public static void migratePrivateKeys() {
-        File oldDir = FsUtils.getExternalDir("ssh");
-        if (oldDir.exists()) {
-            try {
-                FileUtils.copyDirectory(oldDir, getPrivateKeyFolder());
-                FileUtils.deleteDirectory(oldDir);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
+public static void migratePrivateKeys() {
+	File oldDir = FsUtils.getExternalDir("ssh");
+	if (oldDir.exists()) {
+		try {
+			FileUtils.copyDirectory(oldDir, getPrivateKeyFolder());
+			FileUtils.deleteDirectory(oldDir);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+}
 }

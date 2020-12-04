@@ -11,50 +11,50 @@ import java.text.StringCharacterIterator;
  */
 public class RepoDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "repo.db";
+private static final int DATABASE_VERSION = 1;
+private static final String DATABASE_NAME = "repo.db";
 
-    public RepoDbHelper(final Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+public RepoDbHelper(final Context context) {
+	super(context, DATABASE_NAME, null, DATABASE_VERSION);
+}
 
-    @Override
-    public void onCreate(final SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(RepoContract.REPO_ENTRY_CREATE);
-    }
+@Override
+public void onCreate(final SQLiteDatabase sqLiteDatabase) {
+	sqLiteDatabase.execSQL(RepoContract.REPO_ENTRY_CREATE);
+}
 
-    @Override
-    public void onUpgrade(final SQLiteDatabase sqLiteDatabase, final int i, final int i2) {
-        sqLiteDatabase.execSQL(RepoContract.REPO_ENTRY_DROP);
-        onCreate(sqLiteDatabase);
-    }
+@Override
+public void onUpgrade(final SQLiteDatabase sqLiteDatabase, final int i, final int i2) {
+	sqLiteDatabase.execSQL(RepoContract.REPO_ENTRY_DROP);
+	onCreate(sqLiteDatabase);
+}
 
-    public static String addSlashes(final String text) {
-        final StringBuffer sb = new StringBuffer(text.length() * 2);
-        final StringCharacterIterator iterator = new StringCharacterIterator(
-            text);
+public static String addSlashes(final String text) {
+	final StringBuffer sb = new StringBuffer(text.length() * 2);
+	final StringCharacterIterator iterator = new StringCharacterIterator(
+		text);
 
-        char character = iterator.current();
+	char character = iterator.current();
 
-        while (character != StringCharacterIterator.DONE) {
-            if (character == '"')
-                sb.append("\\\"");
-            else if (character == '\'')
-                sb.append("\'\'");
-            else if (character == '\\')
-                sb.append("\\\\");
-            else if (character == '\n')
-                sb.append("\\n");
-            else if (character == '{')
-                sb.append("\\{");
-            else if (character == '}')
-                sb.append("\\}");
-            else
-                sb.append(character);
+	while (character != StringCharacterIterator.DONE) {
+		if (character == '"')
+			sb.append("\\\"");
+		else if (character == '\'')
+			sb.append("\'\'");
+		else if (character == '\\')
+			sb.append("\\\\");
+		else if (character == '\n')
+			sb.append("\\n");
+		else if (character == '{')
+			sb.append("\\{");
+		else if (character == '}')
+			sb.append("\\}");
+		else
+			sb.append(character);
 
-            character = iterator.next();
-        }
+		character = iterator.next();
+	}
 
-        return sb.toString();
-    }
+	return sb.toString();
+}
 }

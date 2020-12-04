@@ -12,41 +12,41 @@ import me.sheimi.android.activities.SheimiFragmentActivity.OnBackClickListener;
  */
 public abstract class BaseFragment extends Fragment {
 
-    public abstract OnBackClickListener getOnBackClickListener();
+public abstract OnBackClickListener getOnBackClickListener();
 
-    private SheimiFragmentActivity mActivity;
+private SheimiFragmentActivity mActivity;
 
-    public abstract void reset();
+public abstract void reset();
 
-    @Override
-    public void onAttach(final Context context) {
-        super.onAttach(context);
-        mActivity = (SheimiFragmentActivity) context;
-    }
+@Override
+public void onAttach(final Context context) {
+	super.onAttach(context);
+	mActivity = (SheimiFragmentActivity) context;
+}
 
-    public SheimiFragmentActivity getRawActivity() {
-        return mActivity;
-    }
+public SheimiFragmentActivity getRawActivity() {
+	return mActivity;
+}
 
-    public void showMessageDialog(final int title, final int msg, final int positiveBtn,
-                                  final DialogInterface.OnClickListener positiveListener) {
-        getRawActivity().showMessageDialog(title, msg, positiveBtn,
-                                           positiveListener);
-    }
+public void showMessageDialog(final int title, final int msg, final int positiveBtn,
+                              final DialogInterface.OnClickListener positiveListener) {
+	getRawActivity().showMessageDialog(title, msg, positiveBtn,
+	                                   positiveListener);
+}
 
-    public void showMessageDialog(final int title, final String msg, final int positiveBtn,
-                                  final DialogInterface.OnClickListener positiveListener) {
-        getRawActivity().showMessageDialog(title, msg, positiveBtn,
-                                           positiveListener);
-    }
+public void showMessageDialog(final int title, final String msg, final int positiveBtn,
+                              final DialogInterface.OnClickListener positiveListener) {
+	getRawActivity().showMessageDialog(title, msg, positiveBtn,
+	                                   positiveListener);
+}
 
-    public void showToastMessage(final int resId) {
-        getRawActivity().showToastMessage(getString(resId));
-    }
+public void showToastMessage(final int resId) {
+	getRawActivity().showToastMessage(getString(resId));
+}
 
-    public void showToastMessage(final String msg) {
-        getRawActivity().showToastMessage(msg);
-    }
+public void showToastMessage(final String msg) {
+	getRawActivity().showToastMessage(msg);
+}
 
-    // public abstract void search(String query);
+// public abstract void search(String query);
 }

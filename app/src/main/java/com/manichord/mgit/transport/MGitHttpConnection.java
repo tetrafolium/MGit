@@ -75,130 +75,130 @@ import org.eclipse.jgit.transport.http.HttpConnection;
  * @since 3.3
  */
 public class MGitHttpConnection implements HttpConnection {
-    HttpURLConnection wrappedUrlConnection;
+HttpURLConnection wrappedUrlConnection;
 
-    /**
-     * @param url
-     * @throws MalformedURLException
-     * @throws IOException
-     */
-    protected MGitHttpConnection(final URL url)
-    throws MalformedURLException,
-        IOException {
-        this.wrappedUrlConnection = (HttpURLConnection) url.openConnection();
-    }
+/**
+ * @param url
+ * @throws MalformedURLException
+ * @throws IOException
+ */
+protected MGitHttpConnection(final URL url)
+throws MalformedURLException,
+IOException {
+	this.wrappedUrlConnection = (HttpURLConnection) url.openConnection();
+}
 
-    /**
-     * @param url
-     * @param proxy
-     * @throws MalformedURLException
-     * @throws IOException
-     */
-    protected MGitHttpConnection(final URL url, final Proxy proxy)
-    throws MalformedURLException, IOException {
-        this.wrappedUrlConnection = (HttpURLConnection) url
-                                    .openConnection(proxy);
-    }
+/**
+ * @param url
+ * @param proxy
+ * @throws MalformedURLException
+ * @throws IOException
+ */
+protected MGitHttpConnection(final URL url, final Proxy proxy)
+throws MalformedURLException, IOException {
+	this.wrappedUrlConnection = (HttpURLConnection) url
+	                            .openConnection(proxy);
+}
 
-    public int getResponseCode() throws IOException {
-        return wrappedUrlConnection.getResponseCode();
-    }
+public int getResponseCode() throws IOException {
+	return wrappedUrlConnection.getResponseCode();
+}
 
-    public URL getURL() {
-        return wrappedUrlConnection.getURL();
-    }
+public URL getURL() {
+	return wrappedUrlConnection.getURL();
+}
 
-    public String getResponseMessage() throws IOException {
-        return wrappedUrlConnection.getResponseMessage();
-    }
+public String getResponseMessage() throws IOException {
+	return wrappedUrlConnection.getResponseMessage();
+}
 
-    public Map<String, List<String>> getHeaderFields() {
-        return wrappedUrlConnection.getHeaderFields();
-    }
+public Map<String, List<String> > getHeaderFields() {
+	return wrappedUrlConnection.getHeaderFields();
+}
 
-    public void setRequestProperty(final String key, final String value) {
-        wrappedUrlConnection.setRequestProperty(key, value);
-    }
+public void setRequestProperty(final String key, final String value) {
+	wrappedUrlConnection.setRequestProperty(key, value);
+}
 
-    public void setRequestMethod(final String method) throws ProtocolException {
-        wrappedUrlConnection.setRequestMethod(method);
-    }
+public void setRequestMethod(final String method) throws ProtocolException {
+	wrappedUrlConnection.setRequestMethod(method);
+}
 
-    public void setUseCaches(final boolean usecaches) {
-        wrappedUrlConnection.setUseCaches(usecaches);
-    }
+public void setUseCaches(final boolean usecaches) {
+	wrappedUrlConnection.setUseCaches(usecaches);
+}
 
-    public void setConnectTimeout(final int timeout) {
-        wrappedUrlConnection.setConnectTimeout(timeout);
-    }
+public void setConnectTimeout(final int timeout) {
+	wrappedUrlConnection.setConnectTimeout(timeout);
+}
 
-    public void setReadTimeout(final int timeout) {
-        wrappedUrlConnection.setReadTimeout(timeout);
-    }
+public void setReadTimeout(final int timeout) {
+	wrappedUrlConnection.setReadTimeout(timeout);
+}
 
-    public String getContentType() {
-        return wrappedUrlConnection.getContentType();
-    }
+public String getContentType() {
+	return wrappedUrlConnection.getContentType();
+}
 
-    public InputStream getInputStream() throws IOException {
-        return wrappedUrlConnection.getInputStream();
-    }
+public InputStream getInputStream() throws IOException {
+	return wrappedUrlConnection.getInputStream();
+}
 
-    public String getHeaderField(final String name) {
-        return wrappedUrlConnection.getHeaderField(name);
-    }
+public String getHeaderField(final String name) {
+	return wrappedUrlConnection.getHeaderField(name);
+}
 
-    public int getContentLength() {
-        return wrappedUrlConnection.getContentLength();
-    }
+public int getContentLength() {
+	return wrappedUrlConnection.getContentLength();
+}
 
-    public void setInstanceFollowRedirects(final boolean followRedirects) {
-        wrappedUrlConnection.setInstanceFollowRedirects(followRedirects);
-    }
+public void setInstanceFollowRedirects(final boolean followRedirects) {
+	wrappedUrlConnection.setInstanceFollowRedirects(followRedirects);
+}
 
-    public void setDoOutput(final boolean dooutput) {
-        wrappedUrlConnection.setDoOutput(dooutput);
-    }
+public void setDoOutput(final boolean dooutput) {
+	wrappedUrlConnection.setDoOutput(dooutput);
+}
 
-    public void setFixedLengthStreamingMode(final int contentLength) {
-        wrappedUrlConnection.setFixedLengthStreamingMode(contentLength);
-    }
+public void setFixedLengthStreamingMode(final int contentLength) {
+	wrappedUrlConnection.setFixedLengthStreamingMode(contentLength);
+}
 
-    public OutputStream getOutputStream() throws IOException {
-        return wrappedUrlConnection.getOutputStream();
-    }
+public OutputStream getOutputStream() throws IOException {
+	return wrappedUrlConnection.getOutputStream();
+}
 
-    public void setChunkedStreamingMode(final int chunklen) {
-        wrappedUrlConnection.setChunkedStreamingMode(chunklen);
-    }
+public void setChunkedStreamingMode(final int chunklen) {
+	wrappedUrlConnection.setChunkedStreamingMode(chunklen);
+}
 
-    public String getRequestMethod() {
-        return wrappedUrlConnection.getRequestMethod();
-    }
+public String getRequestMethod() {
+	return wrappedUrlConnection.getRequestMethod();
+}
 
-    public boolean usingProxy() {
-        return wrappedUrlConnection.usingProxy();
-    }
+public boolean usingProxy() {
+	return wrappedUrlConnection.usingProxy();
+}
 
-    public void connect() throws IOException {
-        wrappedUrlConnection.connect();
-    }
+public void connect() throws IOException {
+	wrappedUrlConnection.connect();
+}
 
-    public void setHostnameVerifier(final HostnameVerifier hostnameverifier) {
-        ((HttpsURLConnection) wrappedUrlConnection)
-        .setHostnameVerifier(hostnameverifier);
-    }
+public void setHostnameVerifier(final HostnameVerifier hostnameverifier) {
+	((HttpsURLConnection) wrappedUrlConnection)
+	.setHostnameVerifier(hostnameverifier);
+}
 
-    public void configure(final KeyManager[] km, final TrustManager[] tm,
-                          final SecureRandom random) throws NoSuchAlgorithmException,
-        KeyManagementException {
-        SSLContext ctx = SSLContext.getInstance("TLS"); //$NON-NLS-1$
-        ctx.init(km, tm, random);
-        SSLSocketFactory factory = ctx.getSocketFactory();
-        if (!(factory instanceof MGitSSLSocketFactory))
-        {
-            factory = new MGitSSLSocketFactory(factory);
-        }
-        ((HttpsURLConnection) wrappedUrlConnection).setSSLSocketFactory(factory);
-    }
+public void configure(final KeyManager[] km, final TrustManager[] tm,
+                      final SecureRandom random) throws NoSuchAlgorithmException,
+KeyManagementException {
+	SSLContext ctx = SSLContext.getInstance("TLS"); //$NON-NLS-1$
+	ctx.init(km, tm, random);
+	SSLSocketFactory factory = ctx.getSocketFactory();
+	if (!(factory instanceof MGitSSLSocketFactory))
+	{
+		factory = new MGitSSLSocketFactory(factory);
+	}
+	((HttpsURLConnection) wrappedUrlConnection).setSSLSocketFactory(factory);
+}
 }

@@ -9,31 +9,31 @@ import me.sheimi.sgit.repo.tasks.repo.ResetCommitTask;
 
 public class ResetAction extends RepoAction {
 
-    public ResetAction(final Repo repo, final RepoDetailActivity activity) {
-        super(repo, activity);
-    }
+public ResetAction(final Repo repo, final RepoDetailActivity activity) {
+	super(repo, activity);
+}
 
-    @Override
-    public void execute() {
-        mActivity.showMessageDialog(R.string.dialog_reset_commit_title,
-                                    R.string.dialog_reset_commit_msg, R.string.action_reset,
-        new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialogInterface, final int i) {
-                reset();
-            }
-        });
-        mActivity.closeOperationDrawer();
-    }
+@Override
+public void execute() {
+	mActivity.showMessageDialog(R.string.dialog_reset_commit_title,
+	                            R.string.dialog_reset_commit_msg, R.string.action_reset,
+	                            new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialogInterface, final int i) {
+			        reset();
+			}
+		});
+	mActivity.closeOperationDrawer();
+}
 
-    public void reset() {
-        ResetCommitTask resetTask = new ResetCommitTask(mRepo,
-        new AsyncTaskPostCallback() {
-            @Override
-            public void onPostExecute(final Boolean isSuccess) {
-                mActivity.reset();
-            }
-        });
-        resetTask.executeTask();
-    }
+public void reset() {
+	ResetCommitTask resetTask = new ResetCommitTask(mRepo,
+	                                                new AsyncTaskPostCallback() {
+			@Override
+			public void onPostExecute(final Boolean isSuccess) {
+			        mActivity.reset();
+			}
+		});
+	resetTask.executeTask();
+}
 }

@@ -6,11 +6,11 @@ package me.sheimi.android.utils;
 
 public class SecurePrefsException extends Exception {
 
-    public SecurePrefsException(final String s) {
-        super(s);
-    }
+public SecurePrefsException(final String s) {
+	super(s);
+}
 
-    public SecurePrefsException(final Exception e) {
-        super(e);
-    }
+public SecurePrefsException(final Exception e) {
+	super(e);
+}
 }

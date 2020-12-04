@@ -10,16 +10,16 @@ import me.sheimi.sgit.fragments.SettingsFragment;
  */
 public class UserSettingsActivity extends SheimiFragmentActivity {
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+@Override
+protected void onCreate(final Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getFragmentManager().beginTransaction()
-        .replace(android.R.id.content, new SettingsFragment())
-        .commit();
-    }
+@Override
+protected void onResume() {
+	super.onResume();
+	getFragmentManager().beginTransaction()
+	.replace(android.R.id.content, new SettingsFragment())
+	.commit();
+}
 }

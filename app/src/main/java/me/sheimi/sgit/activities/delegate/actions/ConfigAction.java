@@ -18,27 +18,27 @@ import timber.log.Timber;
 public class ConfigAction extends RepoAction {
 
 
-    public ConfigAction(final Repo repo, final RepoDetailActivity activity) {
-        super(repo, activity);
-    }
+public ConfigAction(final Repo repo, final RepoDetailActivity activity) {
+	super(repo, activity);
+}
 
-    @Override
-    public void execute() {
+@Override
+public void execute() {
 
-        try {
-            DialogRepoConfigBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.dialog_repo_config, null, false);
-            GitConfig gitConfig = new GitConfig(mRepo);
-            binding.setViewModel(gitConfig);
+	try {
+		DialogRepoConfigBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.dialog_repo_config, null, false);
+		GitConfig gitConfig = new GitConfig(mRepo);
+		binding.setViewModel(gitConfig);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-            builder.setView(binding.getRoot())
-            .setNeutralButton(R.string.label_done, null)
-            .create().show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+		builder.setView(binding.getRoot())
+		.setNeutralButton(R.string.label_done, null)
+		.create().show();
 
-        } catch (StopTaskException e) {
-            //FIXME: show error to user
-            Timber.e(e);
-        }
-    }
+	} catch (StopTaskException e) {
+		//FIXME: show error to user
+		Timber.e(e);
+	}
+}
 
 }

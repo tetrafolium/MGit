@@ -13,28 +13,28 @@ import me.sheimi.sgit.R;
 
 public class Preference extends android.preference.Preference {
 
-    public Preference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
-    }
+public Preference(final Context context, final AttributeSet attrs, final int defStyle) {
+	super(context, attrs, defStyle);
+}
 
-    public Preference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-    }
+public Preference(final Context context, final AttributeSet attrs) {
+	super(context, attrs);
+}
 
-    public Preference(final Context context) {
-        super(context);
-    }
+public Preference(final Context context) {
+	super(context);
+}
 
-    @Override
-    public CharSequence getSummary() {
-        CharSequence summary = super.getSummary();
-        if (summary != null) {
-            SharedPreferences sharedPreference = getContext().getSharedPreferences(
-                    getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-            String value = sharedPreference.getString(getKey(), "");
-            return String.format(summary.toString(), value);
-        } else {
-            return summary;
-        }
-    }
+@Override
+public CharSequence getSummary() {
+	CharSequence summary = super.getSummary();
+	if (summary != null) {
+		SharedPreferences sharedPreference = getContext().getSharedPreferences(
+			getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+		String value = sharedPreference.getString(getKey(), "");
+		return String.format(summary.toString(), value);
+	} else {
+		return summary;
+	}
+}
 }

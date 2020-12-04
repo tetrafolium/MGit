@@ -6,39 +6,39 @@ import me.sheimi.sgit.exception.StopTaskException;
 
 public class CheckoutFileTask extends RepoOpTask {
 
-    private AsyncTaskPostCallback mCallback;
-    private String mPath;
+private AsyncTaskPostCallback mCallback;
+private String mPath;
 
-    public CheckoutFileTask(final Repo repo, final String path,
-                            final AsyncTaskPostCallback callback) {
-        super(repo);
-        mCallback = callback;
-        mPath = path;
-        setSuccessMsg(R.string.success_checkout_file);
-    }
+public CheckoutFileTask(final Repo repo, final String path,
+                        final AsyncTaskPostCallback callback) {
+	super(repo);
+	mCallback = callback;
+	mPath = path;
+	setSuccessMsg(R.string.success_checkout_file);
+}
 
-    @Override
-    protected Boolean doInBackground(final Void... params) {
-        return checkout();
-    }
+@Override
+protected Boolean doInBackground(final Void... params) {
+	return checkout();
+}
 
-    protected void onPostExecute(final Boolean isSuccess) {
-        super.onPostExecute(isSuccess);
-        if (mCallback != null) {
-            mCallback.onPostExecute(isSuccess);
-        }
-    }
+protected void onPostExecute(final Boolean isSuccess) {
+	super.onPostExecute(isSuccess);
+	if (mCallback != null) {
+		mCallback.onPostExecute(isSuccess);
+	}
+}
 
-    private boolean checkout() {
-        try {
-            mRepo.getGit().checkout().addPath(mPath).call();
-        } catch (StopTaskException e) {
-            return false;
-        } catch (Throwable e) {
-            setException(e);
-            return false;
-        }
-        return true;
-    }
+private boolean checkout() {
+	try {
+		mRepo.getGit().checkout().addPath(mPath).call();
+	} catch (StopTaskException e) {
+		return false;
+	} catch (Throwable e) {
+		setException(e);
+		return false;
+	}
+	return true;
+}
 
 }

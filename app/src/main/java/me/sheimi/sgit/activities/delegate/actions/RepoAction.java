@@ -5,13 +5,13 @@ import me.sheimi.sgit.database.models.Repo;
 
 public abstract class RepoAction {
 
-    protected Repo mRepo;
-    protected RepoDetailActivity mActivity;
+protected Repo mRepo;
+protected RepoDetailActivity mActivity;
 
-    public RepoAction(final Repo repo, final RepoDetailActivity activity) {
-        mRepo = repo;
-        mActivity = activity;
-    }
+public RepoAction(final Repo repo, final RepoDetailActivity activity) {
+	mRepo = repo;
+	mActivity = activity;
+}
 
-    public abstract void execute();
+public abstract void execute();
 }

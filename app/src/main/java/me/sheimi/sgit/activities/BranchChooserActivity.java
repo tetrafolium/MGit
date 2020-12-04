@@ -32,224 +32,224 @@ import me.sheimi.sgit.repo.tasks.SheimiAsyncTask.AsyncTaskPostCallback;
 import me.sheimi.sgit.repo.tasks.repo.CheckoutTask;
 
 public class BranchChooserActivity extends SheimiFragmentActivity implements ActionMode.Callback {
-    private static final String LOGTAG = BranchChooserActivity.class.getSimpleName();
+private static final String LOGTAG = BranchChooserActivity.class.getSimpleName();
 
-    private Repo mRepo;
-    private ListView mBranchTagList;
-    private ProgressBar mLoadding;
-    private BranchTagListAdapter mAdapter;
-    private boolean mInActionMode;
-    private String mChosenCommit;
+private Repo mRepo;
+private ListView mBranchTagList;
+private ProgressBar mLoadding;
+private BranchTagListAdapter mAdapter;
+private boolean mInActionMode;
+private String mChosenCommit;
 
-    @Override
-    public void onDestroyActionMode(final ActionMode mode) {
-        mInActionMode = false;
-        mAdapter.notifyDataSetChanged();
-    }
+@Override
+public void onDestroyActionMode(final ActionMode mode) {
+	mInActionMode = false;
+	mAdapter.notifyDataSetChanged();
+}
 
-    @Override
-    public boolean onActionItemClicked(final ActionMode mode, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.action_mode_rename_branch:
-            Bundle pathArg = new Bundle();
-            pathArg.putString(RenameBranchDialog.FROM_COMMIT,
-                              mChosenCommit);
-            pathArg.putSerializable(Repo.TAG,
-                                    mRepo);
-            mode.finish();
-            RenameBranchDialog rbd = new RenameBranchDialog();
-            rbd.setArguments(pathArg);
-            rbd.show(getFragmentManager(), "rename-dialog");
+@Override
+public boolean onActionItemClicked(final ActionMode mode, final MenuItem item) {
+	switch (item.getItemId()) {
+	case R.id.action_mode_rename_branch:
+		Bundle pathArg = new Bundle();
+		pathArg.putString(RenameBranchDialog.FROM_COMMIT,
+		                  mChosenCommit);
+		pathArg.putSerializable(Repo.TAG,
+		                        mRepo);
+		mode.finish();
+		RenameBranchDialog rbd = new RenameBranchDialog();
+		rbd.setArguments(pathArg);
+		rbd.show(getFragmentManager(), "rename-dialog");
 
-            return true;
-        case R.id.action_mode_delete:
-            AlertDialog.Builder alert = new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(getString(R.string.dialog_branch_delete) + " " + mChosenCommit)
-            .setMessage(R.string.dialog_branch_delete_msg)
-            .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    int commitType = Repo.getCommitType(mChosenCommit);
-                    try {
-                        switch (commitType) {
-                        case Repo.COMMIT_TYPE_HEAD:
-                            mRepo.getGit().branchDelete()
-                            .setBranchNames(mChosenCommit)
-                            .setForce(true)
-                            .call();
-                            break;
-                        case Repo.COMMIT_TYPE_TAG:
-                            mRepo.getGit().tagDelete()
-                            .setTags(mChosenCommit)
-                            .call();
-                            break;
-                        }
-                    } catch (StopTaskException e) {
-                        Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_branch, mChosenCommit),
-                                               Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    } catch (CannotDeleteCurrentBranchException e) {
-                        Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_current_branch, mChosenCommit),
-                                               Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    } catch (GitAPIException e) {
-                        Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_branch, mChosenCommit),
-                                               Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                    refreshList();
-                }
+		return true;
+	case R.id.action_mode_delete:
+		AlertDialog.Builder alert = new AlertDialog.Builder(this)
+		                            .setIcon(android.R.drawable.ic_dialog_alert)
+		                            .setTitle(getString(R.string.dialog_branch_delete) + " " + mChosenCommit)
+		                            .setMessage(R.string.dialog_branch_delete_msg)
+		                            .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int which) {
+				        int commitType = Repo.getCommitType(mChosenCommit);
+				        try {
+				                switch (commitType) {
+						case Repo.COMMIT_TYPE_HEAD:
+							mRepo.getGit().branchDelete()
+							.setBranchNames(mChosenCommit)
+							.setForce(true)
+							.call();
+							break;
+						case Repo.COMMIT_TYPE_TAG:
+							mRepo.getGit().tagDelete()
+							.setTags(mChosenCommit)
+							.call();
+							break;
+						}
+					} catch (StopTaskException e) {
+				                Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
+				                runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+							        Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_branch, mChosenCommit),
+							                       Toast.LENGTH_LONG).show();
+							}
+						});
+					} catch (CannotDeleteCurrentBranchException e) {
+				                Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
+				                runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+							        Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_current_branch, mChosenCommit),
+							                       Toast.LENGTH_LONG).show();
+							}
+						});
+					} catch (GitAPIException e) {
+				                Log.e(LOGTAG, "can't delete " + mChosenCommit, e);
+				                runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+							        Toast.makeText(BranchChooserActivity.this, getString(R.string.cannot_delete_branch, mChosenCommit),
+							                       Toast.LENGTH_LONG).show();
+							}
+						});
+					}
+				        refreshList();
+				}
 
-            })
-            .setNegativeButton(R.string.label_cancel, null);
-            mode.finish();
-            alert.show();
-            return true;
-        default:
-            return false;
-        }
-    }
+			})
+		                            .setNegativeButton(R.string.label_cancel, null);
+		mode.finish();
+		alert.show();
+		return true;
+	default:
+		return false;
+	}
+}
 
-    @Override
-    public boolean onCreateActionMode(final ActionMode mode, final Menu menu) {
-        MenuInflater inflater = mode.getMenuInflater();
-        inflater.inflate(R.menu.action_mode_branch, menu);
-        return true;
-    }
+@Override
+public boolean onCreateActionMode(final ActionMode mode, final Menu menu) {
+	MenuInflater inflater = mode.getMenuInflater();
+	inflater.inflate(R.menu.action_mode_branch, menu);
+	return true;
+}
 
-    @Override
-    public boolean onPrepareActionMode(final ActionMode mode, final Menu menu) {
-        return false;
-    }
+@Override
+public boolean onPrepareActionMode(final ActionMode mode, final Menu menu) {
+	return false;
+}
 
-    public void refreshList() {
-        mAdapter = new BranchTagListAdapter(this);
-        mBranchTagList.setAdapter(mAdapter);
-        String[] branches = mRepo.getBranches();
-        String[] tags = mRepo.getTags();
-        mAdapter.addAll(branches);
-        mAdapter.addAll(tags);
-    }
+public void refreshList() {
+	mAdapter = new BranchTagListAdapter(this);
+	mBranchTagList.setAdapter(mAdapter);
+	String[] branches = mRepo.getBranches();
+	String[] tags = mRepo.getTags();
+	mAdapter.addAll(branches);
+	mAdapter.addAll(tags);
+}
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View v = getLayoutInflater().inflate(R.layout.fragment_branches, null);
-        mRepo = (Repo) getIntent().getSerializableExtra(Repo.TAG);
-        mBranchTagList = (ListView) v.findViewById(R.id.branches);
-        mLoadding = (ProgressBar) v.findViewById(R.id.loading);
-        mAdapter = new BranchTagListAdapter(this);
-        mBranchTagList.setAdapter(mAdapter);
-        mBranchTagList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        setTitle(R.string.dialog_choose_branch_title);
+@Override
+protected void onCreate(final Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	View v = getLayoutInflater().inflate(R.layout.fragment_branches, null);
+	mRepo = (Repo) getIntent().getSerializableExtra(Repo.TAG);
+	mBranchTagList = (ListView) v.findViewById(R.id.branches);
+	mLoadding = (ProgressBar) v.findViewById(R.id.loading);
+	mAdapter = new BranchTagListAdapter(this);
+	mBranchTagList.setAdapter(mAdapter);
+	mBranchTagList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+	setTitle(R.string.dialog_choose_branch_title);
 
-        refreshList();
+	refreshList();
 
-        mBranchTagList
-        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(final AdapterView<?> adapterView,
-                                    final View view, final int position, final long id) {
-                String commitName = mAdapter.getItem(position);
-                CheckoutTask checkoutTask = new CheckoutTask(mRepo, commitName, null,
-                new AsyncTaskPostCallback() {
-                    @Override
-                    public void onPostExecute(final Boolean isSuccess) {
-                        finish();
-                    }
-                });
-                mLoadding.setVisibility(View.VISIBLE);
-                mBranchTagList.setVisibility(View.GONE);
-                checkoutTask.executeTask();
-            }
-        });
+	mBranchTagList
+	.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(final AdapterView<?> adapterView,
+			                        final View view, final int position, final long id) {
+			        String commitName = mAdapter.getItem(position);
+			        CheckoutTask checkoutTask = new CheckoutTask(mRepo, commitName, null,
+			                                                     new AsyncTaskPostCallback() {
+					@Override
+					public void onPostExecute(final Boolean isSuccess) {
+					        finish();
+					}
+				});
+			        mLoadding.setVisibility(View.VISIBLE);
+			        mBranchTagList.setVisibility(View.GONE);
+			        checkoutTask.executeTask();
+			}
+		});
 
-        mBranchTagList
-        .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView,
-                                           final View view, final int position, final long id) {
+	mBranchTagList
+	.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(final AdapterView<?> adapterView,
+			                               final View view, final int position, final long id) {
 
-                if (mInActionMode) {
-                    return true;
-                }
+			        if (mInActionMode) {
+			                return true;
+				}
 
-                mInActionMode = true;
-                mChosenCommit = mAdapter.getItem(position);
-                BranchChooserActivity.this.startActionMode(BranchChooserActivity.this);
-                view.setSelected(true);
-                mAdapter.notifyDataSetChanged();
-                return true;
-            }
-        });
+			        mInActionMode = true;
+			        mChosenCommit = mAdapter.getItem(position);
+			        BranchChooserActivity.this.startActionMode(BranchChooserActivity.this);
+			        view.setSelected(true);
+			        mAdapter.notifyDataSetChanged();
+			        return true;
+			}
+		});
 
-        setContentView(v);
-    }
+	setContentView(v);
+}
 
-    private class BranchTagListAdapter extends ArrayAdapter<String> {
+private class BranchTagListAdapter extends ArrayAdapter<String> {
 
-        public BranchTagListAdapter(final Context context) {
-            super(context, 0);
-        }
+public BranchTagListAdapter(final Context context) {
+	super(context, 0);
+}
 
-        @Override
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            ListItemHolder holder;
-            if (convertView == null) {
-                convertView = inflater.inflate(
-                                  R.layout.listitem_dialog_choose_commit, parent, false);
-                holder = new ListItemHolder();
-                holder.commitTitle = (TextView) convertView
-                                     .findViewById(R.id.commitTitle);
-                holder.commitIcon = (ImageView) convertView
-                                    .findViewById(R.id.commitIcon);
-                convertView.setTag(holder);
-            } else {
-                holder = (ListItemHolder) convertView.getTag();
-            }
-            String commitName = getItem(position);
-            String displayName = Repo.getCommitDisplayName(commitName);
-            int commitType = Repo.getCommitType(commitName);
-            switch (commitType) {
-            case Repo.COMMIT_TYPE_HEAD:
-                holder.commitIcon.setImageResource(R.drawable.ic_branch_d);
-                break;
-            case Repo.COMMIT_TYPE_TAG:
-                holder.commitIcon.setImageResource(R.drawable.ic_tag_d);
-                break;
-            }
-            holder.commitTitle.setText(displayName);
+@Override
+public View getView(final int position, final View convertView, final ViewGroup parent) {
+	LayoutInflater inflater = LayoutInflater.from(getContext());
+	ListItemHolder holder;
+	if (convertView == null) {
+		convertView = inflater.inflate(
+			R.layout.listitem_dialog_choose_commit, parent, false);
+		holder = new ListItemHolder();
+		holder.commitTitle = (TextView) convertView
+		                     .findViewById(R.id.commitTitle);
+		holder.commitIcon = (ImageView) convertView
+		                    .findViewById(R.id.commitIcon);
+		convertView.setTag(holder);
+	} else {
+		holder = (ListItemHolder) convertView.getTag();
+	}
+	String commitName = getItem(position);
+	String displayName = Repo.getCommitDisplayName(commitName);
+	int commitType = Repo.getCommitType(commitName);
+	switch (commitType) {
+	case Repo.COMMIT_TYPE_HEAD:
+		holder.commitIcon.setImageResource(R.drawable.ic_branch_d);
+		break;
+	case Repo.COMMIT_TYPE_TAG:
+		holder.commitIcon.setImageResource(R.drawable.ic_tag_d);
+		break;
+	}
+	holder.commitTitle.setText(displayName);
 
-            // set if selected
-            if (convertView.isSelected()) {
-                convertView.setBackgroundColor(convertView.getContext().getResources().getColor(R.color.pressed_sgit));
-            } else {
-                convertView.setBackgroundColor(convertView.getContext().getResources().getColor(android.R.color.transparent));
-            }
-            return convertView;
-        }
+	// set if selected
+	if (convertView.isSelected()) {
+		convertView.setBackgroundColor(convertView.getContext().getResources().getColor(R.color.pressed_sgit));
+	} else {
+		convertView.setBackgroundColor(convertView.getContext().getResources().getColor(android.R.color.transparent));
+	}
+	return convertView;
+}
 
-    }
+}
 
-    private static class ListItemHolder {
-        public TextView commitTitle;
-        public ImageView commitIcon;
-    }
+private static class ListItemHolder {
+public TextView commitTitle;
+public ImageView commitIcon;
+}
 }
