@@ -35,12 +35,12 @@ public class FilesListAdapter extends ArrayAdapter<File> {
         FilesListItemHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listitem_files, parent,
-                    false);
+                                           false);
             holder = new FilesListItemHolder();
             holder.fileTitle = (TextView) convertView
-                    .findViewById(R.id.fileTitle);
+                               .findViewById(R.id.fileTitle);
             holder.fileIcon = (ImageView) convertView
-                    .findViewById(R.id.fileIcon);
+                              .findViewById(R.id.fileIcon);
             convertView.setTag(holder);
         } else {
             holder = (FilesListItemHolder) convertView.getTag();

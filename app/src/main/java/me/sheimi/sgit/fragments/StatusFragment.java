@@ -37,7 +37,7 @@ public class StatusFragment extends RepoDetailFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_status, container, false);
         getRawActivity().setStatusFragment(this);
 
@@ -71,7 +71,7 @@ public class StatusFragment extends RepoDetailFragment {
 
     private void showDiff(String oldCommit, String newCommit) {
         Intent intent = new Intent(getRawActivity(),
-                CommitDiffActivity.class);
+                                   CommitDiffActivity.class);
         intent.putExtra(CommitDiffActivity.OLD_COMMIT, oldCommit);
         intent.putExtra(CommitDiffActivity.NEW_COMMIT, newCommit);
         intent.putExtra(CommitDiffActivity.SHOW_DESCRIPTION, false);

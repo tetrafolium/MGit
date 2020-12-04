@@ -32,7 +32,7 @@ public class RepoDbHelper extends SQLiteOpenHelper {
     public static String addSlashes(String text) {
         final StringBuffer sb = new StringBuffer(text.length() * 2);
         final StringCharacterIterator iterator = new StringCharacterIterator(
-                text);
+            text);
 
         char character = iterator.current();
 

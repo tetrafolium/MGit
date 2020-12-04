@@ -47,7 +47,7 @@ public class PreferenceHelper {
 
     protected SharedPreferences getSharedPrefs() {
         return mContext.getSharedPreferences(
-            mContext.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                   mContext.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
     }
 
 
