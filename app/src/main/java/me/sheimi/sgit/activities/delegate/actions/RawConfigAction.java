@@ -13,15 +13,15 @@ import me.sheimi.sgit.database.models.Repo;
  */
 public class RawConfigAction extends RepoAction {
 
-    public RawConfigAction(Repo repo, RepoDetailActivity activity) {
-        super(repo, activity);
-    }
+public RawConfigAction(Repo repo, RepoDetailActivity activity) {
+	super(repo, activity);
+}
 
-    @Override
-    public void execute() {
-        Intent intent = new Intent(mActivity, ViewFileActivity.class);
-        intent.putExtra(ViewFileActivity.TAG_FILE_NAME,
-                        mRepo.getDir().getAbsoluteFile() + "/.git/config");
-        mActivity.startActivity(intent);
-    }
+@Override
+public void execute() {
+	Intent intent = new Intent(mActivity, ViewFileActivity.class);
+	intent.putExtra(ViewFileActivity.TAG_FILE_NAME,
+	                mRepo.getDir().getAbsoluteFile() + "/.git/config");
+	mActivity.startActivity(intent);
+}
 }

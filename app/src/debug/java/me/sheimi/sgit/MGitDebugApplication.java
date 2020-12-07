@@ -13,23 +13,23 @@ import timber.log.Timber;
  */
 public class MGitDebugApplication extends SGitApplication {
 
-    private static final String LOGTAG = MGitDebugApplication.class.getSimpleName();
+private static final String LOGTAG = MGitDebugApplication.class.getSimpleName();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+@Override
+public void onCreate() {
+	super.onCreate();
 
-        Stetho.initializeWithDefaults(this);
+	Stetho.initializeWithDefaults(this);
 
-        if (true == getResources().getBoolean(R.bool.enable_stetho_timber_logging)) {
-            Timber.plant(new ConfigurableStethoTree(new ConfigurableStethoTree.Configuration.Builder()
-                                                    .showTags(true)
-                                                    .minimumPriority(Log.DEBUG)
-                                                    .build()));
-            Log.i(LOGTAG, "Using Stetho console logging");
-        } else {
-            Timber.plant(new Timber.DebugTree());
-        }
-        Timber.i("Initialised Stetho");
-    }
+	if (true == getResources().getBoolean(R.bool.enable_stetho_timber_logging)) {
+		Timber.plant(new ConfigurableStethoTree(new ConfigurableStethoTree.Configuration.Builder()
+		                                        .showTags(true)
+		                                        .minimumPriority(Log.DEBUG)
+		                                        .build()));
+		Log.i(LOGTAG, "Using Stetho console logging");
+	} else {
+		Timber.plant(new Timber.DebugTree());
+	}
+	Timber.i("Initialised Stetho");
+}
 }
