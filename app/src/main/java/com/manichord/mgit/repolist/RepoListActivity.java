@@ -151,18 +151,18 @@ public class RepoListActivity extends SheimiFragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
-            case R.id.action_new:
-                showCloneView();
-                return true;
-            case R.id.action_import_repo:
-                intent = new Intent(this, ImportRepositoryActivity.class);
-                startActivityForResult(intent, REQUEST_IMPORT_REPO);
-                forwardTransition();
-                return true;
-            case R.id.action_settings:
-                intent = new Intent(this, UserSettingsActivity.class);
-                startActivity(intent);
-                return true;
+        case R.id.action_new:
+            showCloneView();
+            return true;
+        case R.id.action_import_repo:
+            intent = new Intent(this, ImportRepositoryActivity.class);
+            startActivityForResult(intent, REQUEST_IMPORT_REPO);
+            forwardTransition();
+            return true;
+        case R.id.action_settings:
+            intent = new Intent(this, UserSettingsActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -182,40 +182,40 @@ public class RepoListActivity extends SheimiFragmentActivity {
         if (resultCode != Activity.RESULT_OK)
             return;
         switch (requestCode) {
-            case REQUEST_IMPORT_REPO:
-                final String path = data.getExtras().getString(
-                        ExploreFileActivity.RESULT_PATH);
-                File file = new File(path);
-                File dotGit = new File(file, Repo.DOT_GIT_DIR);
-                if (!dotGit.exists()) {
-                    showToastMessage(getString(R.string.error_no_repository));
-                    return;
+        case REQUEST_IMPORT_REPO:
+            final String path = data.getExtras().getString(
+                                    ExploreFileActivity.RESULT_PATH);
+            File file = new File(path);
+            File dotGit = new File(file, Repo.DOT_GIT_DIR);
+            if (!dotGit.exists()) {
+                showToastMessage(getString(R.string.error_no_repository));
+                return;
+            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                this);
+            builder.setTitle(R.string.dialog_comfirm_import_repo_title);
+            builder.setMessage(R.string.dialog_comfirm_import_repo_msg);
+            builder.setNegativeButton(R.string.label_cancel,
+                                      new DummyDialogListener());
+            builder.setPositiveButton(R.string.label_import,
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(
+                    DialogInterface dialogInterface, int i) {
+                    Bundle args = new Bundle();
+                    args.putString(ImportLocalRepoDialog.FROM_PATH, path);
+                    ImportLocalRepoDialog rld = new ImportLocalRepoDialog();
+                    rld.setArguments(args);
+                    rld.show(getSupportFragmentManager(), "import-local-dialog");
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        this);
-                builder.setTitle(R.string.dialog_comfirm_import_repo_title);
-                builder.setMessage(R.string.dialog_comfirm_import_repo_msg);
-                builder.setNegativeButton(R.string.label_cancel,
-                        new DummyDialogListener());
-                builder.setPositiveButton(R.string.label_import,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(
-                                    DialogInterface dialogInterface, int i) {
-                                Bundle args = new Bundle();
-                                args.putString(ImportLocalRepoDialog.FROM_PATH, path);
-                                ImportLocalRepoDialog rld = new ImportLocalRepoDialog();
-                                rld.setArguments(args);
-                                rld.show(getSupportFragmentManager(), "import-local-dialog");
-                            }
-                        });
-                builder.show();
-                break;
+            });
+            builder.show();
+            break;
         }
     }
 
     public class SearchListener implements SearchView.OnQueryTextListener,
-            MenuItemCompat.OnActionExpandListener {
+        MenuItemCompat.OnActionExpandListener {
 
         @Override
         public boolean onQueryTextSubmit(String s) {

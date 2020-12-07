@@ -25,7 +25,7 @@ import android.webkit.MimeTypeMap;
 public class FsUtils {
 
     public static final SimpleDateFormat TIMESTAMP_FORMATTER = new SimpleDateFormat(
-            "yyyyMMdd_HHmmss", Locale.getDefault());
+        "yyyyMMdd_HHmmss", Locale.getDefault());
 
     public static final String PROVIDER_AUTHORITY = "com.manichord.mgit.fileprovider";
     public static final String TEMP_DIR = "temp";
@@ -58,7 +58,9 @@ public class FsUtils {
      * @param dirname
      * @return
      */
-    public static File getInternalDir(String dirname) { return getExternalDir(dirname, true, false); }
+    public static File getInternalDir(String dirname) {
+        return getExternalDir(dirname, true, false);
+    }
 
     /**
      * Get a File representing a dir within the external shared location where files can be stored specific to this app
@@ -67,7 +69,9 @@ public class FsUtils {
      * @param isCreate  create the dir if it does not already exist
      * @return
      */
-    public static File getExternalDir(String dirname, boolean isCreate) { return getExternalDir(dirname, isCreate, true); }
+    public static File getExternalDir(String dirname, boolean isCreate) {
+        return getExternalDir(dirname, isCreate, true);
+    }
 
     /**
      *
@@ -104,7 +108,7 @@ public class FsUtils {
     public static String getMimeType(String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url
-                .toLowerCase(Locale.getDefault()));
+                           .toLowerCase(Locale.getDefault()));
         if (extension != null) {
             MimeTypeMap mime = MimeTypeMap.getSingleton();
             type = mime.getMimeTypeFromExtension(extension);
@@ -156,7 +160,7 @@ public class FsUtils {
         try {
             FileUtils.deleteDirectory(file);
         } catch (IOException e) {
-            //TODO 
+            //TODO
             e.printStackTrace();
         }
     }

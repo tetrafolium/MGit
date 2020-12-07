@@ -68,9 +68,9 @@ public class CommitChangesTask extends RepoOpTask {
     }
 
     public static void commit(Repo repo, boolean stageAll, boolean isAmend,
-            String msg, String authorName, String authorEmail) throws Exception, NoHeadException, NoMessageException,
-            UnmergedPathsException, ConcurrentRefUpdateException,
-            WrongRepositoryStateException, GitAPIException, StopTaskException {
+                              String msg, String authorName, String authorEmail) throws Exception, NoHeadException, NoMessageException,
+                                         UnmergedPathsException, ConcurrentRefUpdateException,
+        WrongRepositoryStateException, GitAPIException, StopTaskException {
         Context context = SGitApplication.getContext();
         StoredConfig config = repo.getGit().getRepository().getConfig();
         String committerEmail = config.getString("user", null, "email");
@@ -89,8 +89,8 @@ public class CommitChangesTask extends RepoOpTask {
             throw new Exception("Please include a commit message");
         }
         CommitCommand cc = repo.getGit().commit()
-                .setCommitter(committerName, committerEmail).setAll(stageAll)
-                .setAmend(isAmend).setMessage(msg);
+                           .setCommitter(committerName, committerEmail).setAll(stageAll)
+                           .setAmend(isAmend).setMessage(msg);
         if (authorName != null && authorEmail != null) {
             cc.setAuthor(authorName, authorEmail);
         }

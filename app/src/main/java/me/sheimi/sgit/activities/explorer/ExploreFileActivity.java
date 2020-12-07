@@ -32,7 +32,7 @@ public class ExploreFileActivity extends FileExplorerActivity {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view,
-                    int position, long id) {
+                                    int position, long id) {
                 File file = mFilesListAdapter.getItem(position);
                 if (file.isDirectory()) {
                     setCurrentDir(file);

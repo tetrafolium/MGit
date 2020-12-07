@@ -32,8 +32,8 @@ public class ConfigAction extends RepoAction {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
             builder.setView(binding.getRoot())
-                .setNeutralButton(R.string.label_done, null)
-                .create().show();
+            .setNeutralButton(R.string.label_done, null)
+            .create().show();
 
         } catch (StopTaskException e) {
             //FIXME: show error to user
