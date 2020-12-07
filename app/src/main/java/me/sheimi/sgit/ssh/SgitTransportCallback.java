@@ -9,16 +9,14 @@ import org.eclipse.jgit.transport.Transport;
  */
 public class SgitTransportCallback implements TransportConfigCallback {
 
-private SGitSessionFactory ssh;
+  private SGitSessionFactory ssh;
 
-public SgitTransportCallback() {
-	ssh = new SGitSessionFactory();
-}
+  public SgitTransportCallback() { ssh = new SGitSessionFactory(); }
 
-@Override
-public void configure(Transport tn) {
-	if (tn instanceof SshTransport) {
-		((SshTransport) tn).setSshSessionFactory(ssh);
-	}
-}
+  @Override
+  public void configure(Transport tn) {
+    if (tn instanceof SshTransport) {
+      ((SshTransport)tn).setSshSessionFactory(ssh);
+    }
+  }
 }
