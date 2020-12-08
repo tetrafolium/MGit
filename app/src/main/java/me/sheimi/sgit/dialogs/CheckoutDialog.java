@@ -22,7 +22,7 @@ import me.sheimi.sgit.activities.RepoDetailActivity;
  */
 
 public class CheckoutDialog extends SheimiDialogFragment implements
-        View.OnClickListener, DialogInterface.OnClickListener {
+    View.OnClickListener, DialogInterface.OnClickListener {
 
     private String mCommit;
     private EditText mBranchName;
@@ -39,28 +39,28 @@ public class CheckoutDialog extends SheimiDialogFragment implements
         if (args != null && args.containsKey(BASE_COMMIT)) {
             mCommit = args.getString(BASE_COMMIT);
         } else {
-	    mCommit = "";
-	}
+            mCommit = "";
+        }
 
-	mRepo = (Repo) args.getSerializable(Repo.TAG);
+        mRepo = (Repo) args.getSerializable(Repo.TAG);
 
-	String message = getString(R.string.dialog_comfirm_checkout_commit_msg)
-	    + " "
-	    + Repo.getCommitDisplayName(mCommit);
+        String message = getString(R.string.dialog_comfirm_checkout_commit_msg)
+                         + " "
+                         + Repo.getCommitDisplayName(mCommit);
 
         builder.setTitle(getString(R.string.dialog_comfirm_checkout_commit_title));
         View view = mActivity.getLayoutInflater().inflate(
-                R.layout.dialog_checkout, null);
+                        R.layout.dialog_checkout, null);
 
         builder.setView(view);
         mBranchName = (EditText) view.findViewById(R.id.newBranchName);
 
         // set button listener
         builder.setNegativeButton(R.string.label_cancel,
-                new DummyDialogListener());
-	builder.setNeutralButton(R.string.label_anonymous_checkout, this);
+                                  new DummyDialogListener());
+        builder.setNeutralButton(R.string.label_anonymous_checkout, this);
         builder.setPositiveButton(R.string.label_checkout,
-                new DummyDialogListener());
+                                  new DummyDialogListener());
 
         return builder.create();
     }
@@ -77,21 +77,21 @@ public class CheckoutDialog extends SheimiDialogFragment implements
         AlertDialog dialog = (AlertDialog) getDialog();
         if (dialog == null)
             return;
-	Button positiveButton = (Button) dialog
-	    .getButton(Dialog.BUTTON_POSITIVE);
+        Button positiveButton = (Button) dialog
+                                .getButton(Dialog.BUTTON_POSITIVE);
         positiveButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-	String newBranch = mBranchName.getText().toString().trim();
-	mActivity.getRepoDelegate().checkoutCommit(mCommit, newBranch);	
+        String newBranch = mBranchName.getText().toString().trim();
+        mActivity.getRepoDelegate().checkoutCommit(mCommit, newBranch);
         dismiss();
     }
 
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-	mActivity.getRepoDelegate().checkoutCommit(mCommit);	
+        mActivity.getRepoDelegate().checkoutCommit(mCommit);
         dismiss();
     }
 }

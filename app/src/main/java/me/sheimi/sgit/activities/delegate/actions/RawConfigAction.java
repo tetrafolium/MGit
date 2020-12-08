@@ -21,7 +21,7 @@ public class RawConfigAction extends RepoAction {
     public void execute() {
         Intent intent = new Intent(mActivity, ViewFileActivity.class);
         intent.putExtra(ViewFileActivity.TAG_FILE_NAME,
-                mRepo.getDir().getAbsoluteFile() + "/.git/config");
+                        mRepo.getDir().getAbsoluteFile() + "/.git/config");
         mActivity.startActivity(intent);
     }
 }

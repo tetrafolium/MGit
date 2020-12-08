@@ -50,7 +50,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         Bundle b = new Bundle();
         Bundle extras = getIntent().getExtras();
         String fileName = extras.getString(TAG_FILE_NAME);
-	    mActivityMode = extras.getShort(TAG_MODE, TAG_MODE_NORMAL);
+        mActivityMode = extras.getShort(TAG_MODE, TAG_MODE_NORMAL);
         b.putString(TAG_FILE_NAME, fileName);
         if (mRepo != null) {
             b.putSerializable(Repo.TAG, mRepo);
@@ -80,10 +80,10 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         @Override
         public BaseFragment getItem(int position) {
             switch (position) {
-                case FILE_FRAGMENT_INDEX:
-                    return mFileFragment;
-                case COMMITS_FRAGMENT_INDEX:
-                    return mCommitsFragment;
+            case FILE_FRAGMENT_INDEX:
+                return mFileFragment;
+            case COMMITS_FRAGMENT_INDEX:
+                return mCommitsFragment;
             }
             return mFileFragment;
         }
@@ -120,9 +120,9 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         @Override
         public boolean onQueryTextSubmit(String query) {
             switch (mViewPager.getCurrentItem()) {
-                case COMMITS_FRAGMENT_INDEX:
-                    mCommitsFragment.setFilter(query);
-                    break;
+            case COMMITS_FRAGMENT_INDEX:
+                mCommitsFragment.setFilter(query);
+                break;
             }
             return true;
         }
@@ -130,9 +130,9 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         @Override
         public boolean onQueryTextChange(String query) {
             switch (mViewPager.getCurrentItem()) {
-                case COMMITS_FRAGMENT_INDEX:
-                    mCommitsFragment.setFilter(query);
-                    break;
+            case COMMITS_FRAGMENT_INDEX:
+                mCommitsFragment.setFilter(query);
+                break;
             }
             return true;
         }
@@ -145,9 +145,9 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         @Override
         public boolean onMenuItemActionCollapse(MenuItem menuItem) {
             switch (mViewPager.getCurrentItem()) {
-                case COMMITS_FRAGMENT_INDEX:
-                    mCommitsFragment.setFilter(null);
-                    break;
+            case COMMITS_FRAGMENT_INDEX:
+                mCommitsFragment.setFilter(null);
+                break;
             }
             return true;
         }
@@ -203,32 +203,32 @@ public class ViewFileActivity extends SheimiFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
+        case android.R.id.home:
+            finish();
+            return true;
+        case R.id.action_edit_in_other_app:
+            if (mActivityMode == TAG_MODE_SSH_KEY) {
                 return true;
-            case R.id.action_edit_in_other_app:
-                if (mActivityMode == TAG_MODE_SSH_KEY) {
-                    return true;
-                }
-                FsUtils.openFile(this, mFileFragment.getFile());
-                break;
-            case R.id.action_edit:
-                if (mActivityMode == TAG_MODE_SSH_KEY) {
-                    return true;
-                }
-                mFileFragment.setEditMode(!mFileFragment.getEditMode());
-                setSaveStatus(item);
+            }
+            FsUtils.openFile(this, mFileFragment.getFile());
+            break;
+        case R.id.action_edit:
+            if (mActivityMode == TAG_MODE_SSH_KEY) {
                 return true;
-            case R.id.action_choose_language:
-                if (mActivityMode == TAG_MODE_SSH_KEY) {
-                    return true;
-                }
-                ChooseLanguageDialog cld = new ChooseLanguageDialog();
-                cld.show(getSupportFragmentManager(), "choose language");
+            }
+            mFileFragment.setEditMode(!mFileFragment.getEditMode());
+            setSaveStatus(item);
+            return true;
+        case R.id.action_choose_language:
+            if (mActivityMode == TAG_MODE_SSH_KEY) {
                 return true;
-            case R.id.action_copy_all:
-                mFileFragment.copyAll();
-                return true;
+            }
+            ChooseLanguageDialog cld = new ChooseLanguageDialog();
+            cld.show(getSupportFragmentManager(), "choose language");
+            return true;
+        case R.id.action_copy_all:
+            mFileFragment.copyAll();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

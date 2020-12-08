@@ -59,11 +59,11 @@ public class CloneTask extends RepoRemoteOpTask {
     public boolean cloneRepo() {
         File localRepo = mRepo.getDir();
         CloneCommand cloneCommand = Git.cloneRepository()
-                .setURI(mRepo.getRemoteURL()).setCloneAllBranches(true)
-                .setProgressMonitor(new RepoCloneMonitor())
-                .setTransportConfigCallback(new SgitTransportCallback())
-                .setDirectory(localRepo)
-                .setCloneSubmodules(mCloneRecursive);
+                                    .setURI(mRepo.getRemoteURL()).setCloneAllBranches(true)
+                                    .setProgressMonitor(new RepoCloneMonitor())
+                                    .setTransportConfigCallback(new SgitTransportCallback())
+                                    .setDirectory(localRepo)
+                                    .setCloneSubmodules(mCloneRecursive);
 
         setCredentials(cloneCommand);
 

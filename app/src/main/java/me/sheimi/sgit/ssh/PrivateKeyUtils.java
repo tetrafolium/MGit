@@ -22,24 +22,24 @@ public class PrivateKeyUtils {
     }
 
     public static File getPublicKey(File privateKey) {
-	return new File(PrivateKeyUtils.getPublicKeyFolder(),
-			privateKey.getName());
+        return new File(PrivateKeyUtils.getPublicKeyFolder(),
+                        privateKey.getName());
     }
 
     public static File getPublicKeyEnsure(File privateKey) {
-	File publicKey = getPublicKey(privateKey);
-	if (!publicKey.exists()) {
-	    try {
-		JSch jsch=new JSch();
-		KeyPair kpair=KeyPair.load(jsch, privateKey.getAbsolutePath());
-		kpair.writePublicKey(new FileOutputStream(publicKey), "mgit");
-		kpair.dispose();
-	    } catch (Exception e) {
-		//TODO 
-		e.printStackTrace();
-	    }
-	}
-	return publicKey;
+        File publicKey = getPublicKey(privateKey);
+        if (!publicKey.exists()) {
+            try {
+                JSch jsch=new JSch();
+                KeyPair kpair=KeyPair.load(jsch, privateKey.getAbsolutePath());
+                kpair.writePublicKey(new FileOutputStream(publicKey), "mgit");
+                kpair.dispose();
+            } catch (Exception e) {
+                //TODO
+                e.printStackTrace();
+            }
+        }
+        return publicKey;
     }
 
     public static void migratePrivateKeys() {

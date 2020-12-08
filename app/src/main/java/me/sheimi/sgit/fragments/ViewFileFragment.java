@@ -66,7 +66,7 @@ public class ViewFileFragment extends BaseFragment {
             public void onConsoleMessage(String message, int lineNumber,
                                          String sourceID) {
                 Log.d("MyApplication", message + " -- From line " + lineNumber
-                        + " of " + sourceID);
+                      + " of " + sourceID);
             }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -110,7 +110,7 @@ public class ViewFileFragment extends BaseFragment {
         mFileContent.setFocusableInTouchMode(mEditMode);
         if (mEditMode) {
             mFileContent.loadUrl(CodeGuesser
-                    .wrapUrlScript("setEditable();"));
+                                 .wrapUrlScript("setEditable();"));
             showToastMessage(R.string.msg_now_you_can_edit);
         } else {
             mFileContent.loadUrl(CodeGuesser.wrapUrlScript("save();"));
@@ -208,10 +208,10 @@ public class ViewFileFragment extends BaseFragment {
                     mFileContent.loadUrl(CodeGuesser.wrapUrlScript(js));
                     mLoading.setVisibility(View.INVISIBLE);
                     mFileContent.loadUrl(CodeGuesser
-                            .wrapUrlScript("display();"));
+                                         .wrapUrlScript("display();"));
                     if (mEditMode) {
                         mFileContent.loadUrl(CodeGuesser
-                                .wrapUrlScript("setEditable();"));
+                                             .wrapUrlScript("setEditable();"));
                     }
                 }
             });
@@ -253,7 +253,7 @@ public class ViewFileFragment extends BaseFragment {
             @Override
             public void run() {
                 ((SheimiFragmentActivity)getActivity()).
-                    showMessageDialog(R.string.dialog_error_title, getString(errorMessageId));
+                showMessageDialog(R.string.dialog_error_title, getString(errorMessageId));
             }
         });
     }

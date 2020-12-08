@@ -10,7 +10,7 @@ public class CheckoutFileTask extends RepoOpTask {
     private String mPath;
 
     public CheckoutFileTask(Repo repo, String path,
-            AsyncTaskPostCallback callback) {
+                            AsyncTaskPostCallback callback) {
         super(repo);
         mCallback = callback;
         mPath = path;
