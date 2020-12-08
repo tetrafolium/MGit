@@ -68,7 +68,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
     private int mSelectedTab;
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
         case BRANCH_CHOOSE_ACTIVITY:
             String branchName = mRepo.getBranchName();
@@ -352,7 +352,7 @@ public class RepoDetailActivity extends SheimiFragmentActivity {
 
     class TabItemPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
-        private final int[] PAGE_TITLE = { R.string.tab_files_label,
+        private final int[] PAGE_TITLE = {R.string.tab_files_label,
                                            R.string.tab_commits_label, R.string.tab_status_label
                                          };
 

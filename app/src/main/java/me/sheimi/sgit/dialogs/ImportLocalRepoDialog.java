@@ -42,7 +42,7 @@ public class ImportLocalRepoDialog extends SheimiDialogFragment implements
 
         mActivity = getActivity();
 
-        mPrefsHelper = ((SGitApplication)mActivity.getApplicationContext()).getPrefenceHelper();
+        mPrefsHelper = ((SGitApplication) mActivity.getApplicationContext()).getPrefenceHelper();
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(FROM_PATH)) {

@@ -71,7 +71,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
 
     class TabItemPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
-        private final int[] PAGE_TITLE = { R.string.tab_file_label, R.string.tab_commits_label };
+        private final int[] PAGE_TITLE = {R.string.tab_file_label, R.string.tab_commits_label };
 
         public TabItemPagerAdapter(FragmentManager fm) {
             super(fm);

@@ -48,7 +48,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
     @Override
     protected void log(int priority, String tag, String message, Throwable t) {
 
-        if(priority < mConfiguration.mMinimumPriority) {
+        if (priority < mConfiguration.mMinimumPriority) {
             return;
         }
 
@@ -81,7 +81,7 @@ public class ConfigurableStethoTree extends Timber.DebugTree {
 
         StringBuilder messageBuilder = new StringBuilder();
 
-        if(mConfiguration.mShowTags && tag != null) {
+        if (mConfiguration.mShowTags && tag != null) {
             messageBuilder
             .append("[")
             .append(tag)
