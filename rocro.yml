@@ -1,3 +1,4 @@
+---
 inspecode:
 
   global:
@@ -42,7 +43,7 @@ inspecode:
     thresholds: { num-issues: 62 }
 
   jscpd:
-    thresholds: { num-issues: 55 }
+    thresholds: { num-issues: 51 }
 
   misspell:
     auto-fix: true
@@ -56,11 +57,11 @@ inspecode:
   - options:
       -targets: app
       -high:
-    thresholds: { num-issues: 41 }
+    thresholds: { num-issues: 20 }
   - options:
       -targets: app
       -bugCategories: [ CORRECTNESS, PERFORMANCE, EXPERIMENTAL ]
-    thresholds: { num-issues: 80 }
+    thresholds: { num-issues: 21 }
 
   uncrustify:
     auto-fix: true
