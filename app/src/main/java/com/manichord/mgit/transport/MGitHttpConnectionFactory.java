@@ -64,7 +64,7 @@ public class MGitHttpConnectionFactory implements HttpConnectionFactory {
     }
 
     public HttpConnection create(URL url, Proxy proxy)
-            throws IOException {
+    throws IOException {
         return new MGitHttpConnection(url, proxy);
     }
 

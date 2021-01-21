@@ -77,14 +77,14 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     private void loadFileContent() {
         mDiffContent.addJavascriptInterface(new CodeLoader(), JS_INF);
         mDiffContent.loadDataWithBaseURL("file:///android_asset/", HTML_TMPL,
-                "text/html", "utf-8", null);
+                                         "text/html", "utf-8", null);
         WebSettings webSettings = mDiffContent.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mDiffContent.setWebChromeClient(new WebChromeClient() {
             public void onConsoleMessage(String message, int lineNumber,
                                          String sourceID) {
                 Log.d("MyApplication", message + " -- From line " + lineNumber
-                        + " of " + sourceID);
+                      + " of " + sourceID);
             }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -132,14 +132,14 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
         committer = mCommit.getCommitterIdent();
         author = mCommit.getAuthorIdent();
         return "commit " + mNewCommit + "\n"
-                + "Author:     " + author.getName() + " <" + author.getEmailAddress() + ">\n"
-                + "AuthorDate: " + author.getWhen() + "\n"
-                + "Commit:     " + committer.getName() + " <" + committer.getEmailAddress() + ">\n"
-                + "CommitDate: " + committer.getWhen() + "\n";
+               + "Author:     " + author.getName() + " <" + author.getEmailAddress() + ">\n"
+               + "AuthorDate: " + author.getWhen() + "\n"
+               + "Commit:     " + committer.getName() + " <" + committer.getEmailAddress() + ">\n"
+               + "CommitDate: " + committer.getWhen() + "\n";
     }
 
     private void saveDiff(OutputStream fos) throws IOException {
-	    /* FIXME: LOCK!!! */
+        /* FIXME: LOCK!!! */
         if (mCommit != null) {
             String message;
             fos.write(formatCommitInfo().getBytes());
@@ -178,16 +178,16 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.action_save_diff:
-                Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)
-                        .setType("text/x-patch")
-                        .putExtra(Intent.EXTRA_TITLE, Repo.getCommitDisplayName(mNewCommit) + ".diff");
+        case android.R.id.home:
+            finish();
+            return true;
+        case R.id.action_save_diff:
+            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)
+            .setType("text/x-patch")
+            .putExtra(Intent.EXTRA_TITLE, Repo.getCommitDisplayName(mNewCommit) + ".diff");
 
-                startActivityForResult(intent, REQUEST_SAVE_DIFF);
-                return true;
+            startActivityForResult(intent, REQUEST_SAVE_DIFF);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -245,7 +245,7 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
         public void getDiffEntries() {
             String oldCommit = mOldCommit != null ? mOldCommit : (mNewCommit + "^");
             CommitDiffTask diffTask = new CommitDiffTask(mRepo, oldCommit,
-                    mNewCommit, new CommitDiffResult() {
+            mNewCommit, new CommitDiffResult() {
                 @Override
                 public void pushResult(List<DiffEntry> diffEntries,
                                        List<String> diffStrs, RevCommit commit) {
@@ -271,12 +271,12 @@ public class CommitDiffActivity extends SheimiFragmentActivity {
     }
 
     private static final String HTML_TMPL = "<!doctype html>"
-            + "<head>"
-            + " <script src=\"js/jquery.js\"></script>"
-            + " <script src=\"js/highlight.pack.js\"></script>"
-            + " <script src=\"js/local_commits_diff.js\"></script>"
-            + " <link type=\"text/css\" rel=\"stylesheet\" href=\"css/rainbow.css\" />"
-            + " <link type=\"text/css\" rel=\"stylesheet\" href=\"css/local_commits_diff.css\" />"
-            + "</head><body></body>";
+                                            + "<head>"
+                                            + " <script src=\"js/jquery.js\"></script>"
+                                            + " <script src=\"js/highlight.pack.js\"></script>"
+                                            + " <script src=\"js/local_commits_diff.js\"></script>"
+                                            + " <link type=\"text/css\" rel=\"stylesheet\" href=\"css/rainbow.css\" />"
+                                            + " <link type=\"text/css\" rel=\"stylesheet\" href=\"css/local_commits_diff.css\" />"
+                                            + "</head><body></body>";
 
 }

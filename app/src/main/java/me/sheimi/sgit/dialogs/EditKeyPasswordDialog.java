@@ -22,7 +22,7 @@ import timber.log.Timber;
  */
 
 public class EditKeyPasswordDialog extends SheimiDialogFragment implements
-        View.OnClickListener, DialogInterface.OnClickListener {
+    View.OnClickListener, DialogInterface.OnClickListener {
 
     private File mKeyFile;
     private PrivateKeyManageActivity mActivity;
@@ -41,16 +41,16 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
 
         builder.setTitle(getString(R.string.dialog_edit_key_password_title));
         View view = mActivity.getLayoutInflater().inflate(
-                R.layout.dialog_prompt_for_password_only, null);
+                        R.layout.dialog_prompt_for_password_only, null);
 
         builder.setView(view);
         mPassword = (EditText) view.findViewById(R.id.password);
 
         // set button listener
         builder.setNegativeButton(R.string.label_cancel,
-                new DummyDialogListener());
+                                  new DummyDialogListener());
         builder.setPositiveButton(R.string.label_save,
-                new DummyDialogListener());
+                                  new DummyDialogListener());
 
         return builder.create();
     }
@@ -77,7 +77,7 @@ public class EditKeyPasswordDialog extends SheimiDialogFragment implements
         String newPassword = mPassword.getText().toString().trim();
         try {
             ((SGitApplication)getActivity().getApplicationContext()).getSecurePrefsHelper().
-                set(mKeyFile.getName(), newPassword);
+            set(mKeyFile.getName(), newPassword);
         } catch (Exception e) {
             Timber.e(e);
         }

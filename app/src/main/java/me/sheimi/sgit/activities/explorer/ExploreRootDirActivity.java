@@ -39,7 +39,7 @@ public class ExploreRootDirActivity extends FileExplorerActivity {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view,
-                    int position, long id) {
+                                    int position, long id) {
                 File file = mFilesListAdapter.getItem(position);
                 if (file.isDirectory()) {
                     setCurrentDir(file);
@@ -64,10 +64,10 @@ public class ExploreRootDirActivity extends FileExplorerActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_select_root:
-                Repo.setLocalRepoRoot(this, getCurrentDir());
-                finish();
-                return true;
+        case R.id.action_select_root:
+            Repo.setLocalRepoRoot(this, getCurrentDir());
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

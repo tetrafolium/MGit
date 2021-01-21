@@ -33,29 +33,29 @@ public class SSLProviderInstaller {
         try {
             final int pos = Security.insertProviderAt(provider, 1);
             switch (pos) {
-                case 1:
-                    SSLContext sslContext = SSLContext.getInstance("Default");
-                    //noinspection JavaReflectionMemberAccess
-                    Field field = SSLSocketFactory.class.getDeclaredField("defaultSocketFactory");
-                    field.setAccessible(true);
-                    field.set(null, sslContext.getSocketFactory());
-                    //noinspection JavaReflectionMemberAccess
-                    field = SSLServerSocketFactory.class.getDeclaredField("defaultServerSocketFactory");
-                    field.setAccessible(true);
-                    field.set(null, sslContext.getServerSocketFactory());
-                    Security.setProperty("ssl.SocketFactory.provider", "org.conscrypt.OpenSSLSocketFactoryImpl");
-                    Security.setProperty("ssl.ServerSocketFactory.provider", "org.conscrypt.OpenSSLServerSocketFactoryImpl");
-                    SSLContext.setDefault(sslContext);
-                    HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-                    Timber.i("Installed default security provider MGit_OpenSSL");
+            case 1:
+                SSLContext sslContext = SSLContext.getInstance("Default");
+                //noinspection JavaReflectionMemberAccess
+                Field field = SSLSocketFactory.class.getDeclaredField("defaultSocketFactory");
+                field.setAccessible(true);
+                field.set(null, sslContext.getSocketFactory());
+                //noinspection JavaReflectionMemberAccess
+                field = SSLServerSocketFactory.class.getDeclaredField("defaultServerSocketFactory");
+                field.setAccessible(true);
+                field.set(null, sslContext.getServerSocketFactory());
+                Security.setProperty("ssl.SocketFactory.provider", "org.conscrypt.OpenSSLSocketFactoryImpl");
+                Security.setProperty("ssl.ServerSocketFactory.provider", "org.conscrypt.OpenSSLServerSocketFactoryImpl");
+                SSLContext.setDefault(sslContext);
+                HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+                Timber.i("Installed default security provider MGit_OpenSSL");
 
-                    // This fallthrough is for the above case a break, and since we want to exclude -1 this is great.
-                case -1:
-                    break;
-                default:
-                    String str = "Failed to install security provider MGit_OpenSSL, result: ";
-                    Timber.e(str + pos);
-                    throw new SecurityException();
+            // This fallthrough is for the above case a break, and since we want to exclude -1 this is great.
+            case -1:
+                break;
+            default:
+                String str = "Failed to install security provider MGit_OpenSSL, result: ";
+                Timber.e(str + pos);
+                throw new SecurityException();
             }
 
         } catch (NoSuchAlgorithmException e) {

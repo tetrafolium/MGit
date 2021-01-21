@@ -23,7 +23,7 @@ import me.sheimi.sgit.repo.tasks.repo.InitLocalTask;
  */
 
 public class InitDialog extends SheimiDialogFragment implements
-        View.OnClickListener {
+    View.OnClickListener {
 
     private EditText mLocalPath;
     private RepoListActivity mActivity;
@@ -47,10 +47,10 @@ public class InitDialog extends SheimiDialogFragment implements
         // set button listener
         builder.setTitle(R.string.dialog_init_repo_title);
         builder.setNegativeButton(getString(R.string.label_cancel),
-                new DummyDialogListener());
+                                  new DummyDialogListener());
         builder.setPositiveButton(
-                getString(R.string.dialog_init_repo_positive_label),
-                new DummyDialogListener());
+            getString(R.string.dialog_init_repo_positive_label),
+            new DummyDialogListener());
 
         return builder.create();
     }
@@ -62,7 +62,7 @@ public class InitDialog extends SheimiDialogFragment implements
         if (dialog == null)
             return;
         Button positiveButton = (Button) dialog
-                .getButton(Dialog.BUTTON_POSITIVE);
+                                .getButton(Dialog.BUTTON_POSITIVE);
         positiveButton.setOnClickListener(this);
     }
 
@@ -87,7 +87,7 @@ public class InitDialog extends SheimiDialogFragment implements
         if (file.exists()) {
             showToastMessage(R.string.alert_localpath_repo_exists);
             mLocalPath
-                    .setError(getString(R.string.alert_localpath_repo_exists));
+            .setError(getString(R.string.alert_localpath_repo_exists));
             mLocalPath.requestFocus();
             return;
         }

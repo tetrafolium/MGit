@@ -16,24 +16,24 @@ public class ResetAction extends RepoAction {
     @Override
     public void execute() {
         mActivity.showMessageDialog(R.string.dialog_reset_commit_title,
-                R.string.dialog_reset_commit_msg, R.string.action_reset,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        reset();
-                    }
-                });
+                                    R.string.dialog_reset_commit_msg, R.string.action_reset,
+        new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                reset();
+            }
+        });
         mActivity.closeOperationDrawer();
     }
 
     public void reset() {
         ResetCommitTask resetTask = new ResetCommitTask(mRepo,
-                new AsyncTaskPostCallback() {
-                    @Override
-                    public void onPostExecute(Boolean isSuccess) {
-                        mActivity.reset();
-                    }
-                });
+        new AsyncTaskPostCallback() {
+            @Override
+            public void onPostExecute(Boolean isSuccess) {
+                mActivity.reset();
+            }
+        });
         resetTask.executeTask();
     }
 }
