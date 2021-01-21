@@ -36,7 +36,7 @@ import android.widget.SearchView;
  * Created by sheimi on 8/5/13.
  */
 public class CommitsFragment extends BaseFragment implements
-        ActionMode.Callback {
+    ActionMode.Callback {
 
     private final static String IS_ACTION_MODE = "is action mode";
     private final static String CHOSEN_ITEM = "chosen item";
@@ -63,13 +63,13 @@ public class CommitsFragment extends BaseFragment implements
         return fragment;
     }
 
-    public void setFilter(String query){
+    public void setFilter(String query) {
         mCommitsListAdapter.setFilter(query);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_commits, container, false);
         if (getRawActivity() instanceof RepoDetailActivity) {
             ((RepoDetailActivity) getRawActivity()).setCommitsFragment(this);
@@ -82,7 +82,7 @@ public class CommitsFragment extends BaseFragment implements
         }
         mFile = bundle.getString(FILE);
         mClipboard = (ClipboardManager) getRawActivity().getSystemService(
-                Activity.CLIPBOARD_SERVICE);
+                         Activity.CLIPBOARD_SERVICE);
         mCommitsList = (ListView) v.findViewById(R.id.commitsList);
         mCommitsListAdapter = new CommitsListAdapter(getRawActivity(),
                 mChosenItem, mRepo, mFile);
@@ -90,30 +90,30 @@ public class CommitsFragment extends BaseFragment implements
         mCommitsList.setAdapter(mCommitsListAdapter);
 
         mCommitsList
-                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView,
-                            View view, int position, long id) {
-                        if (mActionMode == null) {
-                            RevCommit newCommit = mCommitsListAdapter.getItem(position);
-                            showDiff(null, null, newCommit.getName(), true);
-                            return;
-                        }
-                        chooseItem(position);
-                    }
-                });
+        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+                if (mActionMode == null) {
+                    RevCommit newCommit = mCommitsListAdapter.getItem(position);
+                    showDiff(null, null, newCommit.getName(), true);
+                    return;
+                }
+                chooseItem(position);
+            }
+        });
         mCommitsList
-                .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView,
-                            View view, int position, long l) {
-			if (mActionMode == null) {
-                            enterDiffActionMode();
-                        }
-			chooseItem(position);
-                        return true;
-                    }
-                });
+        .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView,
+                                           View view, int position, long l) {
+                if (mActionMode == null) {
+                    enterDiffActionMode();
+                }
+                chooseItem(position);
+                return true;
+            }
+        });
         reset();
         return v;
     }
@@ -127,7 +127,7 @@ public class CommitsFragment extends BaseFragment implements
         boolean isActionMode = savedInstanceState.getBoolean(IS_ACTION_MODE);
         if (isActionMode) {
             List<Integer> itemsInt = savedInstanceState
-                    .getIntegerArrayList(CHOSEN_ITEM);
+                                     .getIntegerArrayList(CHOSEN_ITEM);
             mActionMode = getRawActivity().startActionMode(this);
             mChosenItem.addAll(itemsInt);
             mCommitsListAdapter.notifyDataSetChanged();
@@ -174,7 +174,7 @@ public class CommitsFragment extends BaseFragment implements
     private void showDiff(ActionMode actionMode, String oldCommit, String newCommit,
                           boolean showDescription) {
         Intent intent = new Intent(getRawActivity(),
-                CommitDiffActivity.class);
+                                   CommitDiffActivity.class);
         if (oldCommit != null) {
             intent.putExtra(CommitDiffActivity.OLD_COMMIT, oldCommit);
         }
@@ -190,59 +190,59 @@ public class CommitsFragment extends BaseFragment implements
     @Override
     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.action_mode_diff:
-                Integer[] items = mChosenItem.toArray(new Integer[0]);
-                if (items.length == 0) {
-                    showToastMessage(R.string.alert_no_items_selected);
-                    return true;
-                }
-                int item1,
-                        item2;
-                item1 = items[0];
-                if (items.length == 1) {
-                    item2 = item1 + 1;
-                    if (item2 == mCommitsListAdapter.getCount()) {
-                        showToastMessage(R.string.alert_no_older_commits);
-                        return true;
-                    }
-                } else {
-                    item2 = items[1];
-                }
-
-                int smaller = Math.min(item1, item2);
-                int larger = Math.max(item1, item2);
-                String oldCommit = mCommitsListAdapter.getItem(larger)
-                        .getName();
-                String newCommit = mCommitsListAdapter.getItem(smaller)
-                        .getName();
-                showDiff(actionMode, oldCommit, newCommit, false);
-                return true;
-            case R.id.action_mode_copy_commit: {
-                if (mChosenItem.size() != 1) {
-                    showToastMessage(R.string.alert_you_must_choose_one_commit_to_copy);
-                    return true;
-                }
-                int item = mChosenItem.iterator().next();
-                String commit = mCommitsListAdapter.getItem(item).getName();
-                ClipData clip = ClipData.newPlainText("commit_to_copy", commit);
-                mClipboard.setPrimaryClip(clip);
-                showToastMessage(R.string.msg_commit_str_has_copied);
-                actionMode.finish();
+        case R.id.action_mode_diff:
+            Integer[] items = mChosenItem.toArray(new Integer[0]);
+            if (items.length == 0) {
+                showToastMessage(R.string.alert_no_items_selected);
                 return true;
             }
-            case R.id.action_mode_checkout: {
-                int item = mChosenItem.iterator().next();
-                String commit = mCommitsListAdapter.getItem(item).getName();
-                Bundle pathArg = new Bundle();
-                pathArg.putString(CheckoutDialog.BASE_COMMIT, commit);
-                pathArg.putSerializable(Repo.TAG, mRepo);
-                actionMode.finish();
-                CheckoutDialog ckd = new CheckoutDialog();
-                ckd.setArguments(pathArg);
-                ckd.show(getFragmentManager(), "rename-dialog");
-
-                break;
+            int item1,
+                item2;
+            item1 = items[0];
+            if (items.length == 1) {
+                item2 = item1 + 1;
+                if (item2 == mCommitsListAdapter.getCount()) {
+                    showToastMessage(R.string.alert_no_older_commits);
+                    return true;
+                }
+            } else {
+                item2 = items[1];
             }
+
+            int smaller = Math.min(item1, item2);
+            int larger = Math.max(item1, item2);
+            String oldCommit = mCommitsListAdapter.getItem(larger)
+                               .getName();
+            String newCommit = mCommitsListAdapter.getItem(smaller)
+                               .getName();
+            showDiff(actionMode, oldCommit, newCommit, false);
+            return true;
+        case R.id.action_mode_copy_commit: {
+            if (mChosenItem.size() != 1) {
+                showToastMessage(R.string.alert_you_must_choose_one_commit_to_copy);
+                return true;
+            }
+            int item = mChosenItem.iterator().next();
+            String commit = mCommitsListAdapter.getItem(item).getName();
+            ClipData clip = ClipData.newPlainText("commit_to_copy", commit);
+            mClipboard.setPrimaryClip(clip);
+            showToastMessage(R.string.msg_commit_str_has_copied);
+            actionMode.finish();
+            return true;
+        }
+        case R.id.action_mode_checkout: {
+            int item = mChosenItem.iterator().next();
+            String commit = mCommitsListAdapter.getItem(item).getName();
+            Bundle pathArg = new Bundle();
+            pathArg.putString(CheckoutDialog.BASE_COMMIT, commit);
+            pathArg.putSerializable(Repo.TAG, mRepo);
+            actionMode.finish();
+            CheckoutDialog ckd = new CheckoutDialog();
+            ckd.setArguments(pathArg);
+            ckd.show(getFragmentManager(), "rename-dialog");
+
+            break;
+        }
 
         }
         return false;

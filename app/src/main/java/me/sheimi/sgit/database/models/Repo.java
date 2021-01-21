@@ -167,11 +167,11 @@ public class Repo implements Comparable<Repo>, Serializable {
     }
 
     public String getLastCommitFullMsg() {
-	RevCommit commit = getLatestCommit();
-	if (commit == null) {
-	    return getLastCommitMsg();
-	}
-	return commit.getFullMessage();
+        RevCommit commit = getLatestCommit();
+        if (commit == null) {
+            return getLastCommitMsg();
+        }
+        return commit.getFullMessage();
     }
 
     public Date getLastCommitDate() {
@@ -226,7 +226,7 @@ public class Repo implements Comparable<Repo>, Serializable {
     public void updateRemote() {
         ContentValues values = new ContentValues();
         values.put(RepoContract.RepoEntry.COLUMN_NAME_REMOTE_URL,
-                getRemoteOriginURL());
+                   getRemoteOriginURL());
         RepoDbManager.updateRepo(mID, values);
     }
 
@@ -244,7 +244,7 @@ public class Repo implements Comparable<Repo>, Serializable {
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
+        ClassNotFoundException {
         mID = in.readInt();
         mRemoteURL = (String) in.readObject();
         mLocalPath = (String) in.readObject();
@@ -288,8 +288,8 @@ public class Repo implements Comparable<Repo>, Serializable {
         if (FsUtils.renameDirectory(directory, repoName)) {
             ContentValues values = new ContentValues();
             mLocalPath = isExternal()
-                ? EXTERNAL_PREFIX + directory.getParent() + File.separator + repoName
-                : repoName;
+                         ? EXTERNAL_PREFIX + directory.getParent() + File.separator + repoName
+                         : repoName;
             values.put(RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH, mLocalPath);
             RepoDbManager.updateRepo(getID(), values);
 
@@ -315,18 +315,18 @@ public class Repo implements Comparable<Repo>, Serializable {
                         : uname;
             }
             msg = commit.getShortMessage() != null ? commit.getShortMessage()
-                    : msg;
+                  : msg;
             long date = committer.getWhen().getTime();
             commitDateStr = Long.toString(date);
 
         }
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMIT_DATE,
-                commitDateStr);
+                   commitDateStr);
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMIT_MSG, msg);
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMITTER_EMAIL,
-                email);
+                   email);
         values.put(RepoContract.RepoEntry.COLUMN_NAME_LATEST_COMMITTER_UNAME,
-                uname);
+                   uname);
         RepoDbManager.updateRepo(getID(), values);
     }
 
@@ -349,7 +349,7 @@ public class Repo implements Comparable<Repo>, Serializable {
                 branchList.add(ref.getName());
             }
             List<Ref> remoteRefs = getGit().branchList()
-                    .setListMode(ListBranchCommand.ListMode.REMOTE).call();
+                                   .setListMode(ListBranchCommand.ListMode.REMOTE).call();
             for (Ref ref : remoteRefs) {
                 String name = ref.getName();
                 String localName = convertRemoteName(name);
@@ -461,12 +461,12 @@ public class Repo implements Comparable<Repo>, Serializable {
         String[] splits = name.split("/");
         int type = getCommitType(splits);
         switch (type) {
-            case COMMIT_TYPE_TEMP:
-            case COMMIT_TYPE_TAG:
-            case COMMIT_TYPE_HEAD:
-                return getCommitDisplayName(name);
-            case COMMIT_TYPE_REMOTE:
-                return splits[3];
+        case COMMIT_TYPE_TEMP:
+        case COMMIT_TYPE_TAG:
+        case COMMIT_TYPE_HEAD:
+            return getCommitDisplayName(name);
+        case COMMIT_TYPE_REMOTE:
+            return splits[3];
         }
         return null;
     }
@@ -563,7 +563,7 @@ public class Repo implements Comparable<Repo>, Serializable {
             if (remoteNames.size() == 0)
                 return "";
             String url = config.getString("remote", remoteNames.iterator()
-                    .next(), "url");
+                                          .next(), "url");
             return url;
         } catch (StopTaskException e) {
         }
@@ -589,11 +589,11 @@ public class Repo implements Comparable<Repo>, Serializable {
             Set<String> remoteNames = config.getSubsections("remote");
             if (remoteNames.contains(remote)) {
                 throw new IOException(String.format(
-                        "Remote %s already exists.", remote));
+                                          "Remote %s already exists.", remote));
             }
             config.setString("remote", remote, "url", url);
             String fetch = String.format("+refs/heads/*:refs/remotes/%s/*",
-                    remote);
+                                         remote);
             config.setString("remote", remote, "fetch", fetch);
             config.save();
             mRemotes.add(remote);

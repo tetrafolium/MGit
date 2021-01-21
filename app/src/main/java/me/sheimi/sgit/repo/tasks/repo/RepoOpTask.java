@@ -43,7 +43,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
             return;
         }
         BasicFunctions.getActiveActivity().showToastMessage(
-                R.string.error_task_running);
+            R.string.error_task_running);
     }
 
     protected void setCredentials(TransportCommand command) {
@@ -51,7 +51,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         String password = mRepo.getPassword();
 
         if (username != null && password != null && !username.trim().isEmpty()
-            && !password.trim().isEmpty()) {
+                && !password.trim().isEmpty()) {
             UsernamePasswordCredentialsProvider auth = new UsernamePasswordCredentialsProvider(
                 username, password);
             command.setCredentialsProvider(auth);
@@ -66,14 +66,14 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         Timber.w("clone Auth error: %s", msg);
 
         if (msg == null || ((!msg.contains("Auth fail"))
-                && (!msg.toLowerCase().contains("auth")))) {
+                            && (!msg.toLowerCase().contains("auth")))) {
             return;
         }
 
         String errorInfo = null;
         if (msg.contains("Auth fail")) {
             errorInfo = BasicFunctions.getActiveActivity().getString(
-                    R.string.dialog_prompt_for_password_title_auth_fail);
+                            R.string.dialog_prompt_for_password_title_auth_fail);
         }
         BasicFunctions.getActiveActivity().promptForPassword(onPassEntered,
                 errorInfo);
@@ -131,7 +131,7 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
                 leftHint = progress + "%";
             }
             publishProgress(msg, leftHint, rightHint,
-                    Integer.toString(progress));
+                            Integer.toString(progress));
         }
 
     }

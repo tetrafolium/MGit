@@ -27,7 +27,7 @@ public class PullAction extends RepoAction {
 
     @Override
     public void execute() {
-	Set<String> remotes = mRepo.getRemotes();
+        Set<String> remotes = mRepo.getRemotes();
         if (remotes == null || remotes.isEmpty()) {
             mActivity.showToastMessage(R.string.alert_please_add_a_remote);
             return;
@@ -39,9 +39,9 @@ public class PullAction extends RepoAction {
     }
 
     private static void pull(Repo repo, RepoDetailActivity activity,
-			     String remote, boolean forcePull) {
+                             String remote, boolean forcePull) {
         PullTask pullTask = new PullTask(repo, remote, forcePull, activity.new ProgressCallback(
-                R.string.pull_msg_init));
+                                             R.string.pull_msg_init));
         pullTask.executeTask();
         activity.closeOperationDrawer();
     }
@@ -71,7 +71,7 @@ public class PullAction extends RepoAction {
             mRemoteList = (ListView) layout.findViewById(R.id.remoteList);
 
             mAdapter = new ArrayAdapter<String>(mActivity,
-                    android.R.layout.simple_list_item_1);
+                                                android.R.layout.simple_list_item_1);
             Set<String> remotes = mRepo.getRemotes();
             mAdapter.addAll(remotes);
             mRemoteList.setAdapter(mAdapter);
@@ -80,7 +80,7 @@ public class PullAction extends RepoAction {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
-                        int position, long id) {
+                                        int position, long id) {
                     String remote = mAdapter.getItem(position);
                     boolean isForcePull = mForcePull.isChecked();
                     pull(mRepo, mActivity, remote, isForcePull);
@@ -89,9 +89,9 @@ public class PullAction extends RepoAction {
             });
 
             builder.setTitle(R.string.dialog_pull_repo_title)
-                    .setView(layout)
-                    .setNegativeButton(R.string.label_cancel,
-                            new DummyDialogListener());
+            .setView(layout)
+            .setNegativeButton(R.string.label_cancel,
+                               new DummyDialogListener());
             return builder.create();
         }
     }

@@ -12,7 +12,7 @@ public class CherryPickTask extends RepoOpTask {
     private AsyncTaskPostCallback mCallback;
 
     public CherryPickTask(Repo repo, String commit,
-            AsyncTaskPostCallback callback) {
+                          AsyncTaskPostCallback callback) {
         super(repo);
         mCommitStr = commit;
         mCallback = callback;
@@ -34,7 +34,7 @@ public class CherryPickTask extends RepoOpTask {
     public boolean cherrypick() {
         try {
             ObjectId commit = mRepo.getGit().getRepository()
-                    .resolve(mCommitStr);
+                              .resolve(mCommitStr);
             mRepo.getGit().cherryPick().include(commit).call();
         } catch (StopTaskException e) {
             return false;
