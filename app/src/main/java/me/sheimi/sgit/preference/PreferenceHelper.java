@@ -41,7 +41,7 @@ public class PreferenceHelper {
 
     public void setRepoRoot(String repoRootPath) {
         edit(mContext.getString(R.string.pref_key_repo_root_location), repoRootPath);
-        Timber.d("set root:"+repoRootPath);
+        Timber.d("set root:" + repoRootPath);
     }
 
 
