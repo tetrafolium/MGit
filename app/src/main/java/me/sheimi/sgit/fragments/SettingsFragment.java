@@ -40,8 +40,7 @@ public class SettingsFragment extends PreferenceFragment {
                     .addNextIntent(new Intent(getActivity(), RepoListActivity.class))
                     .addNextIntent(getActivity().getIntent())
                     .startActivities();
-                }
-                else if (gravatarPrefKey.equals(key)) {
+                } else if (gravatarPrefKey.equals(key)) {
                     BasicFunctions.getImageLoader().clearMemoryCache();
                     BasicFunctions.getImageLoader().clearDiskCache();
                 }
