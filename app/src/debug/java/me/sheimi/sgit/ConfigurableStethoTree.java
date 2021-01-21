@@ -35,108 +35,108 @@ import timber.log.Timber;
  * </pre>
  */
 public class ConfigurableStethoTree extends Timber.DebugTree {
-    private final Configuration mConfiguration;
+private final Configuration mConfiguration;
 
-    public ConfigurableStethoTree() {
-        this.mConfiguration = new Configuration.Builder().build();
-    }
+public ConfigurableStethoTree() {
+	this.mConfiguration = new Configuration.Builder().build();
+}
 
-    public ConfigurableStethoTree(Configuration configuration) {
-        this.mConfiguration = configuration;
-    }
+public ConfigurableStethoTree(Configuration configuration) {
+	this.mConfiguration = configuration;
+}
 
-    @Override
-    protected void log(int priority, String tag, String message, Throwable t) {
+@Override
+protected void log(int priority, String tag, String message, Throwable t) {
 
-        if (priority < mConfiguration.mMinimumPriority) {
-            return;
-        }
+	if (priority < mConfiguration.mMinimumPriority) {
+		return;
+	}
 
-        ConsolePeerManager peerManager = ConsolePeerManager.getInstanceOrNull();
-        if (peerManager == null) {
-            Log.println(priority, tag, message);
-            return;
-        }
+	ConsolePeerManager peerManager = ConsolePeerManager.getInstanceOrNull();
+	if (peerManager == null) {
+		Log.println(priority, tag, message);
+		return;
+	}
 
-        Console.MessageLevel logLevel;
+	Console.MessageLevel logLevel;
 
-        switch (priority) {
-        case Log.VERBOSE:
-        case Log.DEBUG:
-            logLevel = Console.MessageLevel.DEBUG;
-            break;
-        case Log.INFO:
-            logLevel = Console.MessageLevel.LOG;
-            break;
-        case Log.WARN:
-            logLevel = Console.MessageLevel.WARNING;
-            break;
-        case Log.ERROR:
-        case Log.ASSERT:
-            logLevel = Console.MessageLevel.ERROR;
-            break;
-        default:
-            logLevel = Console.MessageLevel.LOG;
-        }
+	switch (priority) {
+	case Log.VERBOSE:
+	case Log.DEBUG:
+		logLevel = Console.MessageLevel.DEBUG;
+		break;
+	case Log.INFO:
+		logLevel = Console.MessageLevel.LOG;
+		break;
+	case Log.WARN:
+		logLevel = Console.MessageLevel.WARNING;
+		break;
+	case Log.ERROR:
+	case Log.ASSERT:
+		logLevel = Console.MessageLevel.ERROR;
+		break;
+	default:
+		logLevel = Console.MessageLevel.LOG;
+	}
 
-        StringBuilder messageBuilder = new StringBuilder();
+	StringBuilder messageBuilder = new StringBuilder();
 
-        if (mConfiguration.mShowTags && tag != null) {
-            messageBuilder
-            .append("[")
-            .append(tag)
-            .append("] ");
-        }
+	if (mConfiguration.mShowTags && tag != null) {
+		messageBuilder
+		.append("[")
+		.append(tag)
+		.append("] ");
+	}
 
-        messageBuilder.append(message);
+	messageBuilder.append(message);
 
-        CLog.writeToConsole(
-            logLevel,
-            Console.MessageSource.OTHER,
-            messageBuilder.toString()
-        );
+	CLog.writeToConsole(
+		logLevel,
+		Console.MessageSource.OTHER,
+		messageBuilder.toString()
+		);
 
-    }
+}
 
-    public static class Configuration {
+public static class Configuration {
 
-        private final boolean mShowTags;
-        private final int mMinimumPriority;
+private final boolean mShowTags;
+private final int mMinimumPriority;
 
-        private Configuration(boolean showTags, int minimumPriority) {
-            this.mShowTags = showTags;
-            this.mMinimumPriority = minimumPriority;
-        }
+private Configuration(boolean showTags, int minimumPriority) {
+	this.mShowTags = showTags;
+	this.mMinimumPriority = minimumPriority;
+}
 
-        public static class Builder {
+public static class Builder {
 
-            private boolean mShowTags = false;
-            private int mMinimumPriority = Log.VERBOSE;
+private boolean mShowTags = false;
+private int mMinimumPriority = Log.VERBOSE;
 
-            /**
-             * @param showTags Logs the tag of the calling class when true.
-             *                 Default is false.
-             * @return This {@link Configuration.Builder} instance.
-             */
-            public Builder showTags(boolean showTags) {
-                this.mShowTags = showTags;
-                return this;
-            }
+/**
+ * @param showTags Logs the tag of the calling class when true.
+ *                 Default is false.
+ * @return This {@link Configuration.Builder} instance.
+ */
+public Builder showTags(boolean showTags) {
+	this.mShowTags = showTags;
+	return this;
+}
 
-            /**
-             * @param priority Minimum log priority to send log.
-             *                 Expects one of constants defined in {@link android.util.Log}.
-             *                 Default is {@link Log#VERBOSE}.
-             * @return This {@link Configuration.Builder} instance.
-             */
-            public Builder minimumPriority(int priority) {
-                this.mMinimumPriority = priority;
-                return this;
-            }
+/**
+ * @param priority Minimum log priority to send log.
+ *                 Expects one of constants defined in {@link android.util.Log}.
+ *                 Default is {@link Log#VERBOSE}.
+ * @return This {@link Configuration.Builder} instance.
+ */
+public Builder minimumPriority(int priority) {
+	this.mMinimumPriority = priority;
+	return this;
+}
 
-            public Configuration build() {
-                return new Configuration(mShowTags, mMinimumPriority);
-            }
-        }
-    }
+public Configuration build() {
+	return new Configuration(mShowTags, mMinimumPriority);
+}
+}
+}
 }
