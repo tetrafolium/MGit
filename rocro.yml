@@ -16,8 +16,8 @@ inspecode:
   ##   → Succeeded
   ##
   infer:
-  - thresholds: { num-issues: 62 }
-    machine: {cpu: 0.1}       # cpu resource too small: (must be >= 250m)
+  # - thresholds: { num-issues: 62 }
+  #   machine: {cpu: 0.1}     # cpu resource too small: (must be >= 250m)
   - thresholds: { num-issues: 62 }
     machine: {cpu: 0.25}
   - thresholds: { num-issues: 62 }
