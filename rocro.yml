@@ -17,15 +17,17 @@ inspecode:
   ##
   infer:
   # - thresholds: { num-issues: 62 }
-  #   machine: {cpu: 0.1}     # cpu resource too small: (must be >= 250m)
+  #   machine: {cpu: 0.2}     # cpu resource too small: (must be >= 250m)
   - thresholds: { num-issues: 62 }
-    machine: {cpu: 0.25}
+    machine: {cpu: 0.25}      # minimum setting
+  - thresholds: { num-issues: 62 }
+    machine: {cpu: 0.3}
   - thresholds: { num-issues: 62 }
     machine: {cpu: 0.5}
   - thresholds: { num-issues: 62 }
     # machine: {cpu: 0.75}    # (= default)
   - thresholds: { num-issues: 62 }
-    machine: {cpu: 1.0}       # max for Enterprise-AWS
+    machine: {cpu: 1.0}       # maximum setting at Enterprise-AWS
   #### [on Enterprise-AWS] ... cpu resource too large: (must be <= 1)
   # - thresholds: { num-issues: 62 }
   #   machine: {cpu: 1.1}       # --jobs 2
